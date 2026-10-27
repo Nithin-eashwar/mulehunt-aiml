@@ -83,7 +83,9 @@ def test_hop_timing_distribution(world):
         delays.append(row.timestamp - funding.timestamp.max())
     delays = pd.Series(delays)
     assert (delays > pd.Timedelta(0)).all()
-    assert (delays <= pd.Timedelta(hours=24)).mean() >= 0.90
+    # Patient mules (about 30%) wait 24-47 h, so fewer hops are fast than before (plan rev 4);
+    # every hop still stays inside Person B's 48 h window.
+    assert (delays <= pd.Timedelta(hours=24)).mean() >= 0.60
     assert (delays <= MAX_HOP).all()
 
 
@@ -123,13 +125,48 @@ def test_members_share_ring_split(world):
         assert set(split.loc[members]) == {ring.split}
 
 
-def test_mules_share_devices_with_fraudster(world):
+def test_mules_share_devices_with_fraudster(cfg, world):
     fraud = fraud_only(world)
+    lo, hi = cfg["fraud"]["mule_devices_per_ring"]
+    for ring in world[3]:
+        fresh = [ring.fraudster, *[m for m in sum(ring.mules.values(), []) if m not in ring.sleepers]]
+        devices = fraud[fraud.sender_id.isin(fresh)].device_id.unique()
+        assert 1 <= len(devices) <= hi, ring.ring_id
+
+
+def test_sleepers_use_own_phone(world):
+    accounts, _, fraud, rings = world
+    own = accounts.set_index("account_id").primary_device
+    sleepers = [m for r in rings for m in r.sleepers]
+    assert sleepers
+    rows = fraud[(fraud.is_fraud == 1) & fraud.sender_id.isin(sleepers)]
+    assert len(rows) > 0
+    assert (rows.device_id == rows.sender_id.map(own)).all()
+
+
+def test_patient_mules(cfg, world):
+    fraud = fraud_only(world)
+    role = roles(world)
     rings = world[3]
-    for ring in rings:
-        senders = [ring.fraudster, *sum(ring.mules.values(), [])]
-        devices = fraud[fraud.sender_id.isin(senders)].device_id.unique()
-        assert 1 <= len(devices) <= 2, ring.ring_id
+    mules = [m for r in rings for t in MULES for m in r.mule_list(t)]
+    patient = {m for r in rings for m in r.patient}
+    assert len(patient) / len(mules) == pytest.approx(cfg["fraud"]["patient_mule_share"], abs=0.1)
+    lo, hi = cfg["fraud"]["patient_delay_h"]
+    delays = []
+    for row in fraud[fraud.sender_id.isin(patient) & (fraud.sender_id.map(role).isin(MULES))].itertuples():
+        funding = fraud[(fraud.receiver_id == row.sender_id) & (fraud.timestamp < row.timestamp)
+                        & (fraud.sender_id.map(role) != "fraudster")]
+        delays.append((row.timestamp - funding.timestamp.max()).total_seconds() / 3600)
+    delays = np.array(delays)
+    assert len(delays) > 0 and (delays <= hi + 0.01).all()
+    # Each forward waits 24-47 h after its own deposit (test_patterns.py checks that exactly);
+    # measured from the latest deposit, patient mules still hold money far longer than others.
+    others = []
+    for row in fraud[~fraud.sender_id.isin(patient) & (fraud.sender_id.map(role).isin(MULES))].itertuples():
+        funding = fraud[(fraud.receiver_id == row.sender_id) & (fraud.timestamp < row.timestamp)
+                        & (fraud.sender_id.map(role) != "fraudster")]
+        others.append((row.timestamp - funding.timestamp.max()).total_seconds() / 3600)
+    assert np.median(delays) >= 3 * np.median(others)
 
 
 def test_scenario_signatures(world):

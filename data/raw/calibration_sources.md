@@ -13,6 +13,7 @@ never cited as NPCI.
 | 3 | **Lok Sabha Unstarred Question 2481**, Ministry of Finance, 15 Dec 2025 — https://eparlib.sansad.in/bitstream/123456789/3018042/1/AU2481_5bIzKk.pdf | FY2024-25: 12.64 lakh UPI fraud incidents, ₹981 crore → ₹7,761 per incident | `scenarios.avg_loss_check_inr` |
 | 4 | **Diwali 2025 date** — Tribune India, https://www.tribuneindia.com/news/india/diwali-2025-date-confusion-cleared-which-day-will-india-celebrate-october-20-or-21/ ; five-day calendar (Dhanteras 18 Oct) — https://www.radhakrishnatemple.net/blog/diwali-2025-dates-5-days-festival-muhurat-timings-guide/ | Diwali 20 Oct 2025; Dhanteras 18 Oct 2025 (also NPCI's busiest day in the window) | `festivals` |
 | 5 | **Project handoff** (`docs/specs/MuleHunt_PersonA_Handoff.md`) | 90-day window, split days, ₹10k/25k/50k thresholds, 1–2% label noise | `window.days`, `splits.*`, `fraud.thresholds`, `label_noise.rate` |
+| 6 | **IBM AML benchmark, HI-Small laundering patterns** — https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml (CDLA-Sharing-1.0), saved as `data/raw/ibm_aml/HI-Small_Patterns.txt` | 370 attempts in 8 pattern types; structure check only | `simulator/validate.py` IBM section |
 
 ## Secondary (labelled `assumed` in config)
 

@@ -27,7 +27,7 @@ def window_start(cfg):
 
 def test_columns(accounts):
     assert list(accounts.columns[: len(ACCOUNT_COLUMNS)]) == ACCOUNT_COLUMNS
-    for col in ("primary_device", "split", "household"):
+    for col in ("primary_device", "split", "household", "profile", "shop_group"):
         assert col in accounts.columns
     assert set(accounts.role) <= {"normal", "merchant"}
     assert (accounts.is_fraud == 0).all()
@@ -65,7 +65,31 @@ def test_created_at_ranges(cfg, accounts):
     assert (old >= start - pd.Timedelta(days=8 * 365)).all()
 
 
-def test_shared_devices_only_within_households(accounts):
-    shared = accounts[accounts.primary_device.duplicated(keep=False)]
+def test_family_shared_phones(accounts):
+    shared = accounts[accounts.primary_device.duplicated(keep=False) & (accounts.shop_group < 0)]
     assert (shared.groupby("primary_device").household.nunique() == 1).all()
     assert shared.groupby("primary_device").size().between(2, 3).all()
+
+
+def test_shop_phone_groups(cfg, accounts):
+    # Hard negatives: a shop and its staff pay from one phone, like a mule ring does.
+    hard = cfg["hard_cases"]
+    groups = accounts[accounts.shop_group >= 0].groupby("shop_group")
+    n_small = (accounts.account_type == "small_merchant").sum()
+    assert groups.ngroups == round(hard["shop_phone_group_share"] * n_small)
+    lo, hi = hard["shop_phone_group_size"]
+    assert groups.size().between(lo, hi).all()
+    assert (groups.primary_device.nunique() == 1).all()
+    assert (groups.account_type.apply(lambda t: (t == "small_merchant").sum()) == 1).all()
+
+
+def test_profiles(cfg, accounts):
+    hard = cfg["hard_cases"]
+    personal = accounts.role == "normal"
+    collectors = accounts.profile == "collector"
+    assert collectors.sum() == round(hard["money_collector_share"] * personal.sum())
+    assert (accounts.created_at[collectors] < pd.Timestamp(cfg["window"]["start"], tz="Asia/Kolkata")).all()
+    gig = accounts.account_type == "gig_worker"
+    night = accounts.profile == "night_worker"
+    assert night.sum() == round(hard["night_worker_share"] * gig.sum())
+    assert (accounts.account_type[night] == "gig_worker").all()
