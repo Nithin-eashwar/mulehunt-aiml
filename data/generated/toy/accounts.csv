@@ -1,0 +1,501 @@
+account_id,account_type,bank,state,created_at,role,is_fraud
+ACC000001,student,Kotak,Delhi,2022-06-08T00:00:00+05:30,normal,0
+ACC000002,small_merchant,ICICI,Delhi,2021-04-07T00:00:00+05:30,merchant,0
+ACC000003,gig_worker,HDFC,Tamil Nadu,2024-03-10T00:00:00+05:30,normal,0
+ACC000004,salaried,PNB,Tamil Nadu,2021-03-22T00:00:00+05:30,normal,0
+ACC000005,salaried,ICICI,Karnataka,2025-03-21T00:00:00+05:30,normal,0
+ACC000006,small_merchant,PNB,Tamil Nadu,2022-06-24T00:00:00+05:30,merchant,0
+ACC000007,salaried,SBI,Delhi,2023-09-09T00:00:00+05:30,normal,0
+ACC000008,small_merchant,ICICI,Maharashtra,2022-12-22T00:00:00+05:30,merchant,0
+ACC000009,gig_worker,PNB,Delhi,2022-07-23T00:00:00+05:30,normal,0
+ACC000010,student,PNB,Maharashtra,2024-07-20T00:00:00+05:30,normal,0
+ACC000011,salaried,PNB,Karnataka,2025-04-17T00:00:00+05:30,normal,0
+ACC000012,salaried,ICICI,Karnataka,2022-12-25T00:00:00+05:30,victim,0
+ACC000013,salaried,PNB,Telangana,2020-11-06T00:00:00+05:30,normal,0
+ACC000014,salaried,ICICI,Maharashtra,2024-02-09T00:00:00+05:30,normal,0
+ACC000015,student,Axis,Telangana,2022-10-14T00:00:00+05:30,normal,0
+ACC000016,student,Axis,Karnataka,2024-12-01T00:00:00+05:30,normal,0
+ACC000017,large_merchant,HDFC,Telangana,2023-11-05T00:00:00+05:30,merchant,0
+ACC000018,gig_worker,HDFC,Maharashtra,2024-11-26T00:00:00+05:30,normal,0
+ACC000019,student,Axis,Tamil Nadu,2024-12-25T00:00:00+05:30,normal,0
+ACC000020,large_merchant,HDFC,Delhi,2021-08-06T00:00:00+05:30,merchant,0
+ACC000021,salaried,Axis,Karnataka,2021-02-03T00:00:00+05:30,normal,0
+ACC000022,salaried,PNB,Delhi,2021-01-01T00:00:00+05:30,normal,0
+ACC000023,student,PNB,Delhi,2021-12-13T00:00:00+05:30,normal,0
+ACC000024,salaried,PNB,Tamil Nadu,2024-11-02T00:00:00+05:30,normal,0
+ACC000025,salaried,Axis,Uttar Pradesh,2020-12-26T00:00:00+05:30,normal,0
+ACC000026,student,SBI,Karnataka,2025-06-21T00:00:00+05:30,normal,0
+ACC000027,student,HDFC,Delhi,2024-03-17T00:00:00+05:30,normal,0
+ACC000028,small_merchant,PNB,Maharashtra,2024-03-28T00:00:00+05:30,merchant,0
+ACC000029,student,Axis,Karnataka,2021-11-17T00:00:00+05:30,normal,0
+ACC000030,student,PNB,Karnataka,2024-11-15T00:00:00+05:30,normal,0
+ACC000031,student,ICICI,Uttar Pradesh,2020-10-11T00:00:00+05:30,normal,0
+ACC000032,salaried,ICICI,Uttar Pradesh,2024-08-10T00:00:00+05:30,normal,0
+ACC000033,salaried,HDFC,Uttar Pradesh,2021-04-19T00:00:00+05:30,victim,0
+ACC000034,salaried,SBI,Karnataka,2022-09-01T00:00:00+05:30,normal,0
+ACC000035,gig_worker,SBI,Karnataka,2024-04-22T00:00:00+05:30,normal,0
+ACC000036,salaried,PNB,Delhi,2023-06-17T00:00:00+05:30,normal,0
+ACC000037,salaried,Axis,Delhi,2024-12-21T00:00:00+05:30,normal,0
+ACC000038,salaried,HDFC,Uttar Pradesh,2023-06-05T00:00:00+05:30,normal,0
+ACC000039,small_merchant,ICICI,Telangana,2022-02-18T00:00:00+05:30,merchant,0
+ACC000040,salaried,Axis,Delhi,2024-07-10T00:00:00+05:30,normal,0
+ACC000041,salaried,ICICI,Karnataka,2020-10-21T00:00:00+05:30,normal,0
+ACC000042,small_merchant,ICICI,Telangana,2022-04-09T00:00:00+05:30,merchant,0
+ACC000043,student,HDFC,Tamil Nadu,2023-09-23T00:00:00+05:30,normal,0
+ACC000044,small_merchant,Axis,Telangana,2024-02-11T00:00:00+05:30,merchant,0
+ACC000045,student,Kotak,Delhi,2025-09-08T00:00:00+05:30,mule_t2,1
+ACC000046,gig_worker,HDFC,Karnataka,2023-07-29T00:00:00+05:30,normal,0
+ACC000047,salaried,HDFC,Maharashtra,2020-11-26T00:00:00+05:30,normal,0
+ACC000048,student,ICICI,Uttar Pradesh,2023-04-05T00:00:00+05:30,normal,0
+ACC000049,student,HDFC,Delhi,2022-02-03T00:00:00+05:30,normal,0
+ACC000050,small_merchant,Axis,Karnataka,2021-02-02T00:00:00+05:30,merchant,0
+ACC000051,salaried,Kotak,Delhi,2020-11-12T00:00:00+05:30,normal,0
+ACC000052,student,Axis,Maharashtra,2024-04-28T00:00:00+05:30,normal,0
+ACC000053,salaried,SBI,Telangana,2023-05-29T00:00:00+05:30,normal,0
+ACC000054,salaried,HDFC,Delhi,2022-01-01T00:00:00+05:30,normal,0
+ACC000055,salaried,SBI,Karnataka,2023-07-09T00:00:00+05:30,normal,0
+ACC000056,salaried,Kotak,Tamil Nadu,2024-01-06T00:00:00+05:30,normal,0
+ACC000057,small_merchant,ICICI,Uttar Pradesh,2022-06-28T00:00:00+05:30,merchant,0
+ACC000058,salaried,HDFC,Telangana,2021-02-20T00:00:00+05:30,normal,0
+ACC000059,large_merchant,Kotak,Uttar Pradesh,2023-04-02T00:00:00+05:30,merchant,0
+ACC000060,student,HDFC,Maharashtra,2023-08-07T00:00:00+05:30,normal,0
+ACC000061,student,HDFC,Delhi,2025-10-18T00:00:00+05:30,mule_t3,1
+ACC000062,student,HDFC,Uttar Pradesh,2023-01-20T00:00:00+05:30,normal,0
+ACC000063,gig_worker,ICICI,Uttar Pradesh,2024-01-05T00:00:00+05:30,normal,0
+ACC000064,salaried,SBI,Delhi,2021-03-23T00:00:00+05:30,normal,0
+ACC000065,salaried,Axis,Telangana,2022-07-17T00:00:00+05:30,normal,0
+ACC000066,salaried,ICICI,Maharashtra,2022-03-25T00:00:00+05:30,normal,0
+ACC000067,salaried,Kotak,Delhi,2021-07-16T00:00:00+05:30,normal,0
+ACC000068,salaried,PNB,Telangana,2025-01-26T00:00:00+05:30,normal,0
+ACC000069,large_merchant,ICICI,Karnataka,2021-05-09T00:00:00+05:30,merchant,0
+ACC000070,salaried,PNB,Uttar Pradesh,2024-11-11T00:00:00+05:30,normal,0
+ACC000071,gig_worker,PNB,Karnataka,2025-06-24T00:00:00+05:30,normal,0
+ACC000072,salaried,HDFC,Maharashtra,2020-08-31T00:00:00+05:30,normal,0
+ACC000073,small_merchant,SBI,Maharashtra,2024-03-02T00:00:00+05:30,merchant,0
+ACC000074,gig_worker,SBI,Telangana,2025-05-23T00:00:00+05:30,normal,0
+ACC000075,salaried,SBI,Telangana,2022-01-31T00:00:00+05:30,normal,0
+ACC000076,small_merchant,HDFC,Maharashtra,2024-01-21T00:00:00+05:30,merchant,0
+ACC000077,small_merchant,PNB,Uttar Pradesh,2023-06-26T00:00:00+05:30,merchant,0
+ACC000078,small_merchant,PNB,Maharashtra,2020-10-27T00:00:00+05:30,merchant,0
+ACC000079,student,ICICI,Uttar Pradesh,2022-09-25T00:00:00+05:30,normal,0
+ACC000080,salaried,ICICI,Karnataka,2025-06-17T00:00:00+05:30,normal,0
+ACC000081,salaried,PNB,Maharashtra,2022-03-15T00:00:00+05:30,normal,0
+ACC000082,small_merchant,Kotak,Telangana,2024-09-28T00:00:00+05:30,merchant,0
+ACC000083,student,HDFC,Telangana,2023-12-14T00:00:00+05:30,normal,0
+ACC000084,salaried,Axis,Maharashtra,2024-06-27T00:00:00+05:30,normal,0
+ACC000085,small_merchant,Axis,Delhi,2021-01-16T00:00:00+05:30,merchant,0
+ACC000086,student,Axis,Telangana,2025-02-09T00:00:00+05:30,normal,0
+ACC000087,student,PNB,Delhi,2022-11-17T00:00:00+05:30,normal,0
+ACC000088,salaried,PNB,Tamil Nadu,2023-03-20T00:00:00+05:30,normal,0
+ACC000089,salaried,ICICI,Telangana,2022-10-28T00:00:00+05:30,normal,0
+ACC000090,salaried,PNB,Maharashtra,2022-08-16T00:00:00+05:30,normal,0
+ACC000091,salaried,SBI,Delhi,2025-01-11T00:00:00+05:30,normal,0
+ACC000092,small_merchant,ICICI,Tamil Nadu,2023-12-21T00:00:00+05:30,merchant,0
+ACC000093,student,HDFC,Telangana,2022-10-01T00:00:00+05:30,normal,0
+ACC000094,student,HDFC,Delhi,2024-12-31T00:00:00+05:30,normal,0
+ACC000095,salaried,Kotak,Telangana,2021-07-22T00:00:00+05:30,normal,0
+ACC000096,gig_worker,ICICI,Tamil Nadu,2021-07-20T00:00:00+05:30,normal,0
+ACC000097,salaried,SBI,Delhi,2022-12-09T00:00:00+05:30,normal,0
+ACC000098,salaried,ICICI,Uttar Pradesh,2021-07-31T00:00:00+05:30,normal,0
+ACC000099,salaried,SBI,Telangana,2023-06-05T00:00:00+05:30,normal,0
+ACC000100,salaried,SBI,Uttar Pradesh,2022-10-10T00:00:00+05:30,normal,0
+ACC000101,large_merchant,ICICI,Tamil Nadu,2023-03-31T00:00:00+05:30,merchant,0
+ACC000102,gig_worker,ICICI,Telangana,2024-11-09T00:00:00+05:30,normal,0
+ACC000103,salaried,HDFC,Tamil Nadu,2024-09-02T00:00:00+05:30,normal,0
+ACC000104,student,Axis,Maharashtra,2022-11-15T00:00:00+05:30,normal,0
+ACC000105,small_merchant,ICICI,Telangana,2025-02-25T00:00:00+05:30,merchant,0
+ACC000106,salaried,SBI,Uttar Pradesh,2022-06-11T00:00:00+05:30,normal,0
+ACC000107,student,PNB,Delhi,2023-12-15T00:00:00+05:30,normal,0
+ACC000108,gig_worker,SBI,Delhi,2023-06-07T00:00:00+05:30,normal,0
+ACC000109,salaried,ICICI,Tamil Nadu,2021-02-15T00:00:00+05:30,victim,0
+ACC000110,salaried,HDFC,Uttar Pradesh,2021-04-16T00:00:00+05:30,fraudster,1
+ACC000111,gig_worker,Kotak,Uttar Pradesh,2023-03-25T00:00:00+05:30,normal,0
+ACC000112,small_merchant,HDFC,Telangana,2023-08-14T00:00:00+05:30,merchant,0
+ACC000113,salaried,Kotak,Maharashtra,2021-07-16T00:00:00+05:30,normal,0
+ACC000114,small_merchant,Kotak,Telangana,2023-01-09T00:00:00+05:30,merchant,0
+ACC000115,salaried,HDFC,Delhi,2021-11-30T00:00:00+05:30,normal,0
+ACC000116,gig_worker,SBI,Karnataka,2024-12-22T00:00:00+05:30,normal,0
+ACC000117,small_merchant,SBI,Karnataka,2022-01-14T00:00:00+05:30,merchant,0
+ACC000118,salaried,HDFC,Delhi,2022-10-07T00:00:00+05:30,normal,0
+ACC000119,salaried,ICICI,Karnataka,2024-06-30T00:00:00+05:30,normal,0
+ACC000120,small_merchant,SBI,Telangana,2021-10-08T00:00:00+05:30,merchant,0
+ACC000121,salaried,Kotak,Delhi,2022-11-24T00:00:00+05:30,normal,0
+ACC000122,student,ICICI,Telangana,2021-12-10T00:00:00+05:30,normal,0
+ACC000123,gig_worker,Kotak,Uttar Pradesh,2021-06-19T00:00:00+05:30,normal,0
+ACC000124,student,SBI,Delhi,2024-04-09T00:00:00+05:30,normal,0
+ACC000125,gig_worker,SBI,Delhi,2021-07-21T00:00:00+05:30,normal,0
+ACC000126,salaried,ICICI,Telangana,2020-08-29T00:00:00+05:30,normal,0
+ACC000127,salaried,SBI,Tamil Nadu,2022-12-29T00:00:00+05:30,normal,0
+ACC000128,salaried,SBI,Delhi,2021-12-30T00:00:00+05:30,normal,0
+ACC000129,student,SBI,Uttar Pradesh,2025-10-19T00:00:00+05:30,mule_t1,1
+ACC000130,salaried,HDFC,Delhi,2023-06-15T00:00:00+05:30,normal,0
+ACC000131,small_merchant,PNB,Karnataka,2021-07-30T00:00:00+05:30,merchant,0
+ACC000132,student,PNB,Uttar Pradesh,2023-07-01T00:00:00+05:30,normal,0
+ACC000133,salaried,Axis,Maharashtra,2021-03-09T00:00:00+05:30,normal,0
+ACC000134,salaried,HDFC,Delhi,2021-09-15T00:00:00+05:30,normal,0
+ACC000135,large_merchant,ICICI,Delhi,2022-11-21T00:00:00+05:30,merchant,0
+ACC000136,salaried,Axis,Delhi,2024-09-02T00:00:00+05:30,normal,0
+ACC000137,large_merchant,SBI,Karnataka,2021-06-20T00:00:00+05:30,merchant,0
+ACC000138,student,ICICI,Delhi,2022-05-23T00:00:00+05:30,normal,0
+ACC000139,student,PNB,Maharashtra,2022-09-23T00:00:00+05:30,normal,0
+ACC000140,small_merchant,ICICI,Delhi,2022-01-01T00:00:00+05:30,merchant,0
+ACC000141,gig_worker,ICICI,Uttar Pradesh,2020-08-25T00:00:00+05:30,normal,0
+ACC000142,student,PNB,Maharashtra,2022-12-31T00:00:00+05:30,normal,0
+ACC000143,salaried,PNB,Maharashtra,2023-08-22T00:00:00+05:30,normal,0
+ACC000144,small_merchant,SBI,Maharashtra,2021-03-30T00:00:00+05:30,merchant,0
+ACC000145,salaried,Axis,Uttar Pradesh,2022-05-06T00:00:00+05:30,normal,0
+ACC000146,small_merchant,Kotak,Uttar Pradesh,2023-03-26T00:00:00+05:30,merchant,0
+ACC000147,salaried,HDFC,Maharashtra,2024-08-22T00:00:00+05:30,normal,0
+ACC000148,salaried,Kotak,Tamil Nadu,2023-04-02T00:00:00+05:30,normal,0
+ACC000149,student,Axis,Delhi,2020-12-07T00:00:00+05:30,normal,0
+ACC000150,large_merchant,PNB,Uttar Pradesh,2024-02-20T00:00:00+05:30,merchant,0
+ACC000151,salaried,HDFC,Delhi,2020-10-27T00:00:00+05:30,normal,0
+ACC000152,small_merchant,SBI,Uttar Pradesh,2021-01-06T00:00:00+05:30,merchant,0
+ACC000153,gig_worker,SBI,Tamil Nadu,2021-05-18T00:00:00+05:30,normal,0
+ACC000154,gig_worker,Axis,Karnataka,2023-12-25T00:00:00+05:30,normal,0
+ACC000155,student,Kotak,Tamil Nadu,2021-08-18T00:00:00+05:30,normal,0
+ACC000156,large_merchant,Axis,Karnataka,2022-02-12T00:00:00+05:30,merchant,0
+ACC000157,salaried,ICICI,Tamil Nadu,2021-02-14T00:00:00+05:30,normal,0
+ACC000158,salaried,PNB,Karnataka,2023-07-11T00:00:00+05:30,normal,0
+ACC000159,salaried,Kotak,Delhi,2022-06-30T00:00:00+05:30,normal,0
+ACC000160,salaried,HDFC,Karnataka,2020-12-08T00:00:00+05:30,normal,0
+ACC000161,salaried,SBI,Tamil Nadu,2021-01-17T00:00:00+05:30,normal,0
+ACC000162,small_merchant,Kotak,Uttar Pradesh,2020-11-16T00:00:00+05:30,merchant,0
+ACC000163,small_merchant,SBI,Uttar Pradesh,2025-01-13T00:00:00+05:30,merchant,0
+ACC000164,student,Kotak,Delhi,2025-10-16T00:00:00+05:30,mule_t2,1
+ACC000165,student,SBI,Delhi,2025-01-26T00:00:00+05:30,normal,0
+ACC000166,student,SBI,Karnataka,2020-08-24T00:00:00+05:30,normal,0
+ACC000167,student,HDFC,Karnataka,2023-06-28T00:00:00+05:30,normal,0
+ACC000168,gig_worker,HDFC,Tamil Nadu,2022-07-25T00:00:00+05:30,normal,0
+ACC000169,salaried,HDFC,Uttar Pradesh,2023-06-28T00:00:00+05:30,normal,0
+ACC000170,large_merchant,SBI,Karnataka,2025-03-04T00:00:00+05:30,merchant,0
+ACC000171,student,Kotak,Karnataka,2021-01-21T00:00:00+05:30,normal,0
+ACC000172,student,PNB,Maharashtra,2023-02-03T00:00:00+05:30,normal,0
+ACC000173,student,PNB,Telangana,2024-01-14T00:00:00+05:30,normal,0
+ACC000174,salaried,Kotak,Uttar Pradesh,2025-04-17T00:00:00+05:30,normal,0
+ACC000175,salaried,Kotak,Maharashtra,2024-12-18T00:00:00+05:30,normal,0
+ACC000176,salaried,Kotak,Uttar Pradesh,2022-11-02T00:00:00+05:30,normal,0
+ACC000177,gig_worker,ICICI,Karnataka,2021-10-04T00:00:00+05:30,normal,0
+ACC000178,small_merchant,Axis,Karnataka,2024-08-16T00:00:00+05:30,merchant,0
+ACC000179,gig_worker,PNB,Delhi,2022-12-05T00:00:00+05:30,normal,0
+ACC000180,salaried,Axis,Tamil Nadu,2023-09-23T00:00:00+05:30,normal,0
+ACC000181,small_merchant,PNB,Tamil Nadu,2022-04-29T00:00:00+05:30,merchant,0
+ACC000182,small_merchant,PNB,Maharashtra,2024-01-15T00:00:00+05:30,merchant,0
+ACC000183,small_merchant,ICICI,Uttar Pradesh,2021-03-10T00:00:00+05:30,merchant,0
+ACC000184,student,Axis,Delhi,2022-07-30T00:00:00+05:30,normal,0
+ACC000185,small_merchant,HDFC,Telangana,2024-09-02T00:00:00+05:30,merchant,0
+ACC000186,salaried,Kotak,Tamil Nadu,2021-06-29T00:00:00+05:30,normal,0
+ACC000187,salaried,Kotak,Telangana,2022-05-15T00:00:00+05:30,normal,0
+ACC000188,salaried,Axis,Karnataka,2020-12-06T00:00:00+05:30,normal,0
+ACC000189,salaried,PNB,Tamil Nadu,2020-12-31T00:00:00+05:30,normal,0
+ACC000190,salaried,ICICI,Delhi,2023-12-02T00:00:00+05:30,normal,0
+ACC000191,salaried,ICICI,Telangana,2022-02-18T00:00:00+05:30,normal,0
+ACC000192,student,Axis,Tamil Nadu,2022-09-26T00:00:00+05:30,normal,0
+ACC000193,salaried,HDFC,Uttar Pradesh,2023-05-27T00:00:00+05:30,normal,0
+ACC000194,student,SBI,Tamil Nadu,2025-07-04T00:00:00+05:30,normal,0
+ACC000195,salaried,ICICI,Uttar Pradesh,2021-07-15T00:00:00+05:30,normal,0
+ACC000196,gig_worker,PNB,Maharashtra,2023-09-15T00:00:00+05:30,normal,0
+ACC000197,salaried,HDFC,Karnataka,2025-03-13T00:00:00+05:30,normal,0
+ACC000198,salaried,PNB,Uttar Pradesh,2020-10-24T00:00:00+05:30,normal,0
+ACC000199,small_merchant,Axis,Karnataka,2023-07-27T00:00:00+05:30,merchant,0
+ACC000200,student,ICICI,Maharashtra,2024-12-13T00:00:00+05:30,normal,0
+ACC000201,small_merchant,PNB,Tamil Nadu,2023-05-23T00:00:00+05:30,merchant,0
+ACC000202,gig_worker,Kotak,Telangana,2021-04-05T00:00:00+05:30,normal,0
+ACC000203,student,Kotak,Karnataka,2021-11-07T00:00:00+05:30,normal,0
+ACC000204,salaried,PNB,Karnataka,2022-04-30T00:00:00+05:30,normal,0
+ACC000205,student,SBI,Uttar Pradesh,2024-01-28T00:00:00+05:30,normal,0
+ACC000206,salaried,ICICI,Karnataka,2024-02-03T00:00:00+05:30,normal,0
+ACC000207,small_merchant,Axis,Uttar Pradesh,2024-03-30T00:00:00+05:30,merchant,0
+ACC000208,large_merchant,SBI,Karnataka,2021-09-17T00:00:00+05:30,merchant,0
+ACC000209,small_merchant,ICICI,Karnataka,2021-07-30T00:00:00+05:30,merchant,0
+ACC000210,salaried,SBI,Telangana,2024-02-11T00:00:00+05:30,normal,0
+ACC000211,salaried,Axis,Tamil Nadu,2024-01-21T00:00:00+05:30,normal,0
+ACC000212,salaried,HDFC,Karnataka,2021-02-19T00:00:00+05:30,normal,0
+ACC000213,salaried,HDFC,Delhi,2020-09-29T00:00:00+05:30,normal,0
+ACC000214,student,HDFC,Tamil Nadu,2025-02-16T00:00:00+05:30,normal,0
+ACC000215,gig_worker,Kotak,Maharashtra,2024-04-11T00:00:00+05:30,normal,0
+ACC000216,salaried,ICICI,Telangana,2024-12-13T00:00:00+05:30,normal,0
+ACC000217,small_merchant,Axis,Delhi,2023-10-10T00:00:00+05:30,merchant,0
+ACC000218,gig_worker,Kotak,Telangana,2021-11-06T00:00:00+05:30,normal,0
+ACC000219,salaried,SBI,Uttar Pradesh,2022-08-26T00:00:00+05:30,normal,0
+ACC000220,gig_worker,HDFC,Maharashtra,2023-04-30T00:00:00+05:30,normal,0
+ACC000221,small_merchant,ICICI,Uttar Pradesh,2024-07-07T00:00:00+05:30,merchant,0
+ACC000222,salaried,Kotak,Tamil Nadu,2024-10-23T00:00:00+05:30,normal,0
+ACC000223,student,PNB,Telangana,2021-10-19T00:00:00+05:30,normal,0
+ACC000224,student,PNB,Tamil Nadu,2023-01-05T00:00:00+05:30,normal,0
+ACC000225,student,ICICI,Karnataka,2025-06-08T00:00:00+05:30,normal,0
+ACC000226,salaried,Kotak,Uttar Pradesh,2024-01-28T00:00:00+05:30,normal,0
+ACC000227,gig_worker,HDFC,Karnataka,2022-03-14T00:00:00+05:30,normal,0
+ACC000228,student,ICICI,Delhi,2022-11-01T00:00:00+05:30,normal,0
+ACC000229,small_merchant,ICICI,Tamil Nadu,2021-12-14T00:00:00+05:30,merchant,0
+ACC000230,small_merchant,SBI,Karnataka,2021-11-18T00:00:00+05:30,merchant,0
+ACC000231,salaried,SBI,Telangana,2024-12-27T00:00:00+05:30,normal,0
+ACC000232,gig_worker,PNB,Maharashtra,2021-04-28T00:00:00+05:30,normal,0
+ACC000233,small_merchant,Kotak,Delhi,2022-08-07T00:00:00+05:30,merchant,0
+ACC000234,small_merchant,HDFC,Maharashtra,2025-03-31T00:00:00+05:30,merchant,0
+ACC000235,salaried,SBI,Uttar Pradesh,2020-10-31T00:00:00+05:30,normal,0
+ACC000236,salaried,SBI,Tamil Nadu,2022-08-16T00:00:00+05:30,normal,0
+ACC000237,gig_worker,SBI,Maharashtra,2024-05-13T00:00:00+05:30,normal,0
+ACC000238,salaried,PNB,Maharashtra,2020-09-13T00:00:00+05:30,normal,0
+ACC000239,student,SBI,Uttar Pradesh,2025-05-15T00:00:00+05:30,normal,0
+ACC000240,small_merchant,PNB,Karnataka,2023-04-11T00:00:00+05:30,merchant,0
+ACC000241,salaried,PNB,Telangana,2025-05-04T00:00:00+05:30,normal,0
+ACC000242,salaried,HDFC,Karnataka,2021-10-02T00:00:00+05:30,normal,0
+ACC000243,student,HDFC,Tamil Nadu,2021-09-23T00:00:00+05:30,normal,0
+ACC000244,gig_worker,HDFC,Maharashtra,2025-01-21T00:00:00+05:30,normal,0
+ACC000245,salaried,PNB,Tamil Nadu,2024-02-07T00:00:00+05:30,normal,0
+ACC000246,salaried,Kotak,Maharashtra,2021-03-30T00:00:00+05:30,normal,0
+ACC000247,salaried,PNB,Karnataka,2024-03-31T00:00:00+05:30,normal,0
+ACC000248,gig_worker,HDFC,Telangana,2022-09-04T00:00:00+05:30,normal,0
+ACC000249,small_merchant,PNB,Telangana,2022-11-11T00:00:00+05:30,merchant,0
+ACC000250,salaried,PNB,Delhi,2021-03-03T00:00:00+05:30,normal,0
+ACC000251,salaried,ICICI,Telangana,2021-11-15T00:00:00+05:30,normal,0
+ACC000252,student,SBI,Karnataka,2021-09-01T00:00:00+05:30,normal,0
+ACC000253,salaried,HDFC,Tamil Nadu,2025-02-03T00:00:00+05:30,normal,0
+ACC000254,salaried,PNB,Uttar Pradesh,2021-04-06T00:00:00+05:30,normal,0
+ACC000255,salaried,Axis,Telangana,2023-04-22T00:00:00+05:30,normal,0
+ACC000256,student,SBI,Maharashtra,2025-04-03T00:00:00+05:30,normal,0
+ACC000257,salaried,Kotak,Tamil Nadu,2025-01-24T00:00:00+05:30,normal,0
+ACC000258,gig_worker,Axis,Karnataka,2022-01-07T00:00:00+05:30,normal,0
+ACC000259,student,ICICI,Delhi,2021-03-02T00:00:00+05:30,normal,0
+ACC000260,salaried,SBI,Telangana,2024-07-26T00:00:00+05:30,normal,0
+ACC000261,salaried,Axis,Tamil Nadu,2024-02-03T00:00:00+05:30,normal,0
+ACC000262,gig_worker,Axis,Telangana,2024-03-24T00:00:00+05:30,normal,0
+ACC000263,salaried,SBI,Karnataka,2021-02-25T00:00:00+05:30,normal,0
+ACC000264,salaried,Kotak,Tamil Nadu,2023-12-10T00:00:00+05:30,normal,0
+ACC000265,salaried,Axis,Telangana,2025-09-20T00:00:00+05:30,cashout,1
+ACC000266,salaried,SBI,Maharashtra,2022-08-18T00:00:00+05:30,normal,0
+ACC000267,small_merchant,HDFC,Telangana,2023-07-10T00:00:00+05:30,merchant,0
+ACC000268,salaried,HDFC,Karnataka,2022-06-13T00:00:00+05:30,normal,0
+ACC000269,salaried,PNB,Delhi,2024-07-09T00:00:00+05:30,normal,0
+ACC000270,small_merchant,PNB,Maharashtra,2020-12-16T00:00:00+05:30,merchant,0
+ACC000271,student,PNB,Telangana,2021-01-13T00:00:00+05:30,normal,0
+ACC000272,salaried,Axis,Karnataka,2025-06-22T00:00:00+05:30,normal,0
+ACC000273,salaried,Kotak,Telangana,2025-10-09T00:00:00+05:30,cashout,1
+ACC000274,small_merchant,HDFC,Maharashtra,2024-08-01T00:00:00+05:30,merchant,0
+ACC000275,salaried,Axis,Maharashtra,2023-05-01T00:00:00+05:30,normal,0
+ACC000276,gig_worker,Axis,Maharashtra,2023-10-04T00:00:00+05:30,normal,0
+ACC000277,salaried,ICICI,Uttar Pradesh,2021-03-28T00:00:00+05:30,victim,0
+ACC000278,gig_worker,ICICI,Tamil Nadu,2021-07-07T00:00:00+05:30,normal,0
+ACC000279,gig_worker,PNB,Karnataka,2024-02-14T00:00:00+05:30,normal,0
+ACC000280,small_merchant,Kotak,Maharashtra,2022-10-31T00:00:00+05:30,merchant,0
+ACC000281,gig_worker,Kotak,Karnataka,2023-08-11T00:00:00+05:30,normal,0
+ACC000282,salaried,HDFC,Maharashtra,2023-01-07T00:00:00+05:30,normal,0
+ACC000283,salaried,PNB,Uttar Pradesh,2021-02-03T00:00:00+05:30,fraudster,1
+ACC000284,student,PNB,Telangana,2021-10-19T00:00:00+05:30,normal,0
+ACC000285,gig_worker,Kotak,Delhi,2025-04-11T00:00:00+05:30,normal,0
+ACC000286,salaried,Axis,Delhi,2022-04-26T00:00:00+05:30,normal,0
+ACC000287,salaried,HDFC,Tamil Nadu,2021-09-30T00:00:00+05:30,normal,0
+ACC000288,student,PNB,Karnataka,2024-02-10T00:00:00+05:30,normal,0
+ACC000289,student,HDFC,Karnataka,2025-08-21T00:00:00+05:30,mule_t2,1
+ACC000290,small_merchant,ICICI,Maharashtra,2025-02-08T00:00:00+05:30,merchant,0
+ACC000291,salaried,ICICI,Tamil Nadu,2025-01-27T00:00:00+05:30,normal,0
+ACC000292,salaried,PNB,Uttar Pradesh,2023-04-07T00:00:00+05:30,normal,0
+ACC000293,gig_worker,HDFC,Tamil Nadu,2023-07-04T00:00:00+05:30,normal,0
+ACC000294,student,PNB,Uttar Pradesh,2021-03-18T00:00:00+05:30,normal,0
+ACC000295,gig_worker,SBI,Maharashtra,2021-06-24T00:00:00+05:30,normal,0
+ACC000296,large_merchant,ICICI,Tamil Nadu,2022-08-06T00:00:00+05:30,merchant,0
+ACC000297,small_merchant,SBI,Uttar Pradesh,2022-11-12T00:00:00+05:30,merchant,0
+ACC000298,small_merchant,SBI,Tamil Nadu,2025-04-10T00:00:00+05:30,merchant,0
+ACC000299,gig_worker,HDFC,Maharashtra,2024-08-09T00:00:00+05:30,normal,0
+ACC000300,salaried,Kotak,Maharashtra,2023-05-17T00:00:00+05:30,normal,0
+ACC000301,student,Axis,Telangana,2023-06-13T00:00:00+05:30,normal,0
+ACC000302,salaried,PNB,Karnataka,2023-08-24T00:00:00+05:30,normal,0
+ACC000303,gig_worker,HDFC,Karnataka,2023-01-29T00:00:00+05:30,normal,0
+ACC000304,gig_worker,HDFC,Tamil Nadu,2022-09-03T00:00:00+05:30,normal,0
+ACC000305,gig_worker,Kotak,Uttar Pradesh,2023-08-14T00:00:00+05:30,normal,0
+ACC000306,salaried,PNB,Telangana,2022-08-26T00:00:00+05:30,normal,0
+ACC000307,salaried,ICICI,Uttar Pradesh,2025-01-03T00:00:00+05:30,normal,0
+ACC000308,salaried,HDFC,Uttar Pradesh,2020-11-10T00:00:00+05:30,normal,0
+ACC000309,salaried,Kotak,Telangana,2022-12-27T00:00:00+05:30,normal,0
+ACC000310,small_merchant,ICICI,Tamil Nadu,2023-11-16T00:00:00+05:30,merchant,0
+ACC000311,student,SBI,Tamil Nadu,2023-05-10T00:00:00+05:30,normal,0
+ACC000312,student,Kotak,Tamil Nadu,2025-08-21T00:00:00+05:30,mule_t2,1
+ACC000313,student,ICICI,Karnataka,2024-02-17T00:00:00+05:30,normal,0
+ACC000314,gig_worker,ICICI,Maharashtra,2022-07-09T00:00:00+05:30,normal,0
+ACC000315,salaried,ICICI,Maharashtra,2021-03-05T00:00:00+05:30,normal,0
+ACC000316,small_merchant,HDFC,Telangana,2021-03-06T00:00:00+05:30,merchant,0
+ACC000317,small_merchant,Axis,Karnataka,2024-09-18T00:00:00+05:30,merchant,0
+ACC000318,salaried,HDFC,Maharashtra,2022-01-24T00:00:00+05:30,normal,0
+ACC000319,salaried,Axis,Maharashtra,2025-08-23T00:00:00+05:30,cashout,1
+ACC000320,gig_worker,SBI,Maharashtra,2023-03-22T00:00:00+05:30,normal,0
+ACC000321,large_merchant,Kotak,Delhi,2022-02-25T00:00:00+05:30,merchant,0
+ACC000322,salaried,HDFC,Uttar Pradesh,2021-07-13T00:00:00+05:30,normal,0
+ACC000323,gig_worker,Axis,Uttar Pradesh,2025-01-08T00:00:00+05:30,normal,0
+ACC000324,small_merchant,HDFC,Uttar Pradesh,2023-02-24T00:00:00+05:30,merchant,0
+ACC000325,small_merchant,HDFC,Telangana,2025-05-19T00:00:00+05:30,merchant,0
+ACC000326,salaried,HDFC,Uttar Pradesh,2020-10-19T00:00:00+05:30,normal,0
+ACC000327,salaried,PNB,Karnataka,2022-12-09T00:00:00+05:30,normal,0
+ACC000328,large_merchant,SBI,Delhi,2024-02-23T00:00:00+05:30,merchant,0
+ACC000329,salaried,PNB,Tamil Nadu,2025-03-22T00:00:00+05:30,normal,0
+ACC000330,salaried,ICICI,Karnataka,2024-11-28T00:00:00+05:30,normal,0
+ACC000331,salaried,ICICI,Uttar Pradesh,2024-02-25T00:00:00+05:30,fraudster,1
+ACC000332,salaried,HDFC,Maharashtra,2021-06-15T00:00:00+05:30,normal,0
+ACC000333,gig_worker,ICICI,Karnataka,2020-09-16T00:00:00+05:30,normal,0
+ACC000334,salaried,PNB,Telangana,2024-01-28T00:00:00+05:30,normal,0
+ACC000335,small_merchant,Kotak,Karnataka,2023-11-12T00:00:00+05:30,merchant,0
+ACC000336,salaried,Kotak,Telangana,2021-05-15T00:00:00+05:30,normal,0
+ACC000337,gig_worker,Axis,Telangana,2025-01-15T00:00:00+05:30,normal,0
+ACC000338,salaried,HDFC,Karnataka,2022-07-17T00:00:00+05:30,normal,0
+ACC000339,student,SBI,Telangana,2022-08-03T00:00:00+05:30,normal,0
+ACC000340,salaried,Axis,Telangana,2023-01-13T00:00:00+05:30,normal,0
+ACC000341,salaried,Axis,Telangana,2021-06-06T00:00:00+05:30,normal,0
+ACC000342,salaried,Axis,Delhi,2025-02-08T00:00:00+05:30,normal,0
+ACC000343,gig_worker,Axis,Telangana,2024-02-19T00:00:00+05:30,normal,0
+ACC000344,student,SBI,Karnataka,2021-09-02T00:00:00+05:30,normal,0
+ACC000345,salaried,ICICI,Delhi,2024-01-19T00:00:00+05:30,normal,0
+ACC000346,large_merchant,SBI,Tamil Nadu,2025-03-18T00:00:00+05:30,merchant,0
+ACC000347,small_merchant,Kotak,Delhi,2023-04-16T00:00:00+05:30,merchant,0
+ACC000348,small_merchant,Kotak,Maharashtra,2020-10-16T00:00:00+05:30,merchant,0
+ACC000349,salaried,PNB,Uttar Pradesh,2021-08-26T00:00:00+05:30,normal,0
+ACC000350,salaried,ICICI,Delhi,2021-03-23T00:00:00+05:30,victim,0
+ACC000351,salaried,PNB,Uttar Pradesh,2024-02-19T00:00:00+05:30,normal,0
+ACC000352,salaried,PNB,Karnataka,2024-01-18T00:00:00+05:30,normal,0
+ACC000353,salaried,ICICI,Karnataka,2024-10-10T00:00:00+05:30,victim,0
+ACC000354,student,SBI,Uttar Pradesh,2024-11-27T00:00:00+05:30,normal,0
+ACC000355,salaried,Kotak,Uttar Pradesh,2024-03-02T00:00:00+05:30,normal,0
+ACC000356,salaried,Axis,Tamil Nadu,2021-03-08T00:00:00+05:30,normal,0
+ACC000357,small_merchant,ICICI,Tamil Nadu,2022-03-20T00:00:00+05:30,merchant,0
+ACC000358,student,Kotak,Telangana,2023-03-06T00:00:00+05:30,normal,0
+ACC000359,salaried,Kotak,Telangana,2023-03-22T00:00:00+05:30,normal,0
+ACC000360,gig_worker,Kotak,Telangana,2024-12-02T00:00:00+05:30,normal,0
+ACC000361,salaried,SBI,Telangana,2023-02-16T00:00:00+05:30,normal,0
+ACC000362,student,SBI,Karnataka,2023-02-01T00:00:00+05:30,normal,0
+ACC000363,salaried,ICICI,Uttar Pradesh,2021-10-09T00:00:00+05:30,normal,0
+ACC000364,student,Axis,Karnataka,2024-04-27T00:00:00+05:30,normal,0
+ACC000365,student,HDFC,Telangana,2021-04-16T00:00:00+05:30,normal,0
+ACC000366,student,ICICI,Telangana,2023-07-13T00:00:00+05:30,normal,0
+ACC000367,salaried,Axis,Delhi,2025-03-30T00:00:00+05:30,normal,0
+ACC000368,gig_worker,PNB,Tamil Nadu,2022-05-22T00:00:00+05:30,normal,0
+ACC000369,small_merchant,PNB,Maharashtra,2022-07-24T00:00:00+05:30,merchant,0
+ACC000370,salaried,SBI,Maharashtra,2021-01-13T00:00:00+05:30,normal,0
+ACC000371,salaried,ICICI,Karnataka,2022-10-27T00:00:00+05:30,normal,0
+ACC000372,salaried,HDFC,Maharashtra,2021-08-07T00:00:00+05:30,normal,0
+ACC000373,large_merchant,HDFC,Delhi,2024-05-10T00:00:00+05:30,merchant,0
+ACC000374,small_merchant,PNB,Telangana,2024-09-28T00:00:00+05:30,merchant,0
+ACC000375,salaried,ICICI,Uttar Pradesh,2022-05-17T00:00:00+05:30,normal,0
+ACC000376,large_merchant,ICICI,Tamil Nadu,2023-03-11T00:00:00+05:30,merchant,0
+ACC000377,salaried,Kotak,Uttar Pradesh,2021-08-22T00:00:00+05:30,normal,0
+ACC000378,student,ICICI,Maharashtra,2023-02-12T00:00:00+05:30,normal,0
+ACC000379,student,PNB,Tamil Nadu,2021-08-15T00:00:00+05:30,normal,0
+ACC000380,small_merchant,Kotak,Tamil Nadu,2020-09-02T00:00:00+05:30,merchant,0
+ACC000381,salaried,Kotak,Maharashtra,2020-10-10T00:00:00+05:30,normal,0
+ACC000382,salaried,HDFC,Tamil Nadu,2025-02-09T00:00:00+05:30,normal,0
+ACC000383,student,ICICI,Tamil Nadu,2020-10-08T00:00:00+05:30,normal,0
+ACC000384,salaried,SBI,Delhi,2023-01-10T00:00:00+05:30,normal,0
+ACC000385,salaried,PNB,Telangana,2023-09-12T00:00:00+05:30,normal,0
+ACC000386,salaried,ICICI,Telangana,2021-01-15T00:00:00+05:30,victim,0
+ACC000387,small_merchant,SBI,Delhi,2024-09-14T00:00:00+05:30,merchant,0
+ACC000388,gig_worker,SBI,Telangana,2023-07-30T00:00:00+05:30,normal,0
+ACC000389,small_merchant,HDFC,Karnataka,2021-06-10T00:00:00+05:30,merchant,0
+ACC000390,gig_worker,SBI,Maharashtra,2024-04-01T00:00:00+05:30,normal,0
+ACC000391,gig_worker,SBI,Tamil Nadu,2020-12-09T00:00:00+05:30,normal,0
+ACC000392,small_merchant,Axis,Maharashtra,2022-10-21T00:00:00+05:30,merchant,0
+ACC000393,gig_worker,HDFC,Karnataka,2023-01-07T00:00:00+05:30,normal,0
+ACC000394,gig_worker,Kotak,Delhi,2023-12-18T00:00:00+05:30,normal,0
+ACC000395,salaried,Axis,Uttar Pradesh,2024-11-30T00:00:00+05:30,normal,0
+ACC000396,salaried,Axis,Telangana,2020-12-23T00:00:00+05:30,normal,0
+ACC000397,gig_worker,Axis,Telangana,2025-07-08T00:00:00+05:30,normal,0
+ACC000398,salaried,Axis,Tamil Nadu,2025-02-12T00:00:00+05:30,normal,0
+ACC000399,small_merchant,PNB,Telangana,2025-03-02T00:00:00+05:30,merchant,0
+ACC000400,student,HDFC,Uttar Pradesh,2024-07-08T00:00:00+05:30,normal,0
+ACC000401,salaried,Axis,Telangana,2021-12-04T00:00:00+05:30,normal,0
+ACC000402,small_merchant,Axis,Tamil Nadu,2025-02-14T00:00:00+05:30,merchant,0
+ACC000403,salaried,PNB,Maharashtra,2024-10-22T00:00:00+05:30,normal,0
+ACC000404,student,PNB,Karnataka,2022-01-14T00:00:00+05:30,normal,0
+ACC000405,salaried,PNB,Delhi,2025-05-15T00:00:00+05:30,normal,0
+ACC000406,large_merchant,Axis,Uttar Pradesh,2024-02-04T00:00:00+05:30,merchant,0
+ACC000407,student,SBI,Delhi,2021-06-19T00:00:00+05:30,normal,0
+ACC000408,small_merchant,PNB,Maharashtra,2021-02-10T00:00:00+05:30,merchant,0
+ACC000409,salaried,Kotak,Delhi,2023-02-06T00:00:00+05:30,normal,0
+ACC000410,small_merchant,Axis,Uttar Pradesh,2021-02-21T00:00:00+05:30,merchant,0
+ACC000411,gig_worker,ICICI,Telangana,2021-03-03T00:00:00+05:30,normal,0
+ACC000412,student,HDFC,Karnataka,2020-12-07T00:00:00+05:30,normal,0
+ACC000413,large_merchant,ICICI,Karnataka,2024-04-27T00:00:00+05:30,merchant,0
+ACC000414,salaried,Axis,Delhi,2024-04-11T00:00:00+05:30,normal,0
+ACC000415,salaried,PNB,Delhi,2022-04-17T00:00:00+05:30,normal,0
+ACC000416,gig_worker,ICICI,Telangana,2025-07-13T00:00:00+05:30,normal,0
+ACC000417,small_merchant,HDFC,Delhi,2024-03-26T00:00:00+05:30,merchant,0
+ACC000418,salaried,SBI,Tamil Nadu,2023-08-19T00:00:00+05:30,normal,0
+ACC000419,gig_worker,Axis,Karnataka,2021-03-01T00:00:00+05:30,normal,0
+ACC000420,salaried,Axis,Maharashtra,2020-10-21T00:00:00+05:30,normal,0
+ACC000421,student,Kotak,Delhi,2023-11-09T00:00:00+05:30,normal,0
+ACC000422,gig_worker,PNB,Delhi,2021-10-13T00:00:00+05:30,normal,0
+ACC000423,salaried,Axis,Karnataka,2022-11-10T00:00:00+05:30,normal,0
+ACC000424,gig_worker,SBI,Tamil Nadu,2025-03-29T00:00:00+05:30,normal,0
+ACC000425,salaried,PNB,Karnataka,2023-07-31T00:00:00+05:30,normal,0
+ACC000426,large_merchant,Axis,Maharashtra,2022-01-30T00:00:00+05:30,merchant,0
+ACC000427,student,Kotak,Tamil Nadu,2022-01-25T00:00:00+05:30,normal,0
+ACC000428,salaried,PNB,Karnataka,2021-01-10T00:00:00+05:30,victim,0
+ACC000429,gig_worker,HDFC,Uttar Pradesh,2022-06-13T00:00:00+05:30,normal,0
+ACC000430,student,ICICI,Maharashtra,2020-10-11T00:00:00+05:30,normal,0
+ACC000431,student,ICICI,Uttar Pradesh,2025-08-21T00:00:00+05:30,mule_t2,1
+ACC000432,salaried,HDFC,Tamil Nadu,2022-01-06T00:00:00+05:30,normal,0
+ACC000433,student,PNB,Uttar Pradesh,2022-06-29T00:00:00+05:30,normal,0
+ACC000434,student,ICICI,Delhi,2021-04-17T00:00:00+05:30,normal,0
+ACC000435,small_merchant,PNB,Telangana,2020-12-19T00:00:00+05:30,merchant,0
+ACC000436,salaried,Axis,Tamil Nadu,2021-05-26T00:00:00+05:30,normal,0
+ACC000437,student,ICICI,Telangana,2020-11-02T00:00:00+05:30,normal,0
+ACC000438,student,PNB,Karnataka,2023-10-10T00:00:00+05:30,normal,0
+ACC000439,student,HDFC,Telangana,2020-08-27T00:00:00+05:30,normal,0
+ACC000440,salaried,Axis,Tamil Nadu,2025-01-18T00:00:00+05:30,normal,0
+ACC000441,student,SBI,Telangana,2023-09-24T00:00:00+05:30,normal,0
+ACC000442,salaried,SBI,Karnataka,2021-12-17T00:00:00+05:30,normal,0
+ACC000443,salaried,PNB,Tamil Nadu,2022-06-28T00:00:00+05:30,normal,0
+ACC000444,small_merchant,PNB,Telangana,2024-11-11T00:00:00+05:30,merchant,0
+ACC000445,salaried,PNB,Karnataka,2022-03-11T00:00:00+05:30,normal,0
+ACC000446,student,Kotak,Telangana,2023-08-25T00:00:00+05:30,normal,0
+ACC000447,gig_worker,Axis,Telangana,2021-08-16T00:00:00+05:30,normal,0
+ACC000448,gig_worker,SBI,Delhi,2020-08-22T00:00:00+05:30,normal,0
+ACC000449,student,ICICI,Uttar Pradesh,2024-07-16T00:00:00+05:30,normal,0
+ACC000450,small_merchant,HDFC,Delhi,2022-10-14T00:00:00+05:30,merchant,0
+ACC000451,student,PNB,Tamil Nadu,2025-05-25T00:00:00+05:30,normal,0
+ACC000452,student,HDFC,Telangana,2022-12-21T00:00:00+05:30,normal,0
+ACC000453,small_merchant,Axis,Uttar Pradesh,2021-05-25T00:00:00+05:30,merchant,0
+ACC000454,gig_worker,Kotak,Karnataka,2020-11-16T00:00:00+05:30,normal,0
+ACC000455,student,HDFC,Tamil Nadu,2021-08-23T00:00:00+05:30,normal,0
+ACC000456,salaried,Kotak,Uttar Pradesh,2024-02-21T00:00:00+05:30,normal,0
+ACC000457,student,PNB,Tamil Nadu,2023-09-09T00:00:00+05:30,normal,0
+ACC000458,salaried,SBI,Karnataka,2020-08-16T00:00:00+05:30,normal,0
+ACC000459,gig_worker,Axis,Uttar Pradesh,2021-08-25T00:00:00+05:30,normal,0
+ACC000460,salaried,HDFC,Uttar Pradesh,2021-01-19T00:00:00+05:30,normal,0
+ACC000461,student,PNB,Tamil Nadu,2024-04-28T00:00:00+05:30,normal,0
+ACC000462,gig_worker,HDFC,Delhi,2023-09-30T00:00:00+05:30,normal,0
+ACC000463,student,ICICI,Tamil Nadu,2021-06-25T00:00:00+05:30,normal,0
+ACC000464,salaried,ICICI,Tamil Nadu,2023-12-05T00:00:00+05:30,normal,0
+ACC000465,small_merchant,ICICI,Karnataka,2021-10-29T00:00:00+05:30,merchant,0
+ACC000466,salaried,Kotak,Telangana,2024-11-29T00:00:00+05:30,normal,0
+ACC000467,small_merchant,Kotak,Tamil Nadu,2025-03-24T00:00:00+05:30,merchant,0
+ACC000468,gig_worker,SBI,Maharashtra,2021-01-13T00:00:00+05:30,normal,0
+ACC000469,salaried,PNB,Karnataka,2024-01-18T00:00:00+05:30,normal,0
+ACC000470,gig_worker,HDFC,Uttar Pradesh,2024-08-15T00:00:00+05:30,normal,0
+ACC000471,salaried,SBI,Uttar Pradesh,2024-04-13T00:00:00+05:30,normal,0
+ACC000472,salaried,ICICI,Tamil Nadu,2025-06-28T00:00:00+05:30,normal,0
+ACC000473,small_merchant,Kotak,Delhi,2021-10-19T00:00:00+05:30,merchant,0
+ACC000474,student,Axis,Delhi,2021-02-28T00:00:00+05:30,normal,0
+ACC000475,student,Axis,Telangana,2025-06-14T00:00:00+05:30,normal,0
+ACC000476,gig_worker,PNB,Delhi,2022-08-06T00:00:00+05:30,normal,0
+ACC000477,gig_worker,ICICI,Uttar Pradesh,2023-09-29T00:00:00+05:30,normal,0
+ACC000478,student,ICICI,Maharashtra,2022-03-27T00:00:00+05:30,normal,0
+ACC000479,salaried,PNB,Tamil Nadu,2022-02-03T00:00:00+05:30,normal,0
+ACC000480,salaried,SBI,Karnataka,2021-12-07T00:00:00+05:30,normal,0
+ACC000481,salaried,Kotak,Delhi,2025-04-23T00:00:00+05:30,normal,0
+ACC000482,salaried,ICICI,Tamil Nadu,2025-04-29T00:00:00+05:30,normal,0
+ACC000483,salaried,Axis,Maharashtra,2020-11-21T00:00:00+05:30,normal,0
+ACC000484,large_merchant,Kotak,Maharashtra,2025-01-31T00:00:00+05:30,merchant,0
+ACC000485,student,PNB,Tamil Nadu,2025-09-23T00:00:00+05:30,mule_t1,1
+ACC000486,student,PNB,Uttar Pradesh,2025-08-14T00:00:00+05:30,mule_t1,1
+ACC000487,salaried,PNB,Maharashtra,2023-09-03T00:00:00+05:30,normal,0
+ACC000488,student,SBI,Telangana,2025-04-15T00:00:00+05:30,normal,0
+ACC000489,small_merchant,ICICI,Delhi,2024-09-17T00:00:00+05:30,merchant,0
+ACC000490,small_merchant,PNB,Telangana,2023-01-21T00:00:00+05:30,merchant,0
+ACC000491,salaried,HDFC,Maharashtra,2024-12-29T00:00:00+05:30,normal,0
+ACC000492,salaried,HDFC,Telangana,2021-12-01T00:00:00+05:30,normal,0
+ACC000493,small_merchant,Kotak,Tamil Nadu,2021-04-23T00:00:00+05:30,merchant,0
+ACC000494,student,PNB,Uttar Pradesh,2022-04-21T00:00:00+05:30,normal,0
+ACC000495,gig_worker,HDFC,Uttar Pradesh,2021-06-16T00:00:00+05:30,normal,0
+ACC000496,salaried,SBI,Karnataka,2022-07-04T00:00:00+05:30,normal,0
+ACC000497,small_merchant,ICICI,Karnataka,2022-02-17T00:00:00+05:30,merchant,0
+ACC000498,salaried,Kotak,Telangana,2025-04-22T00:00:00+05:30,normal,0
+ACC000499,student,Axis,Delhi,2022-11-08T00:00:00+05:30,normal,0
+ACC000500,salaried,SBI,Karnataka,2024-05-16T00:00:00+05:30,normal,0
