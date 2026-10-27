@@ -85,15 +85,17 @@ def _merchant_payments(accounts, cfg, rng, festival, activity):
                  _lognormal(cfg["ticket_size"]["p2m"], len(rows), rng), "P2M")
 
 
-def _scheduled_business(accounts, cfg, rng, festival, activity, key, payer_mask, ticket):
-    """Bills (personal) and supplier payments (merchants): P2M to large merchants, never on Sundays."""
+def _scheduled_business(accounts, cfg, rng, festival, activity, key, payer_mask, ticket, channel,
+                        skip_sunday):
+    """Payments to large merchants: bills by people (P2M, any day) and supplier
+    transfers between businesses (P2P, never on Sundays)."""
     weekday = _days(cfg).dayofweek.to_numpy()
-    day_weight = np.where(weekday == SUNDAY, 0.0, 7 / 6) * festival
+    day_weight = (np.where(weekday == SUNDAY, 0.0, 7 / 6) if skip_sunday else np.ones(len(weekday))) * festival
     rates = np.where(payer_mask, _rate(accounts, cfg, key, per_month=True), 0.0)
     rows, days = _daily_events(rates, day_weight, activity, rng)
     large = accounts.account_id[accounts.account_type == "large_merchant"].to_numpy()
     return _rows(accounts.account_id.to_numpy()[rows], rng.choice(large, size=len(rows)),
-                 _timestamps(days, cfg, rng), _lognormal(cfg["ticket_size"][ticket], len(rows), rng), "P2M")
+                 _timestamps(days, cfg, rng), _lognormal(cfg["ticket_size"][ticket], len(rows), rng), channel)
 
 
 def _salaries(accounts, cfg, rng):
@@ -131,7 +133,7 @@ def _gig_payouts(accounts, cfg, rng):
 
 
 def _rent(accounts, cfg, rng):
-    """Monthly rent on days 1-10 to a landlord (an older salaried account)."""
+    """Monthly rent on days 1-15 to a landlord (an older salaried account)."""
     share = accounts.account_type.map(lambda t: cfg["behaviours"][t].get("rent_share", 0.0)).to_numpy()
     payers = accounts[rng.random(len(accounts)) < share]
     landlords = accounts.account_id[(accounts.account_type == "salaried")
@@ -141,8 +143,10 @@ def _rent(accounts, cfg, rng):
     days = _days(cfg)
     out = []
     for month_start in days[days.day == 1]:
-        day_idx = (month_start - days[0]).days + rng.integers(0, 10, size=len(payers))
-        out.append(_rows(payers.account_id.to_numpy(), landlord, _timestamps(day_idx, cfg, rng), rent, "P2P"))
+        day_idx = (month_start - days[0]).days + rng.integers(0, 15, size=len(payers))
+        keep = day_idx < len(days)
+        out.append(_rows(payers.account_id.to_numpy()[keep], landlord[keep], _timestamps(day_idx[keep], cfg, rng),
+                         rent[keep], "P2P"))
     return pd.concat(out, ignore_index=True)
 
 
@@ -202,11 +206,14 @@ def generate_normal_transactions(accounts: pd.DataFrame, cfg: dict, rng: np.rand
     personal = (accounts.role == "normal").to_numpy()
     p2m = pd.concat([
         _merchant_payments(accounts, cfg, rng, festival, activity),
-        _scheduled_business(accounts, cfg, rng, festival, activity, "bills_per_month", personal, "bills"),
-        _scheduled_business(accounts, cfg, rng, festival, activity, "supplier_per_month", ~personal, "supplier"),
+        _scheduled_business(accounts, cfg, rng, festival, activity, "bills_per_month", personal, "bills",
+                            "P2M", skip_sunday=False),
     ], ignore_index=True)
-    p2p = pd.concat([_salaries(accounts, cfg, rng), _gig_payouts(accounts, cfg, rng), _rent(accounts, cfg, rng)],
-                    ignore_index=True)
+    p2p = pd.concat([
+        _scheduled_business(accounts, cfg, rng, festival, activity, "supplier_per_month", ~personal, "supplier",
+                            "P2P", skip_sunday=True),
+        _salaries(accounts, cfg, rng), _gig_payouts(accounts, cfg, rng), _rent(accounts, cfg, rng),
+    ], ignore_index=True)
     share = cfg["channel_mix"]
     n_needed = round(len(p2m) * share["P2P"] / share["P2M"]) - len(p2p)
     tx = pd.concat([p2m, p2p, _family_transfers(accounts, cfg, rng, festival, activity, n_needed)],

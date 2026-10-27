@@ -49,13 +49,13 @@ ticket_size:
     source: "NPCI UPI daily statistics, 13 Aug - 10 Nov 2025: total value / total volume = Rs 1,280 (data/raw/npci/upi_daily_2025-08_to_2025-11.csv)"
     status: sourced
   # Per-behaviour lognormal amounts (median in rupees, sigma of log-amount).
-  p2m: {value: {median: 180, sigma: 1.0}, source: "assumed; checked against secondary report that 86% of P2M payments are <= Rs 500 (Outlook Money, Feb 2025) - this lognormal gives 85%", status: assumed}
-  p2p_family: {value: {median: 1200, sigma: 0.9}, source: "assumed", status: assumed}
-  bills: {value: {median: 600, sigma: 0.7}, source: "assumed: bills and mobile recharges", status: assumed}
+  p2m: {value: {median: 120, sigma: 1.0}, source: "assumed; tuned with bills so that about 86% of all P2M payments are <= Rs 500 (secondary: Outlook Money, Feb 2025)", status: assumed}
+  p2p_family: {value: {median: 1600, sigma: 0.9}, source: "assumed", status: assumed}
+  bills: {value: {median: 350, sigma: 0.7}, source: "assumed: bills and mobile recharges", status: assumed}
   rent: {value: {median: 8000, sigma: 0.5}, source: "assumed", status: assumed}
-  salary: {value: {median: 35000, sigma: 0.5}, source: "assumed", status: assumed}
+  salary: {value: {median: 15000, sigma: 0.5}, source: "assumed: wages paid over UPI come mostly from small employers (shops, domestic work); corporate salaries use NEFT", status: assumed}
   gig_payout: {value: {median: 2000, sigma: 0.6}, source: "assumed: weekly gig-platform payouts", status: assumed}
-  supplier: {value: {median: 2500, sigma: 0.8}, source: "assumed: merchant payments to suppliers", status: assumed}
+  supplier: {value: {median: 4000, sigma: 0.8}, source: "assumed: merchant payments to suppliers", status: assumed}
 
 channel_mix:
   value: {P2P: 0.38, P2M: 0.62}
@@ -77,17 +77,19 @@ month_start:
 
 festivals:
   value:
-    - {name: Dussehra, start: "2025-10-02", end: "2025-10-02", volume_uplift: 0.0}
-    - {name: Dhanteras-Diwali, start: "2025-10-16", end: "2025-10-20", volume_uplift: 0.047}
-    - {name: post-Diwali, start: "2025-10-21", end: "2025-10-30", volume_uplift: -0.113}
-  source: "NPCI daily statistics: 16-20 Oct volume +4.7% and 21-30 Oct -11.3% vs 6-15 Oct; 2 Oct +0.3% vs prior 10 days. Diwali 20 Oct 2025 (Tribune India); Dhanteras 18 Oct = NPCI's busiest day in the window. Dussehra date to verify against an official holiday list"
+    # volume_uplift: multiplier the simulator applies on those days.
+    # observed_uplift: what NPCI shows vs baseline_start..baseline_end (the validation target).
+    - {name: Dussehra, start: "2025-10-02", end: "2025-10-02", volume_uplift: -0.03, observed_uplift: 0.003, baseline_start: "2025-09-22", baseline_end: "2025-10-01"}
+    - {name: Dhanteras-Diwali, start: "2025-10-16", end: "2025-10-20", volume_uplift: 0.047, observed_uplift: 0.047, baseline_start: "2025-10-06", baseline_end: "2025-10-15"}
+    - {name: post-Diwali, start: "2025-10-21", end: "2025-10-30", volume_uplift: -0.113, observed_uplift: -0.113, baseline_start: "2025-10-06", baseline_end: "2025-10-15"}
+  source: "NPCI daily statistics: 16-20 Oct volume +4.7% and 21-30 Oct -11.3% vs 6-15 Oct; 2 Oct +0.3% vs 22 Sep-1 Oct but -3.0% vs 3-5 Oct (a public holiday inside the month-start week, so the simulator applies -3%). Diwali 20 Oct 2025 (Tribune India); Dhanteras 18 Oct = NPCI's busiest day in the window. Dussehra date to verify against an official holiday list"
   status: sourced
 
 behaviours:
   # Expected events per account. *_per_day: Poisson rates; *_per_month: monthly counts.
-  salaried: {value: {p2m_per_day: 0.30, p2p_per_day: 0.10, bills_per_month: 2, rent_share: 0.2}, source: "assumed; rates tuned so the default config gives about 1.5M transactions (plan D6) with the NPCI mean ticket", status: assumed}
-  student: {value: {p2m_per_day: 0.22, p2p_per_day: 0.08, bills_per_month: 1, rent_share: 0.08}, source: "assumed", status: assumed}
-  gig_worker: {value: {p2m_per_day: 0.26, p2p_per_day: 0.12, bills_per_month: 2, rent_share: 0.18}, source: "assumed; weekly platform payouts", status: assumed}
+  salaried: {value: {p2m_per_day: 0.30, p2p_per_day: 0.10, bills_per_month: 2, rent_share: 0.12}, source: "assumed; rates tuned so the default config gives about 1.5M transactions (plan D6) with the NPCI mean ticket", status: assumed}
+  student: {value: {p2m_per_day: 0.22, p2p_per_day: 0.08, bills_per_month: 1, rent_share: 0.05}, source: "assumed", status: assumed}
+  gig_worker: {value: {p2m_per_day: 0.26, p2p_per_day: 0.12, bills_per_month: 2, rent_share: 0.11}, source: "assumed; weekly platform payouts", status: assumed}
   small_merchant: {value: {p2m_per_day: 0.06, p2p_per_day: 0.08, supplier_per_month: 2}, source: "assumed: merchants mostly receive", status: assumed}
   large_merchant: {value: {p2m_per_day: 0.03, p2p_per_day: 0.02, supplier_per_month: 3}, source: "assumed; large merchants also pay salaries and gig payouts (plan D13)", status: assumed}
   salary_via_upi_share: {value: 0.05, source: "assumed: most salaries arrive by NEFT/IMPS, not UPI; only these salary credits appear in UPI data", status: assumed}
