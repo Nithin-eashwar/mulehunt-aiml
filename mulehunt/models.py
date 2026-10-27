@@ -133,7 +133,7 @@ def run_tree_study(splits, fig_dir=FIGURES, tab_dir=TABLES) -> dict:
     gini = tree_depth_curve(splits, criterion="gini")
     entropy = tree_depth_curve(splits, criterion="entropy")
     curve = gini.merge(entropy, on="depth", suffixes=("", "_entropy"))
-    curve.to_csv(tab_dir / "tree_depth_curve.csv", index=False)
+    curve.to_csv(tab_dir / "tree_depth_curve.csv", index=False, lineterminator="\n")
     best_depth = int(gini.depth[gini.val_pr_auc.idxmax()])
 
     fig, ax = plt.subplots(figsize=(7, 4))
@@ -148,7 +148,7 @@ def run_tree_study(splits, fig_dir=FIGURES, tab_dir=TABLES) -> dict:
     plt.close(fig)
 
     pruned, path = prune_tree(splits, max_depth=int(gini.depth.max()))
-    path.to_csv(tab_dir / "tree_pruning_path.csv", index=False)
+    path.to_csv(tab_dir / "tree_pruning_path.csv", index=False, lineterminator="\n")
     fig, ax = plt.subplots(figsize=(7, 4))
     ax.plot(path.n_leaves, path.val_pr_auc, "o-", color="#4C72B0")
     ax.axvline(pruned.get_n_leaves(), color="#C44E52", ls=":", label=f"chosen: {pruned.get_n_leaves()} leaves")
