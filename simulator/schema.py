@@ -115,6 +115,20 @@ def _parse_ist(values: pd.Series) -> pd.Series:
     return pd.to_datetime(values, utc=True).dt.tz_convert(IST_TZ)
 
 
+def _to_csv(df: pd.DataFrame, path: str | Path, datetime_column: str) -> None:
+    out = df.copy()
+    out[datetime_column] = out[datetime_column].map(lambda t: t.isoformat(timespec="seconds"))
+    out.to_csv(path, index=False, lineterminator="\n", float_format="%.2f")
+
+
+def write_accounts(df: pd.DataFrame, path: str | Path) -> None:
+    _to_csv(df[ACCOUNT_COLUMNS], path, "created_at")
+
+
+def write_transactions(df: pd.DataFrame, path: str | Path) -> None:
+    _to_csv(df[TRANSACTION_COLUMNS], path, "timestamp")
+
+
 def read_accounts(path: str | Path) -> pd.DataFrame:
     df = pd.read_csv(path, dtype={"account_id": str})
     df["created_at"] = _parse_ist(df["created_at"])

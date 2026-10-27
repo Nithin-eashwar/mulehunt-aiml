@@ -1,0 +1,7 @@
+# Keep LF line endings everywhere so generated CSVs are byte-identical on every
+# machine and match data/generated/CHECKSUMS.txt (CONTRACTS.md section 6).
+* text=auto eol=lf
+*.csv text eol=lf
+*.parquet binary
+*.joblib binary
+*.png binary
