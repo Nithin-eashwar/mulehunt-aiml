@@ -117,7 +117,8 @@ def _parse_ist(values: pd.Series) -> pd.Series:
 
 def _to_csv(df: pd.DataFrame, path: str | Path, datetime_column: str) -> None:
     out = df.copy()
-    out[datetime_column] = out[datetime_column].map(lambda t: t.isoformat(timespec="seconds"))
+    stamps = out[datetime_column].dt.tz_convert(IST_TZ).dt.strftime("%Y-%m-%dT%H:%M:%S")
+    out[datetime_column] = stamps + IST
     out.to_csv(path, index=False, lineterminator="\n", float_format="%.2f")
 
 
