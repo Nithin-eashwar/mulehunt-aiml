@@ -1,2 +1,4 @@
 eff3f96cdb900f3f65247b7332d551e446e63d0580ed07c80b1d129d17dd5219  accounts.csv
 2595fb8bc612c032e5d9d82e4133e2bb0a79702f26c4a714291f0a6a101ca743  transactions.csv
+43ce8b19015ef241f8b2377b2b3821a0bfd3574c4b821efe5d1a97dfafe6b5a9  ../processed/features.parquet
+43ce8b19015ef241f8b2377b2b3821a0bfd3574c4b821efe5d1a97dfafe6b5a9  C:/Users/Nithin/AppData/Local/Temp/claude/C--Users-Nithin-mulehunt-aiml/1941f552-5459-48da-a3ba-2ae241e632e9/scratchpad/f2.parquet

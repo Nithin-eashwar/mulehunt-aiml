@@ -34,7 +34,7 @@ HONEST_FRAMING = ("Real transaction data is legally unavailable; we built a simu
 # ---------------------------------------------------------------- patterns
 
 def _seconds(ts: pd.Series) -> np.ndarray:
-    return (ts.dt.tz_convert("UTC").astype("int64") // 10**9).to_numpy()
+    return ts.dt.tz_convert("UTC").dt.as_unit("s").astype("int64").to_numpy()
 
 
 def _max_distinct_in_window(keys, others, times, window) -> Counter:
