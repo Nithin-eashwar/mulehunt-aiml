@@ -1,0 +1,22 @@
+[
+ "total_inflow",
+ "total_outflow",
+ "pass_through_ratio",
+ "avg_dwell_hours",
+ "in_degree",
+ "out_degree",
+ "new_counterparty_share",
+ "fan_in_max_24h",
+ "fan_out_max_24h",
+ "neighbor_suspicious_share",
+ "txn_count",
+ "night_txn_share",
+ "round_amount_share",
+ "below_threshold_share",
+ "burstiness",
+ "has_large_receipt",
+ "account_age_at_first_large_receipt_days",
+ "device_count",
+ "device_shared_accounts",
+ "counterparty_state_mismatch_share"
+]

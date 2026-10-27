@@ -412,26 +412,129 @@ def run_model_study(splits, splits_txn_only, groups, scenarios, fig_dir=FIGURES,
     return fitted, board
 
 
+# ---------------------------------------------------------------- handoffs: risk scores and saved models
+
+RISK_SCORES = Path("models/risk_scores.csv")
+MODELS_DIR = Path("models")
+RISK_CLIP = 1e-6
+TREE_MODELS = ("decision_tree", "random_forest", "adaboost")
+
+
+def oof_folds(y, groups: pd.Series, n_folds: int = 5) -> np.ndarray:
+    """Fold number per training row; members of a fraud ring share one fold (plan D17)."""
+    from sklearn.model_selection import StratifiedGroupKFold
+
+    folds = np.empty(len(y), dtype=int)
+    splitter = StratifiedGroupKFold(n_splits=n_folds, shuffle=True, random_state=0)
+    for k, (_, held) in enumerate(splitter.split(np.zeros(len(y)), np.asarray(y), np.asarray(groups))):
+        folds[held] = k
+    return folds
+
+
+def write_risk_scores(best: FittedModel, splits, path=RISK_SCORES, n_folds: int = 5,
+                      groups: pd.Series | None = None) -> pd.DataFrame:
+    """account_id, risk_prob for Person B's A* (edge cost = -log risk_prob).
+
+    Train accounts get out-of-fold scores, so tracing is never fed memorised labels;
+    val and test accounts are scored by the model fitted on train. Clipped to
+    [1e-6, 1 - 1e-6] so -log is always finite."""
+    X_tr, y_tr, ids_tr = splits["train"]
+    groups = pd.Series(np.arange(len(y_tr))) if groups is None else groups
+    folds = oof_folds(y_tr, groups, n_folds)
+    oof = np.empty(len(y_tr))
+    for k in range(n_folds):
+        model = clone(best.pipeline).fit(X_tr[folds != k], y_tr[folds != k])
+        oof[folds == k] = model.predict_proba(X_tr[folds == k])[:, 1]
+    parts = [pd.DataFrame({"account_id": ids_tr, "risk_prob": oof})]
+    for split in ("val", "test"):
+        X, _, ids = splits[split]
+        parts.append(pd.DataFrame({"account_id": ids, "risk_prob": best.predict_proba(X)}))
+    out = pd.concat(parts, ignore_index=True).sort_values("account_id", ignore_index=True)
+    out["risk_prob"] = out.risk_prob.clip(RISK_CLIP, 1 - RISK_CLIP)
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    out.to_csv(path, index=False, lineterminator="\n", float_format="%.8g")
+    return out
+
+
+def save_models(fitted: dict[str, FittedModel], splits, out_dir=MODELS_DIR) -> None:
+    """models/<name>.joblib bundles for the dashboard, feature_columns.json and
+    best_model.txt (the model with the best validation PR-AUC)."""
+    import joblib
+    import json
+
+    out = Path(out_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    X_tr, y_tr, _ = splits["train"]
+    columns = list(X_tr.columns)
+    if "random_forest" in fitted:
+        fallback = fitted["random_forest"].pipeline.named_steps["model"].feature_importances_
+    else:
+        fallback = RandomForestClassifier(n_estimators=100, class_weight="balanced", n_jobs=-1,
+                                          random_state=0).fit(X_tr, y_tr).feature_importances_
+    for name, fm in fitted.items():
+        bundle = {"name": name, "pipeline": fm.pipeline, "threshold": fm.threshold, "feature_columns": columns,
+                  "params": fm.params, "val_metrics": fm.val_metrics,
+                  "feature_mean": X_tr.mean().to_numpy(), "feature_std": X_tr.std(ddof=0).replace(0, 1).to_numpy(),
+                  "fallback_importances": np.asarray(fallback)}
+        joblib.dump(bundle, out / f"{name}.joblib", compress=3)
+    (out / "feature_columns.json").write_text(json.dumps(columns, indent=1) + "\n", encoding="utf-8", newline="\n")
+    best = max(fitted, key=lambda k: fitted[k].val_metrics["pr_auc"])
+    (out / "best_model.txt").write_text(best + "\n", encoding="utf-8", newline="\n")
+
+
+def load_model(name: str, models_dir=MODELS_DIR) -> dict:
+    import joblib
+    return joblib.load(Path(models_dir) / f"{name}.joblib")
+
+
+def explain(model_bundle: dict, x_row: pd.Series, top_k: int = 5) -> list[tuple[str, float]]:
+    """Top contributing features for one account, largest effect first.
+
+    Logistic regression: coefficient x standardised value. Tree models (decision tree,
+    random forest, AdaBoost): feature importance x the row's standardised deviation
+    from the training mean. Other models (KNN, Naive Bayes, bagging, gradient boosting)
+    have no per-feature weights, so they fall back to the random forest's importances
+    with the same deviation."""
+    columns = model_bundle["feature_columns"]
+    z = (x_row[columns].to_numpy(dtype=float) - model_bundle["feature_mean"]) / model_bundle["feature_std"]
+    model = model_bundle["pipeline"].named_steps["model"] if hasattr(model_bundle["pipeline"], "named_steps") else None
+    if model is not None and hasattr(model, "coef_"):
+        contribution = model.coef_[0] * z
+    elif model is not None and model_bundle.get("name") in TREE_MODELS and hasattr(model, "feature_importances_"):
+        contribution = model.feature_importances_ * z
+    else:
+        contribution = model_bundle["fallback_importances"] * z
+    order = np.argsort(-np.abs(contribution))[:top_k]
+    return [(columns[i], float(contribution[i])) for i in order]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Train and evaluate the fraud models")
     parser.add_argument("--features", default=str(FEATURES))
     parser.add_argument("--tree", action="store_true", help="run the decision-tree study")
     parser.add_argument("--models", action="store_true", help="run the model zoo, leaderboard and analyses")
+    parser.add_argument("--all", action="store_true",
+                        help="tree study + model study, then write models/risk_scores.csv and models/*.joblib")
     args = parser.parse_args()
     splits = load_splits(args.features)
-    if args.tree:
+    if args.tree or args.all:
         print(run_tree_study(splits))
-    if args.models:
+    if args.models or args.all:
         from mulehunt.features import TXN_ONLY, account_scenarios
         from simulator.schema import read_transactions
 
         print(single_feature_pr_auc(splits).head(5).to_string(index=False))
         scenarios = account_scenarios(read_transactions("data/generated/transactions.csv"))
         groups = load_groups(splits["test"][2])
-        _, board = run_model_study(splits, load_splits(args.features, columns=TXN_ONLY), groups, scenarios)
+        fitted, board = run_model_study(splits, load_splits(args.features, columns=TXN_ONLY), groups, scenarios)
         cols = ["model", "pr_auc", "pr_auc_ci_low", "pr_auc_ci_high", "precision", "recall", "f1",
                 "recall_at_1pct_fpr"]
         print(board[cols].round(3).to_string(index=False))
+        if args.all:
+            best = max(fitted, key=lambda k: fitted[k].val_metrics["pr_auc"])
+            risk = write_risk_scores(fitted[best], splits, groups=load_groups(splits["train"][2]))
+            save_models(fitted, splits)
+            print(f"risk scores from {best}: {len(risk):,} accounts -> {RISK_SCORES}; models saved to {MODELS_DIR}/")
 
 
 if __name__ == "__main__":
