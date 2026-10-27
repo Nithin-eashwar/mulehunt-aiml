@@ -133,3 +133,154 @@ def test_baseline_lr_fast():
     start = time.perf_counter()
     make_baseline_lr().fit(X, y)
     assert time.perf_counter() - start < 2.0
+
+
+# ---------------------------------------------------------------- Task 10: model zoo and analyses
+
+from imblearn.over_sampling import SMOTE  # noqa: E402
+from sklearn.metrics import average_precision_score  # noqa: E402
+
+from mulehunt.features import TXN_ONLY  # noqa: E402
+from mulehunt.models import (  # noqa: E402
+    MODEL_NAMES,
+    FittedModel,
+    ablation,
+    bootstrap_ci,
+    build_models,
+    fit_all,
+    imbalance_comparison,
+    leaderboard,
+    lr_coefficients,
+    per_scenario_table,
+    single_feature_pr_auc,
+)
+
+ONE_SETTING = {name: [{}] for name in MODEL_NAMES}
+
+
+@pytest.fixture(scope="module")
+def fitted(splits):
+    return fit_all(build_models(), splits, grids=ONE_SETTING)
+
+
+def test_build_models_keys():
+    assert set(build_models()) == {"decision_tree", "knn", "naive_bayes", "logistic_regression", "bagging",
+                                   "adaboost", "gradient_boosting", "random_forest"}
+    assert list(build_models()) == list(MODEL_NAMES)
+
+
+def test_grids_are_small():
+    from mulehunt.models import MODEL_GRIDS
+    assert set(MODEL_GRIDS) == set(MODEL_NAMES)
+    assert all(1 <= len(grid) <= 12 for grid in MODEL_GRIDS.values())
+
+
+def test_all_models_predict_proba(fitted, splits):
+    X_va = splits["val"][0]
+    for name, fm in fitted.items():
+        p = fm.pipeline.predict_proba(X_va)
+        assert p.shape == (len(X_va), 2), name
+        assert ((p >= 0) & (p <= 1)).all(), name
+        assert 0 <= fm.threshold <= 1 and "pr_auc" in fm.val_metrics
+
+
+def test_smote_only_on_train(splits, monkeypatch):
+    calls = []
+    original = SMOTE.fit_resample
+
+    def counting(self, X, y):
+        calls.append(len(X))
+        return original(self, X, y)
+
+    monkeypatch.setattr(SMOTE, "fit_resample", counting)
+    (X_tr, y_tr, _), (X_va, _, _) = splits["train"], splits["val"]
+    knn = build_models()["knn"].fit(X_tr, y_tr)
+    assert calls == [len(X_tr)]
+    assert len(knn.predict_proba(X_va)) == len(X_va)
+    assert calls == [len(X_tr)]
+
+
+def test_fit_all_picks_best_setting(splits):
+    grids = {"logistic_regression": [{"model__C": 1e-4}, {"model__C": 1.0}]}
+    fm = fit_all({"logistic_regression": build_models()["logistic_regression"]}, splits, grids=grids)
+    X_va, y_va, _ = splits["val"]
+    scores = []
+    for params in grids["logistic_regression"]:
+        m = build_models()["logistic_regression"].set_params(**params).fit(*splits["train"][:2])
+        scores.append(average_precision_score(y_va, m.predict_proba(X_va)[:, 1]))
+    assert fm["logistic_regression"].val_metrics["pr_auc"] == pytest.approx(max(scores))
+    assert fm["logistic_regression"].params == grids["logistic_regression"][int(np.argmax(scores))]
+
+
+def test_leaderboard_no_accuracy(fitted, splits):
+    board = leaderboard(fitted, splits, n_boot=50)
+    assert "accuracy" not in board.columns
+    assert len(board) == 8 and set(board.model) == set(MODEL_NAMES)
+    assert board.pr_auc.is_monotonic_decreasing
+    for col in ("precision", "recall", "f1", "pr_auc", "recall_at_1pct_fpr",
+                "pr_auc_ci_low", "pr_auc_ci_high", "f1_ci_low", "f1_ci_high", "threshold"):
+        assert col in board.columns
+    assert (board.pr_auc_ci_low <= board.pr_auc + 1e-9).all() and (board.pr_auc <= board.pr_auc_ci_high + 1e-9).all()
+
+
+def ap(y, p, w):
+    return average_precision_score(y, p, sample_weight=w)
+
+
+def test_bootstrap_ci_brackets_point():
+    rng = np.random.default_rng(0)
+    y = np.array([0] * 400 + [1] * 40)
+    p = np.concatenate([rng.uniform(0, 0.7, 400), rng.uniform(0.3, 1.0, 40)])
+    lo, hi = bootstrap_ci(y, p, ap, pd.Series(np.arange(len(y))), n=300)
+    assert lo <= average_precision_score(y, p) <= hi
+
+
+def test_grouped_bootstrap_wider():
+    rng = np.random.default_rng(1)
+    pos_scores = np.repeat(rng.uniform(0.2, 1.0, 10), 8)  # 10 rings x 8 identical members
+    y = np.array([0] * 920 + [1] * 80)
+    p = np.concatenate([rng.uniform(0, 0.8, 920), pos_scores])
+    groups = pd.Series([f"n{i}" for i in range(920)] + [f"ring{i // 8}" for i in range(80)])
+    lo_g, hi_g = bootstrap_ci(y, p, ap, groups, n=400, seed=2)
+    lo_r, hi_r = bootstrap_ci(y, p, ap, pd.Series(np.arange(1000)), n=400, seed=2)
+    assert hi_g - lo_g > hi_r - lo_r
+
+
+def test_single_feature_pr_auc_rows(splits):
+    table = single_feature_pr_auc(splits)
+    assert list(table.columns) == ["feature", "val_pr_auc"]
+    assert sorted(table.feature) == sorted(FEATURE_COLUMNS)
+    assert table.val_pr_auc.between(0, 1).all() and table.val_pr_auc.is_monotonic_decreasing
+
+
+def test_imbalance_comparison(splits):
+    table = imbalance_comparison(splits)
+    assert list(table.method) == ["none", "class_weight", "smote"]
+    assert {"val_pr_auc", "test_pr_auc", "test_recall", "test_f1"} <= set(table.columns)
+
+
+def test_ablation_rows(parquet):
+    table = ablation(load_splits(parquet), load_splits(parquet, columns=TXN_ONLY), model_name="logistic_regression")
+    assert list(table.features) == ["transaction_only", "with_network"]
+    assert list(table.n_features) == [len(TXN_ONLY), len(FEATURE_COLUMNS)]
+    assert table.test_pr_auc.between(0, 1).all()
+
+
+def test_per_scenario_empty_scenario(fitted, splits):
+    _, y_te, ids = splits["test"]
+    positives = ids[y_te == 1].to_list()
+    scenarios = pd.Series({a: ("fake_kyc" if i % 2 else "job_task") for i, a in enumerate(positives)})
+    table = per_scenario_table(fitted["logistic_regression"], splits, scenarios).set_index("scenario")
+    assert list(table.columns) == ["n_fraud", "recall", "mean_risk_prob"]
+    assert len(table) == 5
+    assert table.loc["loan_app", "n_fraud"] == 0 and np.isnan(table.loc["loan_app", "recall"])
+    assert table.loc["fake_kyc", "n_fraud"] + table.loc["job_task", "n_fraud"] == len(positives)
+    assert 0 <= table.loc["fake_kyc", "recall"] <= 1
+
+
+def test_lr_coefficients(fitted):
+    table = lr_coefficients(fitted["logistic_regression"])
+    assert list(table.columns) == ["feature", "coefficient", "odds_ratio"]
+    assert sorted(table.feature) == sorted(FEATURE_COLUMNS)
+    assert np.allclose(table.odds_ratio, np.exp(table.coefficient))
+    assert table.coefficient.abs().is_monotonic_decreasing
