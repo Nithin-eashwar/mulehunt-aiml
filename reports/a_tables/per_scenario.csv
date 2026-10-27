@@ -1,6 +1,6 @@
 scenario,n_fraud,recall,mean_risk_prob
-fake_kyc,34,0.705882,0.550409
-digital_arrest,35,0.971429,0.843605
-job_task,30,0.7,0.493547
-loan_app,35,0.942857,0.657971
-fake_investment,32,0.96875,0.834376
+fake_kyc,35,0.371429,0.47193
+digital_arrest,35,0.857143,0.755421
+job_task,30,0.7,0.641968
+loan_app,35,0.942857,0.82641
+fake_investment,33,0.939394,0.817787

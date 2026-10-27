@@ -141,24 +141,24 @@ label_noise:
 
 scenarios:
   fake_kyc:
-    value: {victims: [1, 1], payments_per_victim: [1, 1], amount: [20000, 200000]}
-    source: "handoff §4.3 shape; amounts assumed"
+    value: {victims: [1, 1], payments_per_victim: [1, 1], amount: [10000, 50000]}
+    source: "handoff §4.3 shape; amounts assumed, scaled (plan rev 4) so the average loss per victim is near the Lok Sabha Rs 7,761 per incident"
     status: assumed
   digital_arrest:
-    value: {victims: [1, 1], payments_per_victim: [3, 8], amount: [50000, 500000], days: [2, 8]}
-    source: "handoff §4.3 shape; amounts assumed"
+    value: {victims: [1, 1], payments_per_victim: [3, 8], amount: [10000, 40000], days: [2, 8]}
+    source: "handoff §4.3 shape; amounts assumed, scaled (plan rev 4) so the average loss per victim is near the Lok Sabha Rs 7,761 per incident"
     status: assumed
   job_task:
     value: {victims: [15, 60], payments_per_victim: [1, 1], amount: [500, 5000]}
-    source: "handoff §4.3 shape; amounts assumed"
+    source: "handoff §4.3 shape; amounts assumed, scaled (plan rev 4) so the average loss per victim is near the Lok Sabha Rs 7,761 per incident"
     status: assumed
   loan_app:
     value: {victims: [10, 40], payments_per_victim: [2, 5], amount: [500, 5000]}
-    source: "handoff §4.3 shape; amounts assumed"
+    source: "handoff §4.3 shape; amounts assumed, scaled (plan rev 4) so the average loss per victim is near the Lok Sabha Rs 7,761 per incident"
     status: assumed
   fake_investment:
-    value: {victims: [5, 20], returns_per_victim: [1, 3], return_amount: [200, 2000], amount: [10000, 200000], cycle_ring_share: 0.25}
-    source: "handoff §4.3 shape; amounts assumed"
+    value: {victims: [5, 20], returns_per_victim: [1, 3], return_amount: [200, 2000], amount: [10000, 40000], cycle_ring_share: 0.25}
+    source: "handoff §4.3 shape; amounts assumed, scaled (plan rev 4) so the average loss per victim is near the Lok Sabha Rs 7,761 per incident"
     status: assumed
   avg_loss_check_inr:
     value: 7761
