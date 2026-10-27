@@ -100,6 +100,7 @@ outliers:
 
 fraud:
   rings_per_scenario: {value: 15, source: "plan D7 (review rev 2)", status: assumed}
+  small_rings_per_scenario: {value: 4, source: "assumed: --small development config (5,000 accounts) keeps the fraud share moderate", status: assumed}
   ring_size:
     value: {mule_t1: [2, 4], mule_t2: [1, 3], mule_t3: [0, 2], cashout: [1, 1]}
     source: "plan D7: about 8 accounts per ring with the fraudster"
