@@ -58,7 +58,7 @@ The handoff leaves these open. The plan uses the value in the "Plan uses" column
 - Person A edits only `simulator/`, `mulehunt/features.py`, `mulehunt/models.py`, `mulehunt/clustering.py`, `mulehunt/pipeline.py`, `tests/simulator/`, `tests/mulehunt/`, `reports/a_*`, `models/`, and `data/generated|processed/`. Shared files (`CONTRACTS.md`, `requirements.txt`, `README.md`, `pytest.ini`) change only after telling Person B.
 - Never use Kaggle "UPI" CSVs or PaySim as training data, and never use real people's statements.
 - Always use the honest framing: *"Real transaction data is legally unavailable; we built a simulator calibrated to NPCI/RBI statistics and validated against the IBM AML benchmark."*
-- One branch and one PR per task (e.g. `a/toy-data`), reviewed by Person B.
+- One commit (or a few) per task, but several tasks share one working branch. A PR is opened only when a good chunk of work is done or it's a natural merge point (such as a handoff to Person B), and Person B reviews it. (Person A's decision, 2026-10-27; Tasks 1–6 went out as stacked PRs #1–#5.)
 - Git holds only the toy CSVs, `CHECKSUMS.txt`, `risk_scores.csv` and `models/*.joblib` (each < 50 MB). The real CSVs and parquet are regenerated (D23).
 - A figure is cited as "NPCI" only if it comes from an NPCI page. Secondary reports are labelled as secondary, and anything without a source is `assumed`.
 
