@@ -20,7 +20,7 @@ splits:
   shares: {value: {train: 0.50, val: 0.25, test: 0.25}, source: "plan D7/D8: rings and normal accounts split 50/25/25", status: assumed}
   lookback_days: {value: 30, source: "plan D8: features use a 30-day window ending on the split's last day", status: assumed}
   new_counterparty_history_days: {value: 30, source: "plan rev 2: fixed 30-day history for new_counterparty_share", status: assumed}
-  ring_tail_days: {value: 3, source: "plan D8: rings end at least 3 days before their split ends", status: assumed}
+  ring_tail_days: {value: 6, source: "plan D8 / rev 4: rings start at least 6 days before their split ends, leaving room for patient hops", status: assumed}
 
 population:
   n_accounts: {value: 50000, source: "plan D6, inside handoff §4.1 range of 20k-50k", status: assumed}
@@ -96,6 +96,22 @@ behaviours:
   merchant_size_weight: {value: {small_merchant: 1.0, large_merchant: 8.0}, source: "assumed: large merchants receive about 8x the P2M payments of small ones", status: assumed}
   phone_change_share: {value: 0.02, source: "assumed: accounts that change phone once mid-window", status: assumed}
 
+hard_cases:
+  # Plan rev 4: normal behaviour that looks a little like a mule, so no feature is a giveaway.
+  money_collector_share: {value: 0.05, source: "assumed: people who collect money from several others and pass it on the same day (group funds, family pooling, informal agents)", status: assumed}
+  collections_per_month: {value: 4, source: "assumed", status: assumed}
+  collection_size: {value: [3, 8], source: "assumed: payers per collection", status: assumed}
+  collection_amount: {value: {median: 1500, sigma: 0.8}, source: "assumed", status: assumed}
+  forward_share: {value: [0.85, 1.0], source: "assumed: share of the collected money passed on", status: assumed}
+  forward_delay: {value: {median_h: 3.0, sigma: 0.8}, source: "assumed: hours before passing the money on", status: assumed}
+  shop_phone_group_share: {value: 0.05, source: "assumed: small shops where the owner and staff pay from one phone", status: assumed}
+  shop_phone_group_size: {value: [3, 6], source: "assumed: accounts per shared shop phone (the shop plus 2-5 staff)", status: assumed}
+  new_account_large_receipt_share: {value: 0.40, source: "assumed: new accounts whose first large receipt is a first salary, fees or a family transfer", status: assumed}
+  new_account_large_receipt_days: {value: [1, 20], source: "assumed: days after opening", status: assumed}
+  new_account_large_receipt_amount: {value: [10000, 60000], source: "assumed", status: assumed}
+  night_worker_share: {value: 0.30, source: "assumed: gig workers on night shifts (delivery, ride-hailing)", status: assumed}
+  night_shift_hours: {value: 12, source: "assumed: their hour-of-day curve is shifted by 12 hours", status: assumed}
+
 outliers:
   account_rate: {value: 0.01, source: "assumed: genuine one-off spikes (wedding, hospital bill, phone purchase)", status: assumed}
   multiplier: {value: [10, 40], source: "assumed: outlier amount = 10-40x the account's median", status: assumed}
@@ -108,7 +124,7 @@ fraud:
     source: "plan D7: about 8 accounts per ring with the fraudster"
     status: assumed
   max_ring_days: {value: 8, source: "plan D8: rings fit inside the 15-day val/test periods", status: assumed}
-  sleeper_share: {value: 0.30, source: "plan D14 / handoff §4.5 sleeper mules", status: assumed}
+  sleeper_share: {value: 0.50, source: "plan D14 / handoff §4.5 sleeper mules; raised to 0.50 in plan rev 4 (many mules are recruited existing accounts)", status: assumed}
   sleeper_min_history_days: {value: 21, source: "plan D14", status: assumed}
   fresh_mule_age_days: {value: [3, 20], source: "plan D14: fresh mules opened 3-20 days before the ring", status: assumed}
   threshold_split_share: {value: 0.30, source: "plan D14", status: assumed}
@@ -116,7 +132,9 @@ fraud:
   threshold_band: {value: [0.90, 0.999], source: "plan D12/D14: same band as the below_threshold feature", status: assumed}
   hop_delay: {value: {median_h: 2.0, sigma: 1.5, cap_h: 48}, source: "plan D14 (rev 2): about 95% of hops within 24 h; Person B's 48 h hop rule", status: assumed}
   mule_commission: {value: [0.92, 0.99], source: "plan Task 5: each mule forwards 92-99% of what it received", status: assumed}
-  mule_devices_per_ring: {value: [1, 2], source: "plan Task 5: mules share 1-2 devices with the fraudster", status: assumed}
+  mule_devices_per_ring: {value: [2, 4], source: "plan rev 4: fresh mules and the fraudster spread over 2-4 ring phones (fewer accounts per phone); sleepers use their own", status: assumed}
+  patient_mule_share: {value: 0.30, source: "plan rev 4: about 30% of mules wait before forwarding (hard case for pass-through)", status: assumed}
+  patient_delay_h: {value: [24, 47], source: "plan rev 4: patient mules wait 1-2 days, kept inside Person B's 48 h hop window", status: assumed}
 
 label_noise:
   rate: {value: 0.015, source: "handoff §4.5: about 1-2% label noise; plan D9 keeps prevalence", status: sourced}

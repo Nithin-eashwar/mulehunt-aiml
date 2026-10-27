@@ -148,3 +148,17 @@ def test_write_report(toy, tmp_path):
     assert text.startswith("# ")
     assert "| check |" in text and "mean_ticket_inr" in text
     assert "SKIPPED" in text and "a.b" in text
+
+
+def test_expected_hour_curve_blends_night_workers():
+    from simulator.validate import expected_hour_curve
+
+    cfg = load_config()
+    w = np.asarray(cfg["hour_of_day"], dtype=float)
+    cfg["hard_cases"]["night_worker_share"] = 0.0
+    assert np.allclose(expected_hour_curve(cfg), w / w.sum())
+    cfg["hard_cases"]["night_worker_share"] = 0.3
+    curve = expected_hour_curve(cfg)
+    assert curve.sum() == pytest.approx(1.0)
+    night = [23, 0, 1, 2, 3, 4]
+    assert curve[night].sum() > (w / w.sum())[night].sum()

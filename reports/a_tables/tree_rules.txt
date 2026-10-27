@@ -1,106 +1,238 @@
-|--- neighbor_suspicious_share <= 0.018
-|   |--- device_shared_accounts <= 1.500
-|   |   |--- night_txn_share <= 0.304
-|   |   |   |--- burstiness <= 0.150
-|   |   |   |   |--- device_count <= 1.500
-|   |   |   |   |   |--- new_counterparty_share <= 0.825
-|   |   |   |   |   |   |--- pass_through_ratio <= 0.066
-|   |   |   |   |   |   |   |--- class: 0
-|   |   |   |   |   |   |--- pass_through_ratio >  0.066
-|   |   |   |   |   |   |   |--- pass_through_ratio <= 0.078
-|   |   |   |   |   |   |   |   |--- account_age_at_first_large_receipt_days <= 521.118
-|   |   |   |   |   |   |   |   |   |--- out_degree <= 12.500
-|   |   |   |   |   |   |   |   |   |   |--- class: 0
-|   |   |   |   |   |   |   |   |   |--- out_degree >  12.500
-|   |   |   |   |   |   |   |   |   |   |--- out_degree <= 13.500
-|   |   |   |   |   |   |   |   |   |   |   |--- class: 1
-|   |   |   |   |   |   |   |   |   |   |--- out_degree >  13.500
+|--- neighbor_suspicious_share <= 0.079
+|   |--- total_inflow <= 40195.520
+|   |   |--- pass_through_ratio <= 0.650
+|   |   |   |--- txn_count <= 28.500
+|   |   |   |   |--- night_txn_share <= 0.159
+|   |   |   |   |   |--- avg_dwell_hours <= 171.821
+|   |   |   |   |   |   |--- avg_dwell_hours <= 171.804
+|   |   |   |   |   |   |   |--- counterparty_state_mismatch_share <= 0.943
+|   |   |   |   |   |   |   |   |--- counterparty_state_mismatch_share <= 0.640
+|   |   |   |   |   |   |   |   |   |--- total_inflow <= 602.380
+|   |   |   |   |   |   |   |   |   |   |--- in_degree <= 6.500
 |   |   |   |   |   |   |   |   |   |   |   |--- class: 0
-|   |   |   |   |   |   |   |   |--- account_age_at_first_large_receipt_days >  521.118
+|   |   |   |   |   |   |   |   |   |   |--- in_degree >  6.500
+|   |   |   |   |   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |   |   |   |   |--- total_inflow >  602.380
+|   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |   |--- counterparty_state_mismatch_share >  0.640
+|   |   |   |   |   |   |   |   |   |--- total_inflow <= 24402.955
+|   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |   |   |--- total_inflow >  24402.955
+|   |   |   |   |   |   |   |   |   |   |--- total_inflow <= 24407.591
+|   |   |   |   |   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |   |   |   |   |   |--- total_inflow >  24407.591
+|   |   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |--- counterparty_state_mismatch_share >  0.943
+|   |   |   |   |   |   |   |   |--- txn_count <= 23.500
+|   |   |   |   |   |   |   |   |   |--- neighbor_suspicious_share <= 0.051
+|   |   |   |   |   |   |   |   |   |   |--- total_outflow <= 1278.765
+|   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |   |   |   |   |   |   |   |--- total_outflow >  1278.765
+|   |   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |   |   |--- neighbor_suspicious_share >  0.051
+|   |   |   |   |   |   |   |   |   |   |--- counterparty_state_mismatch_share <= 0.974
+|   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 6
+|   |   |   |   |   |   |   |   |   |   |--- counterparty_state_mismatch_share >  0.974
+|   |   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |   |--- txn_count >  23.500
+|   |   |   |   |   |   |   |   |   |--- avg_dwell_hours <= 81.134
+|   |   |   |   |   |   |   |   |   |   |--- pass_through_ratio <= 0.160
+|   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 3
+|   |   |   |   |   |   |   |   |   |   |--- pass_through_ratio >  0.160
+|   |   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |   |   |--- avg_dwell_hours >  81.134
+|   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |--- avg_dwell_hours >  171.804
+|   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |--- avg_dwell_hours >  171.821
+|   |   |   |   |   |   |--- class: 0
+|   |   |   |   |--- night_txn_share >  0.159
+|   |   |   |   |   |--- counterparty_state_mismatch_share <= 0.756
+|   |   |   |   |   |   |--- account_age_at_first_large_receipt_days <= 365.751
+|   |   |   |   |   |   |   |--- account_age_at_first_large_receipt_days <= 26.707
+|   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |--- account_age_at_first_large_receipt_days >  26.707
+|   |   |   |   |   |   |   |   |--- new_counterparty_share <= 0.871
 |   |   |   |   |   |   |   |   |   |--- class: 0
-|   |   |   |   |   |   |   |--- pass_through_ratio >  0.078
-|   |   |   |   |   |   |   |   |--- class: 0
-|   |   |   |   |   |--- new_counterparty_share >  0.825
-|   |   |   |   |   |   |--- class: 0
-|   |   |   |   |--- device_count >  1.500
-|   |   |   |   |   |--- total_inflow <= 50113.924
-|   |   |   |   |   |   |--- class: 0
-|   |   |   |   |   |--- total_inflow >  50113.924
-|   |   |   |   |   |   |--- class: 1
-|   |   |   |--- burstiness >  0.150
-|   |   |   |   |--- new_counterparty_share <= 0.838
-|   |   |   |   |   |--- burstiness <= 0.158
-|   |   |   |   |   |   |--- counterparty_state_mismatch_share <= 0.894
-|   |   |   |   |   |   |   |--- out_degree <= 9.000
-|   |   |   |   |   |   |   |   |--- class: 0
-|   |   |   |   |   |   |   |--- out_degree >  9.000
-|   |   |   |   |   |   |   |   |--- class: 1
-|   |   |   |   |   |   |--- counterparty_state_mismatch_share >  0.894
+|   |   |   |   |   |   |   |   |--- new_counterparty_share >  0.871
+|   |   |   |   |   |   |   |   |   |--- burstiness <= -0.148
+|   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |   |   |--- burstiness >  -0.148
+|   |   |   |   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |   |--- account_age_at_first_large_receipt_days >  365.751
 |   |   |   |   |   |   |   |--- class: 0
-|   |   |   |   |   |--- burstiness >  0.158
-|   |   |   |   |   |   |--- class: 0
-|   |   |   |   |--- new_counterparty_share >  0.838
-|   |   |   |   |   |--- class: 0
-|   |   |--- night_txn_share >  0.304
-|   |   |   |--- below_threshold_share <= 0.038
-|   |   |   |   |--- class: 0
-|   |   |   |--- below_threshold_share >  0.038
-|   |   |   |   |--- class: 1
-|   |--- device_shared_accounts >  1.500
-|   |   |--- pass_through_ratio <= 0.076
-|   |   |   |--- class: 0
-|   |   |--- pass_through_ratio >  0.076
-|   |   |   |--- new_counterparty_share <= 0.854
-|   |   |   |   |--- class: 0
-|   |   |   |--- new_counterparty_share >  0.854
-|   |   |   |   |--- burstiness <= -0.107
-|   |   |   |   |   |--- class: 0
-|   |   |   |   |--- burstiness >  -0.107
-|   |   |   |   |   |--- total_inflow <= 2336.265
-|   |   |   |   |   |   |--- class: 0
-|   |   |   |   |   |--- total_inflow >  2336.265
-|   |   |   |   |   |   |--- device_shared_accounts <= 2.500
-|   |   |   |   |   |   |   |--- account_age_at_first_large_receipt_days <= 86.879
-|   |   |   |   |   |   |   |   |--- class: 1
-|   |   |   |   |   |   |   |--- account_age_at_first_large_receipt_days >  86.879
+|   |   |   |   |   |--- counterparty_state_mismatch_share >  0.756
+|   |   |   |   |   |   |--- burstiness <= 0.183
+|   |   |   |   |   |   |   |--- neighbor_suspicious_share <= 0.069
 |   |   |   |   |   |   |   |   |--- class: 0
-|   |   |   |   |   |   |--- device_shared_accounts >  2.500
-|   |   |   |   |   |   |   |--- class: 1
-|--- neighbor_suspicious_share >  0.018
-|   |--- device_shared_accounts <= 0.500
-|   |   |--- total_inflow <= 42096.879
-|   |   |   |--- class: 0
-|   |   |--- total_inflow >  42096.879
-|   |   |   |--- neighbor_suspicious_share <= 0.038
-|   |   |   |   |--- class: 0
-|   |   |   |--- neighbor_suspicious_share >  0.038
-|   |   |   |   |--- account_age_at_first_large_receipt_days <= 2284.500
-|   |   |   |   |   |--- night_txn_share <= 0.015
-|   |   |   |   |   |   |--- class: 0
-|   |   |   |   |   |--- night_txn_share >  0.015
-|   |   |   |   |   |   |--- class: 1
-|   |   |   |   |--- account_age_at_first_large_receipt_days >  2284.500
+|   |   |   |   |   |   |   |--- neighbor_suspicious_share >  0.069
+|   |   |   |   |   |   |   |   |--- burstiness <= 0.018
+|   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |   |--- burstiness >  0.018
+|   |   |   |   |   |   |   |   |   |--- burstiness <= 0.033
+|   |   |   |   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |   |   |   |   |--- burstiness >  0.033
+|   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |--- burstiness >  0.183
+|   |   |   |   |   |   |   |--- burstiness <= 0.190
+|   |   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |   |   |--- burstiness >  0.190
+|   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |--- txn_count >  28.500
+|   |   |   |   |--- burstiness <= -0.012
 |   |   |   |   |   |--- class: 0
-|   |--- device_shared_accounts >  0.500
-|   |   |--- new_counterparty_share <= 0.806
-|   |   |   |--- class: 0
-|   |   |--- new_counterparty_share >  0.806
-|   |   |   |--- account_age_at_first_large_receipt_days <= 2954.665
-|   |   |   |   |--- out_degree <= 26.500
-|   |   |   |   |   |--- device_shared_accounts <= 1.500
-|   |   |   |   |   |   |--- account_age_at_first_large_receipt_days <= 1884.246
-|   |   |   |   |   |   |   |--- class: 1
-|   |   |   |   |   |   |--- account_age_at_first_large_receipt_days >  1884.246
+|   |   |   |   |--- burstiness >  -0.012
+|   |   |   |   |   |--- in_degree <= 9.500
+|   |   |   |   |   |   |--- avg_dwell_hours <= 137.532
+|   |   |   |   |   |   |   |--- total_inflow <= 17057.500
+|   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |--- total_inflow >  17057.500
+|   |   |   |   |   |   |   |   |--- new_counterparty_share <= 0.907
+|   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |   |--- new_counterparty_share >  0.907
+|   |   |   |   |   |   |   |   |   |--- counterparty_state_mismatch_share <= 0.863
+|   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |   |   |--- counterparty_state_mismatch_share >  0.863
+|   |   |   |   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |   |--- avg_dwell_hours >  137.532
 |   |   |   |   |   |   |   |--- class: 0
-|   |   |   |   |   |--- device_shared_accounts >  1.500
-|   |   |   |   |   |   |--- new_counterparty_share <= 0.897
-|   |   |   |   |   |   |   |--- device_count <= 1.500
-|   |   |   |   |   |   |   |   |--- class: 0
-|   |   |   |   |   |   |   |--- device_count >  1.500
-|   |   |   |   |   |   |   |   |--- class: 1
-|   |   |   |   |   |   |--- new_counterparty_share >  0.897
-|   |   |   |   |   |   |   |--- class: 1
-|   |   |   |   |--- out_degree >  26.500
+|   |   |   |   |   |--- in_degree >  9.500
+|   |   |   |   |   |   |--- class: 0
+|   |   |--- pass_through_ratio >  0.650
+|   |   |   |--- account_age_at_first_large_receipt_days <= 48.043
+|   |   |   |   |--- total_inflow <= 5187.245
 |   |   |   |   |   |--- class: 0
-|   |   |   |--- account_age_at_first_large_receipt_days >  2954.665
+|   |   |   |   |--- total_inflow >  5187.245
+|   |   |   |   |   |--- class: 1
+|   |   |   |--- account_age_at_first_large_receipt_days >  48.043
+|   |   |   |   |--- pass_through_ratio <= 0.651
+|   |   |   |   |   |--- class: 1
+|   |   |   |   |--- pass_through_ratio >  0.651
+|   |   |   |   |   |--- class: 0
+|   |--- total_inflow >  40195.520
+|   |   |--- in_degree <= 21.500
+|   |   |   |--- total_inflow <= 63453.980
+|   |   |   |   |--- avg_dwell_hours <= 134.710
+|   |   |   |   |   |--- in_degree <= 17.500
+|   |   |   |   |   |   |--- in_degree <= 6.500
+|   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |--- in_degree >  6.500
+|   |   |   |   |   |   |   |--- fan_out_max_24h <= 3.500
+|   |   |   |   |   |   |   |   |--- night_txn_share <= 0.142
+|   |   |   |   |   |   |   |   |   |--- total_outflow <= 24448.495
+|   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |   |   |--- total_outflow >  24448.495
+|   |   |   |   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |   |   |   |--- night_txn_share >  0.142
+|   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |--- fan_out_max_24h >  3.500
+|   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |--- in_degree >  17.500
+|   |   |   |   |   |   |--- class: 0
+|   |   |   |   |--- avg_dwell_hours >  134.710
+|   |   |   |   |   |--- class: 0
+|   |   |   |--- total_inflow >  63453.980
+|   |   |   |   |--- account_age_at_first_large_receipt_days <= 5.556
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- account_age_at_first_large_receipt_days >  5.556
+|   |   |   |   |   |--- txn_count <= 9.000
+|   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |--- txn_count >  9.000
+|   |   |   |   |   |   |--- new_counterparty_share <= 0.812
+|   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |--- new_counterparty_share >  0.812
+|   |   |   |   |   |   |   |--- total_inflow <= 73598.758
+|   |   |   |   |   |   |   |   |--- fan_in_max_24h <= 2.500
+|   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |   |--- fan_in_max_24h >  2.500
+|   |   |   |   |   |   |   |   |   |--- in_degree <= 15.500
+|   |   |   |   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |   |   |   |   |--- in_degree >  15.500
+|   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |--- total_inflow >  73598.758
+|   |   |   |   |   |   |   |   |--- total_inflow <= 81264.949
+|   |   |   |   |   |   |   |   |   |--- burstiness <= 0.182
+|   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |   |   |--- burstiness >  0.182
+|   |   |   |   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |   |   |   |--- total_inflow >  81264.949
+|   |   |   |   |   |   |   |   |   |--- class: 1
+|   |   |--- in_degree >  21.500
+|   |   |   |--- neighbor_suspicious_share <= 0.042
 |   |   |   |   |--- class: 0
+|   |   |   |--- neighbor_suspicious_share >  0.042
+|   |   |   |   |--- total_outflow <= 66468.734
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- total_outflow >  66468.734
+|   |   |   |   |   |--- account_age_at_first_large_receipt_days <= 1739.175
+|   |   |   |   |   |   |--- burstiness <= 0.203
+|   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |--- burstiness >  0.203
+|   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |--- account_age_at_first_large_receipt_days >  1739.175
+|   |   |   |   |   |   |--- class: 0
+|--- neighbor_suspicious_share >  0.079
+|   |--- new_counterparty_share <= 0.865
+|   |   |--- class: 0
+|   |--- new_counterparty_share >  0.865
+|   |   |--- account_age_at_first_large_receipt_days <= 391.374
+|   |   |   |--- new_counterparty_share <= 0.981
+|   |   |   |   |--- txn_count <= 28.000
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- txn_count >  28.000
+|   |   |   |   |   |--- class: 1
+|   |   |   |--- new_counterparty_share >  0.981
+|   |   |   |   |--- account_age_at_first_large_receipt_days <= 3.983
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- account_age_at_first_large_receipt_days >  3.983
+|   |   |   |   |   |--- neighbor_suspicious_share <= 0.098
+|   |   |   |   |   |   |--- burstiness <= 0.088
+|   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |--- burstiness >  0.088
+|   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |--- neighbor_suspicious_share >  0.098
+|   |   |   |   |   |   |--- in_degree <= 10.500
+|   |   |   |   |   |   |   |--- total_inflow <= 21049.390
+|   |   |   |   |   |   |   |   |--- total_outflow <= 1712.325
+|   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |   |--- total_outflow >  1712.325
+|   |   |   |   |   |   |   |   |   |--- in_degree <= 7.500
+|   |   |   |   |   |   |   |   |   |   |--- device_shared_accounts <= 4.000
+|   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |   |   |   |   |   |   |--- device_shared_accounts >  4.000
+|   |   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |   |   |--- in_degree >  7.500
+|   |   |   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |--- total_inflow >  21049.390
+|   |   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |   |--- in_degree >  10.500
+|   |   |   |   |   |   |   |--- total_outflow <= 82146.554
+|   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |--- total_outflow >  82146.554
+|   |   |   |   |   |   |   |   |--- class: 1
+|   |   |--- account_age_at_first_large_receipt_days >  391.374
+|   |   |   |--- total_inflow <= 26901.115
+|   |   |   |   |--- pass_through_ratio <= 0.158
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- pass_through_ratio >  0.158
+|   |   |   |   |   |--- neighbor_suspicious_share <= 0.132
+|   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |--- neighbor_suspicious_share >  0.132
+|   |   |   |   |   |   |--- in_degree <= 3.500
+|   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |--- in_degree >  3.500
+|   |   |   |   |   |   |   |--- out_degree <= 8.500
+|   |   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |   |--- out_degree >  8.500
+|   |   |   |   |   |   |   |   |--- class: 1
+|   |   |   |--- total_inflow >  26901.115
+|   |   |   |   |--- total_outflow <= 15055.595
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- total_outflow >  15055.595
+|   |   |   |   |   |--- avg_dwell_hours <= 250.494
+|   |   |   |   |   |   |--- burstiness <= -0.127
+|   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |--- burstiness >  -0.127
+|   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |--- avg_dwell_hours >  250.494
+|   |   |   |   |   |   |--- class: 0

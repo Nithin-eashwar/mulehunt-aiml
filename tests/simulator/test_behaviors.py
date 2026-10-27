@@ -83,8 +83,11 @@ def test_salary_near_month_start(world):
     accounts, tx = world
     types = accounts.set_index("account_id").account_type
     # Merchants also make ordinary P2P transfers to people; salaries are the large ones.
+    # New accounts' first large receipts (tested separately) arrive at random times.
+    created = accounts.set_index("account_id").created_at
+    old = tx.receiver_id.map(created) < pd.Timestamp("2025-08-13", tz=IST)
     salary = tx[(tx.receiver_id.map(types) == "salaried") & (tx.sender_id.map(types) == "large_merchant")
-                & (tx.channel == "P2P") & (tx.amount >= 15000)]
+                & (tx.channel == "P2P") & (tx.amount >= 15000) & old]
     assert len(salary) > 0
     assert (salary.timestamp.dt.day <= 5).mean() >= 0.80
 
@@ -109,11 +112,13 @@ def test_mean_ticket_near_npci(cfg, world):
 
 
 def test_night_share_matches_hours(cfg, world):
-    _, tx = world
+    # The configured curve is for day-time users; night workers are checked in test_night_workers.
+    accounts, tx = world
+    night = accounts.account_id[accounts.profile == "night_worker"]
+    day_users = tx[~tx.sender_id.isin(night)]
     w = np.array(cfg["hour_of_day"], dtype=float)
     target = w[[23, 0, 1, 2, 3, 4]].sum() / w.sum()
-    hours = tx.timestamp.dt.hour
-    assert hours.isin([23, 0, 1, 2, 3, 4]).mean() == pytest.approx(target, abs=0.02)
+    assert day_users.timestamp.dt.hour.isin([23, 0, 1, 2, 3, 4]).mean() == pytest.approx(target, abs=0.02)
 
 
 def test_sample_hours_distribution(cfg):
@@ -154,3 +159,40 @@ def test_outliers_are_rare_and_large(cfg, world):
     assert events.sender_id.nunique() / personal == pytest.approx(cfg["outliers"]["account_rate"], abs=0.005)
     medians = tx.groupby("sender_id").amount.median()
     assert (events.amount >= 10 * events.sender_id.map(medians).fillna(0)).all()
+
+
+# ---------------------------------------------------------------- hard negatives (plan rev 4)
+
+def test_money_collectors_forward_fast(cfg, world):
+    from mulehunt.features import compute_account_features, split_windows
+
+    accounts, tx = world
+    start, end = split_windows(cfg)["train"]
+    collectors = accounts.account_id[accounts.profile == "collector"]
+    normal = accounts.account_id[(accounts.role == "normal") & (accounts.profile == "")]
+    f = compute_account_features(tx, accounts, list(collectors) + list(normal[:300]), start, end)
+    assert f.pass_through_ratio[collectors].median() >= 0.5
+    assert f.pass_through_ratio[normal[:300]].median() < 0.1
+    assert f.fan_in_max_24h[collectors].median() >= 3
+
+
+def test_new_accounts_large_first_receipt(cfg, world):
+    accounts, tx = world
+    start = pd.Timestamp(cfg["window"]["start"], tz=IST)
+    hard = cfg["hard_cases"]
+    new = accounts[(accounts.role == "normal") & (accounts.created_at >= start)
+                   & (accounts.created_at < start + pd.Timedelta(days=60))].set_index("account_id")
+    large = tx[(tx.amount >= 10000) & tx.receiver_id.isin(new.index)]
+    first = large.groupby("receiver_id").timestamp.min()
+    quick = (first - new.created_at.reindex(first.index)) <= pd.Timedelta(days=hard["new_account_large_receipt_days"][1])
+    assert quick.sum() / len(new) >= hard["new_account_large_receipt_share"] - 0.1
+
+
+def test_night_workers(world):
+    accounts, tx = world
+    night = accounts.account_id[accounts.profile == "night_worker"]
+    others = accounts.account_id[(accounts.account_type == "gig_worker") & (accounts.profile == "")]
+    hour = tx.timestamp.dt.hour
+    is_night = hour.isin([23, 0, 1, 2, 3, 4])
+    assert is_night[tx.sender_id.isin(night)].mean() >= 0.25
+    assert is_night[tx.sender_id.isin(others)].mean() < 0.10

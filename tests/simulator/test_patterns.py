@@ -80,3 +80,14 @@ def test_split_under_threshold(rng):
 
 def test_split_small_amount_unchanged(rng):
     assert split_under_threshold(4000, [10000, 25000, 50000], rng) == [4000]
+
+
+def test_patient_sender_waits(cfg, rng):
+    lo, hi = cfg["fraud"]["patient_delay_h"]
+    rows = chain([0, 1, 2, 3], 10000.0, T0, rng, cfg, slow={1})
+    times = [T0] + [r["timestamp"] for r in rows]
+    waits = [(b - a).total_seconds() / 3600 for a, b in zip(times, times[1:])]
+    assert lo <= waits[1] <= hi + 0.01          # mule 1 is patient
+    assert waits[0] <= 48 and waits[2] <= 48
+    spread = fan_out(5, [6, 7], 1000.0, T0, rng, cfg, slow={5})
+    assert all(lo <= (r["timestamp"] - T0).total_seconds() / 3600 <= hi + 0.01 for r in spread)

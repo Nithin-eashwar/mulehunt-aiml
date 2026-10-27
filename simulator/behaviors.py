@@ -170,6 +170,64 @@ def _family_transfers(accounts, cfg, rng, festival, activity, n_needed):
                  _lognormal(cfg["ticket_size"]["p2p_family"], len(rows), rng), "P2P")
 
 
+def _collections(accounts, cfg, rng):
+    """Hard negative: money collectors gather small P2P payments from several people in a
+    day and pass most of it on within hours (group funds, family pooling)."""
+    hard = cfg["hard_cases"]
+    collectors = accounts.account_id[accounts.profile == "collector"].to_numpy()
+    personal = accounts.account_id[(accounts.role == "normal") & (accounts.created_at < window_start(cfg))].to_numpy()
+    rows = []
+    n_days = cfg["window"]["days"]
+    for c in collectors:
+        for day in rng.choice(n_days, size=rng.poisson(hard["collections_per_month"] * n_days / 30), replace=True):
+            n = int(rng.integers(hard["collection_size"][0], hard["collection_size"][1] + 1))
+            payers = rng.choice(personal[personal != c], size=n, replace=False)
+            times = np.sort(_timestamps(np.full(n, day), cfg, rng))
+            amounts = _lognormal(hard["collection_amount"], n, rng)
+            rows += [(t, p, c, a) for t, p, a in zip(times, payers, amounts)]
+            total = amounts.sum() * rng.uniform(*hard["forward_share"])
+            delay = np.exp(rng.normal(np.log(hard["forward_delay"]["median_h"]), hard["forward_delay"]["sigma"]))
+            recipients = rng.choice(personal[personal != c], size=int(rng.integers(1, 3)), replace=False)
+            t_out = (times[-1] + pd.Timedelta(hours=float(delay))).floor("s")
+            for r, share in zip(recipients, rng.dirichlet(np.ones(len(recipients)))):
+                rows.append((t_out, c, r, round(total * share, 2)))
+    df = pd.DataFrame(rows, columns=["timestamp", "sender_id", "receiver_id", "amount"])
+    df["channel"] = "P2P"
+    end = window_start(cfg) + pd.Timedelta(days=n_days)
+    return df[df.timestamp < end].reset_index(drop=True)
+
+
+def _first_large_receipts(accounts, cfg, rng):
+    """Hard negative: many new accounts get a large first receipt soon after opening
+    (first salary, fees from parents, a family transfer), as fresh mules do."""
+    hard = cfg["hard_cases"]
+    start = window_start(cfg)
+    new = accounts[(accounts.role == "normal") & (accounts.created_at >= start)]
+    new = new[rng.random(len(new)) < hard["new_account_large_receipt_share"]]
+    lo, hi = hard["new_account_large_receipt_days"]
+    when = new.created_at + pd.to_timedelta(rng.uniform(lo, hi, size=len(new)) * 86400, unit="s")
+    large = accounts.account_id[accounts.account_type == "large_merchant"].to_numpy()
+    parents = accounts.account_id[(accounts.role == "normal") & (accounts.created_at < start)].to_numpy()
+    sender = np.where(rng.random(len(new)) < 0.5, rng.choice(large, size=len(new)), rng.choice(parents, size=len(new)))
+    df = _rows(sender, new.account_id.to_numpy(), when.dt.floor("s").reset_index(drop=True),
+               np.round(rng.uniform(*hard["new_account_large_receipt_amount"], size=len(new)), 2), "P2P")
+    return df[df.timestamp < start + pd.Timedelta(days=cfg["window"]["days"])].reset_index(drop=True)
+
+
+def _night_shift(tx, accounts, cfg, rng):
+    """Night workers' own payments follow the hour curve shifted by night_shift_hours."""
+    night = set(accounts.account_id[accounts.profile == "night_worker"])
+    mask = tx.sender_id.isin(night).to_numpy()
+    if not mask.any():
+        return tx
+    tx = tx.copy()
+    hours = (sample_hours(mask.sum(), cfg, rng) + cfg["hard_cases"]["night_shift_hours"]) % 24
+    day = tx.timestamp[mask].dt.normalize()
+    tx.loc[mask, "timestamp"] = (day + pd.to_timedelta(hours * 3600 + rng.integers(0, 3600, size=mask.sum()),
+                                                       unit="s")).to_numpy()
+    return tx
+
+
 def outlier_events(accounts: pd.DataFrame, txns: pd.DataFrame, cfg: dict, rng: np.random.Generator) -> pd.DataFrame:
     """Genuine one-off spikes (wedding, hospital bill, phone): one large P2M payment
     at 10-40x the account's median amount, for about 1% of personal accounts."""
@@ -213,11 +271,13 @@ def generate_normal_transactions(accounts: pd.DataFrame, cfg: dict, rng: np.rand
         _scheduled_business(accounts, cfg, rng, festival, activity, "supplier_per_month", ~personal, "supplier",
                             "P2P", skip_sunday=True),
         _salaries(accounts, cfg, rng), _gig_payouts(accounts, cfg, rng), _rent(accounts, cfg, rng),
+        _collections(accounts, cfg, rng), _first_large_receipts(accounts, cfg, rng),
     ], ignore_index=True)
     share = cfg["channel_mix"]
     n_needed = round(len(p2m) * share["P2P"] / share["P2M"]) - len(p2p)
     tx = pd.concat([p2m, p2p, _family_transfers(accounts, cfg, rng, festival, activity, n_needed)],
                    ignore_index=True)
+    tx = _night_shift(tx, accounts, cfg, rng)
 
     created = accounts.set_index("account_id").created_at
     tx = tx[(tx.sender_id != tx.receiver_id)

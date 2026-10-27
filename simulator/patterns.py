@@ -24,8 +24,10 @@ def hop_delay(rng: np.random.Generator, cfg: dict, size=None) -> np.ndarray:
     return out if size is not None else out[:1]
 
 
-def _after(t0: pd.Timestamp, rng, cfg) -> pd.Timestamp:
-    return (t0 + pd.Timedelta(hours=float(hop_delay(rng, cfg)[0]))).floor("s") + pd.Timedelta(seconds=1)
+def _after(t0: pd.Timestamp, rng, cfg, patient: bool = False) -> pd.Timestamp:
+    """When a mule forwards money received at t0; patient mules wait 1-2 days (plan rev 4)."""
+    hours = rng.uniform(*cfg["fraud"]["patient_delay_h"]) if patient else hop_delay(rng, cfg)[0]
+    return (t0 + pd.Timedelta(hours=float(hours))).floor("s") + pd.Timedelta(seconds=1)
 
 
 def _commission(rng, cfg) -> float:
@@ -38,11 +40,13 @@ def _row(t, sender, receiver, amount, channel="P2P") -> dict:
             "amount": round(float(amount), 2), "channel": channel}
 
 
-def fan_out(src, dsts, total, t0, rng, cfg) -> list[dict]:
-    """src received `total` at t0 and spreads it over dsts, each shortly after."""
+def fan_out(src, dsts, total, t0, rng, cfg, slow=frozenset()) -> list[dict]:
+    """src received `total` at t0 and spreads it over dsts, each shortly after.
+    Senders in `slow` are patient mules."""
     kept = total * _commission(rng, cfg)
     shares = rng.dirichlet(np.ones(len(dsts)) * 3)
-    return [_row(_after(t0, rng, cfg), src, d, np.floor(kept * s * 100) / 100) for d, s in zip(dsts, shares)]
+    return [_row(_after(t0, rng, cfg, src in slow), src, d, np.floor(kept * s * 100) / 100)
+            for d, s in zip(dsts, shares)]
 
 
 def fan_in(srcs, dst, amounts, t0s, rng=None, cfg=None) -> list[dict]:
@@ -50,27 +54,27 @@ def fan_in(srcs, dst, amounts, t0s, rng=None, cfg=None) -> list[dict]:
     return [_row(t, s, dst, a) for s, a, t in zip(srcs, amounts, t0s)]
 
 
-def chain(path, amount, t0, rng, cfg) -> list[dict]:
+def chain(path, amount, t0, rng, cfg, slow=frozenset()) -> list[dict]:
     """path[0] received `amount` at t0 and the money hops along the path."""
     rows, t = [], t0
     for sender, receiver in zip(path, path[1:]):
-        amount, t = amount * _commission(rng, cfg), _after(t, rng, cfg)
+        amount, t = amount * _commission(rng, cfg), _after(t, rng, cfg, sender in slow)
         rows.append(_row(t, sender, receiver, amount))
         amount = rows[-1]["amount"]
     return rows
 
 
-def scatter_gather(src, middles, dst, total, t0, rng, cfg) -> list[dict]:
+def scatter_gather(src, middles, dst, total, t0, rng, cfg, slow=frozenset()) -> list[dict]:
     """src scatters `total` over middles, which each pass their part on to dst."""
-    rows = fan_out(src, middles, total, t0, rng, cfg)
+    rows = fan_out(src, middles, total, t0, rng, cfg, slow)
     for r in list(rows):
-        rows += chain([r["receiver_id"], dst], r["amount"], r["timestamp"], rng, cfg)
+        rows += chain([r["receiver_id"], dst], r["amount"], r["timestamp"], rng, cfg, slow)
     return rows
 
 
-def cycle(nodes, amount, t0, rng, cfg) -> list[dict]:
+def cycle(nodes, amount, t0, rng, cfg, slow=frozenset()) -> list[dict]:
     """Money goes round the nodes and back to the first one."""
-    return chain(list(nodes) + [nodes[0]], amount, t0, rng, cfg)
+    return chain(list(nodes) + [nodes[0]], amount, t0, rng, cfg, slow)
 
 
 def split_under_threshold(amount: float, thresholds: list[int], rng: np.random.Generator) -> list[float]:

@@ -43,6 +43,8 @@ class Ring:
     duration_days: int = 1
     cycle: bool = False
     device_of: dict = field(default_factory=dict)
+    sleepers: list = field(default_factory=list)  # existing accounts recruited as mules; they use their own phone
+    patient: list = field(default_factory=list)   # mules that wait 1-2 days before forwarding
 
     def mule_list(self, tier: str) -> list:
         return self.mules.get(tier, [])
@@ -131,6 +133,7 @@ def recruit_members(rings, accounts, cfg, rng, normal_txns=None) -> pd.DataFrame
     fraud = cfg["fraud"]
     accounts = accounts.copy()
     created = accounts.set_index("account_id").created_at
+    own_device = accounts.set_index("account_id").primary_device
     personal = accounts.account_id[accounts.role == "normal"].to_numpy()
     if normal_txns is not None:
         first_seen = normal_txns.groupby("sender_id").timestamp.min()
@@ -170,6 +173,8 @@ def recruit_members(rings, accounts, cfg, rng, normal_txns=None) -> pd.DataFrame
                     acc = sleeper_pool.take(1, lambda a: first_seen.get(a, pd.NaT) <= ring.start - history,
                                             used)[0]
                     role_of[acc], split_of[acc] = tier, ring.split
+                    device = own_device[acc]
+                    ring.sleepers.append(acc)
                 else:
                     acc = next_id
                     next_id += 1
@@ -177,6 +182,8 @@ def recruit_members(rings, accounts, cfg, rng, normal_txns=None) -> pd.DataFrame
                                                  ring.start - fresh_age(), ring.split, device))
                 ring.mules[tier].append(acc)
                 ring.device_of[acc] = device
+                if rng.random() < fraud["patient_mule_share"]:
+                    ring.patient.append(acc)
 
         ring.cashout = next_id
         device = ring_devices[int(rng.integers(len(ring_devices)))]
@@ -228,29 +235,29 @@ def _to_cashout(ring, i, amount, t, cfg, rng):
     """Tier-2 mule number i passes money via a tier-3 mule (if any) to the cash-out."""
     t2, t3s = ring.mule_list("mule_t2")[i], ring.mule_list("mule_t3")
     path = [t2] + ([t3s[i % len(t3s)]] if t3s else []) + [ring.cashout]
-    return chain(path, amount, t, rng, cfg)
+    return chain(path, amount, t, rng, cfg, set(ring.patient))
 
 
 def _launder(ring, receipts, cfg, rng) -> list[dict]:
     """Move each tier-1 receipt (mule, amount, time) down to the cash-out account."""
-    rows, t2s = [], ring.mule_list("mule_t2")
+    rows, t2s, slow = [], ring.mule_list("mule_t2"), set(ring.patient)
     for n, (t1, amount, t) in enumerate(receipts):
         if ring.scenario == "digital_arrest":
             t3s = ring.mule_list("mule_t3")
             gather = t3s[0] if t3s else ring.cashout
-            hops = scatter_gather(t1, t2s, gather, amount, t, rng, cfg)
+            hops = scatter_gather(t1, t2s, gather, amount, t, rng, cfg, slow)
             rows += hops
             if t3s:
                 for r in hops:
                     if r["receiver_id"] == gather:
-                        rows += chain([gather, ring.cashout], r["amount"], r["timestamp"], rng, cfg)
+                        rows += chain([gather, ring.cashout], r["amount"], r["timestamp"], rng, cfg, slow)
             continue
-        spread = fan_out(t1, t2s, amount, t, rng, cfg)
+        spread = fan_out(t1, t2s, amount, t, rng, cfg, slow)
         rows += spread
         for r in spread:
             i = t2s.index(r["receiver_id"])
             if ring.cycle and n == 0 and i == 0:
-                loop = cycle(t2s, r["amount"], r["timestamp"], rng, cfg)
+                loop = cycle(t2s, r["amount"], r["timestamp"], rng, cfg, slow)
                 rows += loop
                 rows += _to_cashout(ring, 0, loop[-1]["amount"], loop[-1]["timestamp"], cfg, rng)
             else:

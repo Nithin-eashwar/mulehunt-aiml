@@ -160,6 +160,24 @@ def compare_ibm(patterns: dict, ibm_patterns_path) -> pd.DataFrame:
 
 # ---------------------------------------------------------------- calibration checks
 
+def expected_hour_curve(cfg: dict) -> np.ndarray:
+    """Hour-of-day shares the simulator should produce: the configured day-time curve,
+    blended with the night-shifted curve for the expected share of transactions that
+    night-shift gig workers send (plan rev 4)."""
+    w = np.asarray(cfg["hour_of_day"], dtype=float)
+    day = w / w.sum()
+    hard = cfg.get("hard_cases", {})
+    if not hard.get("night_worker_share"):
+        return day
+    shifted = np.roll(day, hard["night_shift_hours"])
+    rates = {t: r.get("p2m_per_day", 0) + r.get("p2p_per_day", 0)
+             for t, r in cfg["behaviours"].items() if isinstance(r, dict) and "p2m_per_day" in r}
+    mix = cfg["population"]["type_mix"]
+    mean_rate = sum(mix[t] * rates[t] for t in rates)
+    f = hard["night_worker_share"] * mix["gig_worker"] * rates["gig_worker"] / mean_rate
+    return (1 - f) * day + f * shifted
+
+
 def hour_tvd(observed, expected) -> float:
     p = np.asarray(observed, dtype=float)
     q = np.asarray(expected, dtype=float)
@@ -189,12 +207,13 @@ def run_checks(accounts: pd.DataFrame, txns: pd.DataFrame, cfg: dict) -> pd.Data
     small = (txns.amount[txns.channel == "P2M"] <= 500).mean()
     add("p2m_share_le_500", 0.86, small, abs(small - 0.86) <= 0.05, "secondary (Outlook Money); tolerance ±5 pp")
     hours = np.bincount(txns.timestamp.dt.tz_convert(IST_TZ).dt.hour, minlength=24)
-    tvd = hour_tvd(hours, cfg["hour_of_day"])
-    add("hour_of_day_tvd", 0.0, tvd, tvd <= 0.05, "assumed hour curve; total variation distance <= 0.05")
-    w = np.asarray(cfg["hour_of_day"], dtype=float)
-    night = hours[NIGHT_HOURS].sum() / hours.sum()
-    add("night_share_23_to_05", w[NIGHT_HOURS].sum() / w.sum(), night,
-        abs(night - w[NIGHT_HOURS].sum() / w.sum()) <= 0.02, "assumed hour curve; tolerance ±2 pp")
+    curve = expected_hour_curve(cfg)
+    tvd = hour_tvd(hours, curve)
+    add("hour_of_day_tvd", 0.0, tvd, tvd <= 0.05,
+        "assumed hour curve blended with night workers; total variation distance <= 0.05")
+    night, target = hours[NIGHT_HOURS].sum() / hours.sum(), curve[NIGHT_HOURS].sum()
+    add("night_share_23_to_05", target, night, abs(night - target) <= 0.02,
+        "assumed hour curve blended with night workers; tolerance ±2 pp")
 
     weekend = daily.volume[daily.index.dayofweek >= 5].mean() / daily.volume.mean()
     add("weekend_volume_factor", 1.0 + cfg["weekend"]["volume_uplift"], weekend, abs(weekend - 1.0) <= 0.05,
@@ -271,8 +290,7 @@ def make_figures(accounts, txns, cfg, out_dir=FIGURES, ibm=None) -> dict[str, Pa
 
     fig, ax = plt.subplots(figsize=(7, 3.5))
     hours = np.bincount(txns.timestamp.dt.tz_convert(IST_TZ).dt.hour, minlength=24)
-    w = np.asarray(cfg["hour_of_day"], dtype=float)
-    ax.plot(range(24), w / w.sum(), "o-", color="#C44E52", label="configured curve")
+    ax.plot(range(24), expected_hour_curve(cfg), "o-", color="#C44E52", label="expected (config + night workers)")
     ax.plot(range(24), hours / hours.sum(), "s--", color="#4C72B0", label="generated")
     ax.set(xlabel="hour of day (IST)", ylabel="share", title="Hour-of-day pattern")
     ax.legend()

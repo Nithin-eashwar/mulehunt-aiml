@@ -1,0 +1,4 @@
+method,val_pr_auc,test_pr_auc,test_precision,test_recall,test_f1,test_recall_at_1pct_fpr
+none,0.867526,0.892452,0.907285,0.815476,0.858934,0.904762
+class_weight,0.88792,0.897647,0.951389,0.815476,0.878205,0.910714
+smote,0.879081,0.890751,0.951389,0.815476,0.878205,0.916667
