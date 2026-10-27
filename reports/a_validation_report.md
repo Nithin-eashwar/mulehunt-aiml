@@ -48,15 +48,19 @@ Shapes counted within a 48 h window. `chain` = transactions that start a time-re
 
 ## 3. IBM AML benchmark (structure check)
 
-PASS means the IBM pattern type appears in our fraud graph. The share columns are for reference: our mix is set by our own config, so it is not expected to match IBM's.
+PASS means the IBM pattern type appears in our fraud graph. The share columns are for reference only: our mix is set by our own config, and the units differ (IBM counts laundering attempts; we count shapes found in the graph: accounts for fan-out/fan-in, account pairs for scatter-gather, distinct loops for cycles and starting transactions for chains).
 
 | ibm_pattern | our_pattern | ibm_count | ibm_share | our_count | our_share | status |
 |---|---|---|---|---|---|---|
-| FAN-OUT | fan_out | — | — | 140 | 0.02978 | SKIPPED |
-| FAN-IN | fan_in | — | — | 250 | 0.05318 | SKIPPED |
-| SCATTER-GATHER | scatter_gather | — | — | 123 | 0.02616 | SKIPPED |
-| CYCLE | cycle | — | — | 4 | 0.0008509 | SKIPPED |
-| chain (ours only) | chain | — | — | 4184 | 0.89 | SKIPPED |
+| BIPARTITE |  | 49 | 0.1324 | — | — | not implemented |
+| CYCLE | cycle | 54 | 0.1459 | 4 | 0.0008509 | PASS |
+| FAN-IN | fan_in | 40 | 0.1081 | 250 | 0.05318 | PASS |
+| FAN-OUT | fan_out | 48 | 0.1297 | 140 | 0.02978 | PASS |
+| GATHER-SCATTER |  | 51 | 0.1378 | — | — | not implemented |
+| RANDOM |  | 41 | 0.1108 | — | — | not implemented |
+| SCATTER-GATHER | scatter_gather | 44 | 0.1189 | 123 | 0.02616 | PASS |
+| STACK |  | 43 | 0.1162 | — | — | not implemented |
+| chain (ours only) | chain | — | — | 4,184 | 0.89 | ours only |
 
 ## 4. Figures
 
@@ -64,6 +68,7 @@ PASS means the IBM pattern type appears in our fraud graph. The share columns ar
 ![channel_mix](a_figures/val_channel_mix.png)
 ![hour_of_day](a_figures/val_hour_of_day.png)
 ![daily_volume](a_figures/val_daily_volume.png)
+![patterns_vs_ibm](a_figures/val_patterns_vs_ibm.png)
 
 ## 5. Values that are still assumptions
 

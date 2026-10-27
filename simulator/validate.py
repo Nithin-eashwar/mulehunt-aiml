@@ -290,13 +290,14 @@ def make_figures(accounts, txns, cfg, out_dir=FIGURES, ibm=None) -> dict[str, Pa
         save(fig, "daily_volume")
 
     if ibm is not None and (ibm.status != "SKIPPED").any():
-        rows = ibm[ibm.ibm_share.notna() | ibm.our_share.notna()]
-        fig, ax = plt.subplots(figsize=(8, 3.5))
+        rows = ibm[ibm.our_pattern.isin(list(IBM_TO_OURS.values()))]
+        fig, ax = plt.subplots(figsize=(7, 3.5))
         x = np.arange(len(rows))
-        ax.bar(x - 0.2, rows.ibm_share.fillna(0), 0.4, label="IBM HI-Small", color="#C44E52")
-        ax.bar(x + 0.2, rows.our_share.fillna(0), 0.4, label="ours", color="#4C72B0")
-        ax.set_xticks(x, rows.ibm_pattern, rotation=30, ha="right")
-        ax.set(ylabel="share of patterns", title="Laundering pattern mix (reference only)")
+        ax.bar(x - 0.2, rows.ibm_count / rows.ibm_count.sum(), 0.4, label="IBM HI-Small (attempts)", color="#C44E52")
+        ax.bar(x + 0.2, rows.our_count / rows.our_count.sum(), 0.4, label="ours (shapes found)", color="#4C72B0")
+        ax.set_xticks(x, rows.ibm_pattern)
+        ax.set(ylabel="share among shared types",
+               title="Pattern types present in both (reference only; units differ)")
         ax.legend()
         save(fig, "patterns_vs_ibm")
     return figs
@@ -341,8 +342,10 @@ def write_report(path, checks, patterns_fraud, patterns_all, ibm, figures, unsou
         "path of 3 or more hops. Scatter-gather and cycles are counted on fraud transactions only.", "",
         md_table(pattern_rows), "",
         "## 3. IBM AML benchmark (structure check)", "",
-        "PASS means the IBM pattern type appears in our fraud graph. The share columns are for reference: "
-        "our mix is set by our own config, so it is not expected to match IBM's.", "",
+        "PASS means the IBM pattern type appears in our fraud graph. The share columns are for reference only: "
+        "our mix is set by our own config, and the units differ (IBM counts laundering attempts; we count "
+        "shapes found in the graph: accounts for fan-out/fan-in, account pairs for scatter-gather, distinct "
+        "loops for cycles and starting transactions for chains).", "",
         md_table(ibm), "",
     ]
     if figures:
