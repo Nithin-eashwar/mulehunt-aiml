@@ -50,12 +50,12 @@ ticket_size:
     status: sourced
   # Per-behaviour lognormal amounts (median in rupees, sigma of log-amount).
   p2m: {value: {median: 180, sigma: 1.0}, source: "assumed; checked against secondary report that 86% of P2M payments are <= Rs 500 (Outlook Money, Feb 2025) - this lognormal gives 85%", status: assumed}
-  p2p_family: {value: {median: 1500, sigma: 1.0}, source: "assumed", status: assumed}
+  p2p_family: {value: {median: 1200, sigma: 0.9}, source: "assumed", status: assumed}
   bills: {value: {median: 600, sigma: 0.7}, source: "assumed: bills and mobile recharges", status: assumed}
-  rent: {value: {median: 12000, sigma: 0.5}, source: "assumed", status: assumed}
+  rent: {value: {median: 8000, sigma: 0.5}, source: "assumed", status: assumed}
   salary: {value: {median: 35000, sigma: 0.5}, source: "assumed", status: assumed}
-  gig_payout: {value: {median: 4000, sigma: 0.6}, source: "assumed: weekly gig-platform payouts", status: assumed}
-  supplier: {value: {median: 8000, sigma: 0.9}, source: "assumed: merchant payments to suppliers", status: assumed}
+  gig_payout: {value: {median: 2000, sigma: 0.6}, source: "assumed: weekly gig-platform payouts", status: assumed}
+  supplier: {value: {median: 2500, sigma: 0.8}, source: "assumed: merchant payments to suppliers", status: assumed}
 
 channel_mix:
   value: {P2P: 0.38, P2M: 0.62}
@@ -85,11 +85,12 @@ festivals:
 
 behaviours:
   # Expected events per account. *_per_day: Poisson rates; *_per_month: monthly counts.
-  salaried: {value: {p2m_per_day: 0.40, p2p_per_day: 0.10, bills_per_month: 3, rent_share: 0.6, salary_per_month: 1}, source: "assumed; tuned so the default config gives about 1.5M transactions (plan D6)", status: assumed}
-  student: {value: {p2m_per_day: 0.30, p2p_per_day: 0.08, bills_per_month: 1, rent_share: 0.2, salary_per_month: 0}, source: "assumed", status: assumed}
-  gig_worker: {value: {p2m_per_day: 0.35, p2p_per_day: 0.12, bills_per_month: 2, rent_share: 0.5, gig_payouts_per_month: 4}, source: "assumed", status: assumed}
-  small_merchant: {value: {p2m_per_day: 0.10, p2p_per_day: 0.08, supplier_per_month: 6}, source: "assumed: merchants mostly receive", status: assumed}
-  large_merchant: {value: {p2m_per_day: 0.05, p2p_per_day: 0.02, supplier_per_month: 10}, source: "assumed; large merchants also pay salaries (plan D13)", status: assumed}
+  salaried: {value: {p2m_per_day: 0.30, p2p_per_day: 0.10, bills_per_month: 2, rent_share: 0.2}, source: "assumed; rates tuned so the default config gives about 1.5M transactions (plan D6) with the NPCI mean ticket", status: assumed}
+  student: {value: {p2m_per_day: 0.22, p2p_per_day: 0.08, bills_per_month: 1, rent_share: 0.08}, source: "assumed", status: assumed}
+  gig_worker: {value: {p2m_per_day: 0.26, p2p_per_day: 0.12, bills_per_month: 2, rent_share: 0.18}, source: "assumed; weekly platform payouts", status: assumed}
+  small_merchant: {value: {p2m_per_day: 0.06, p2p_per_day: 0.08, supplier_per_month: 2}, source: "assumed: merchants mostly receive", status: assumed}
+  large_merchant: {value: {p2m_per_day: 0.03, p2p_per_day: 0.02, supplier_per_month: 3}, source: "assumed; large merchants also pay salaries and gig payouts (plan D13)", status: assumed}
+  salary_via_upi_share: {value: 0.05, source: "assumed: most salaries arrive by NEFT/IMPS, not UPI; only these salary credits appear in UPI data", status: assumed}
   merchant_size_weight: {value: {small_merchant: 1.0, large_merchant: 8.0}, source: "assumed: large merchants receive about 8x the P2M payments of small ones", status: assumed}
   phone_change_share: {value: 0.02, source: "assumed: accounts that change phone once mid-window", status: assumed}
 
