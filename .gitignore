@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ipynb_checkpoints/
+.superpowers/
+
+# Real generated data is rebuilt from the seed (see CONTRACTS.md section 6)
+data/generated/*.csv
+data/generated/_meta/
+data/processed/*
+!data/processed/.gitkeep
