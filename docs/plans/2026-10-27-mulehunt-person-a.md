@@ -561,3 +561,10 @@ The three reports hold what §9 asked the notebooks to show, written in viva lan
 | NPCI P2P/P2M | Agreed | Mark it `assumed` when there's no NPCI source, and label secondary sources as secondary (Global Constraints) |
 
 **Rev 3 (2026-10-27, Person A):** no notebooks and no Jupyter. Task 14 is now a one-command pipeline that writes the §9 content as Markdown reports in `reports/` (D21). `requirements.txt` no longer lists `jupyter`, `ipykernel` or `nbconvert`.
+
+**Rev 4 (2026-10-27, after Task 10's sanity gate tripped):** the first model run scored test PR-AUC 0.98 with every real mule caught, because simulated mules differed from normal accounts on every feature at once. Person A chose hard cases on both sides:
+- **Normal side:** money collectors (5%), shop phones shared by the owner and staff (5% of small shops), large first receipts for 40% of new accounts, and night-shift gig workers (30%).
+- **Fraud side:** half of all mules are sleepers paying from their own phones, 30% are patient mules waiting 24–47 h (inside Person B's 48 h window, so the hop-timing test now expects at least 60% of hops within 24 h), and fresh mules spread over 2–4 ring phones.
+- **Scam amounts** were scaled so the average loss per victim is about ₹10k (Lok Sabha: ₹7,761).
+
+The best model now scores 0.915, and every validation check still passes.
