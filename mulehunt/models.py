@@ -269,6 +269,8 @@ def bootstrap_ci(y, p, metric: Callable, groups: pd.Series, n: int = 1000, seed:
         if weight[y == 1].sum() == 0 or weight[y == 0].sum() == 0:
             continue
         values.append(metric(y, p, weight))
+    if not values:  # every resample had a single class (tiny or one-class input)
+        return float("nan"), float("nan")
     return float(np.percentile(values, 2.5)), float(np.percentile(values, 97.5))
 
 
@@ -381,7 +383,7 @@ def run_model_study(splits, splits_txn_only, groups, scenarios, fig_dir=FIGURES,
     shortcuts = single_feature_pr_auc(splits)
     fitted = fit_all(build_models(), splits)
     board = leaderboard(fitted, splits, groups, n_boot)
-    best = fitted[board.model.iloc[0]]
+    best = max(fitted.values(), key=lambda fm: fm.val_metrics["pr_auc"])  # chosen on validation, never test
     _save_tables(tab_dir, single_feature_pr_auc=shortcuts, leaderboard=board,
                  imbalance_comparison=imbalance_comparison(splits),
                  ablation=ablation(splits, splits_txn_only),
@@ -508,14 +510,15 @@ def explain(model_bundle: dict, x_row: pd.Series, top_k: int = 5) -> list[tuple[
     return [(columns[i], float(contribution[i])) for i in order]
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Train and evaluate the fraud models")
     parser.add_argument("--features", default=str(FEATURES))
+    parser.add_argument("--data", default=str(META.parents[1]), help="generated dataset (transactions, _meta)")
     parser.add_argument("--tree", action="store_true", help="run the decision-tree study")
     parser.add_argument("--models", action="store_true", help="run the model zoo, leaderboard and analyses")
     parser.add_argument("--all", action="store_true",
                         help="tree study + model study, then write models/risk_scores.csv and models/*.joblib")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     splits = load_splits(args.features)
     if args.tree or args.all:
         print(run_tree_study(splits))
@@ -524,17 +527,21 @@ def main() -> None:
         from simulator.schema import read_transactions
 
         print(single_feature_pr_auc(splits).head(5).to_string(index=False))
-        scenarios = account_scenarios(read_transactions("data/generated/transactions.csv"))
-        groups = load_groups(splits["test"][2])
+        meta = Path(args.data) / "_meta" / "account_split.csv"
+        scenarios = account_scenarios(read_transactions(Path(args.data) / "transactions.csv"))
+        groups = load_groups(splits["test"][2], meta)
         fitted, board = run_model_study(splits, load_splits(args.features, columns=TXN_ONLY), groups, scenarios)
         cols = ["model", "pr_auc", "pr_auc_ci_low", "pr_auc_ci_high", "precision", "recall", "f1",
                 "recall_at_1pct_fpr"]
         print(board[cols].round(3).to_string(index=False))
         if args.all:
             best = max(fitted, key=lambda k: fitted[k].val_metrics["pr_auc"])
-            risk = write_risk_scores(fitted[best], splits, groups=load_groups(splits["train"][2]))
+            risk = write_risk_scores(fitted[best], splits, groups=load_groups(splits["train"][2], meta))
             save_models(fitted, splits)
             print(f"risk scores from {best}: {len(risk):,} accounts -> {RISK_SCORES}; models saved to {MODELS_DIR}/")
+            from mulehunt.report import write_classifier_report
+
+            print(f"wrote {write_classifier_report(features_path=args.features, meta_path=meta)}")
 
 
 if __name__ == "__main__":

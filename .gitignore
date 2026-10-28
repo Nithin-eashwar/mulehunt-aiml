@@ -10,3 +10,4 @@ data/generated/*.csv
 data/generated/_meta/
 data/processed/*
 !data/processed/.gitkeep
+build/

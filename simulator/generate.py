@@ -123,12 +123,12 @@ def summary(accounts: pd.DataFrame, txns: pd.DataFrame, rings: list[Ring]) -> st
     ])
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Generate the MuleHunt dataset")
     parser.add_argument("--config", default=str(DEFAULT_PATH))
     parser.add_argument("--out", default="data/generated")
     parser.add_argument("--small", action="store_true", help="5,000-account development dataset")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     cfg = load_config(args.config)
     if args.small:
         cfg = small_config(cfg)

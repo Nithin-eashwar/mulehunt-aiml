@@ -332,6 +332,25 @@ def test_train_scores_are_out_of_fold(fitted, splits, tmp_path):
     assert len(np.unique(oof_folds(y_tr, pd.Series(np.arange(len(y_tr))), 5))) == 5
 
 
+def test_oof_scores_are_not_memorised(splits, tmp_path):
+    # An unpruned tree memorises its training rows (in-sample AP = 1), so truly out-of-fold
+    # train scores must rank far worse than that.
+    from sklearn.pipeline import Pipeline
+    from sklearn.tree import DecisionTreeClassifier
+
+    X_tr, y_tr, ids_tr = splits["train"]
+    tree = Pipeline([("model", DecisionTreeClassifier(random_state=0))]).fit(X_tr, y_tr)
+    assert average_precision_score(y_tr, tree.predict_proba(X_tr)[:, 1]) == 1.0
+    fm = FittedModel("tree", tree, 0.5, {})
+    out = write_risk_scores(fm, splits, tmp_path / "risk.csv").set_index("account_id")
+    assert average_precision_score(y_tr, out.risk_prob.loc[ids_tr]) < 0.8
+
+
+def test_bootstrap_ci_one_class_is_nan():
+    lo, hi = bootstrap_ci(np.zeros(10), np.linspace(0, 1, 10), lambda y, p, w: 0.0, pd.Series(range(10)), n=5)
+    assert np.isnan(lo) and np.isnan(hi)
+
+
 def test_val_test_scores_from_train_model(fitted, splits, tmp_path):
     fm = fitted["logistic_regression"]
     out = write_risk_scores(fm, splits, tmp_path / "risk.csv").set_index("account_id")

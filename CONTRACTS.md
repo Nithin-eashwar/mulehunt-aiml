@@ -15,7 +15,7 @@ them; run them on any file you produce or consume.
 | `state` | str | Indian state name (list in `simulator/config.yaml`) |
 | `created_at` | ISO-8601 datetime with IST offset | e.g. `2024-03-02T10:15:00+05:30` |
 | `role` | str | `normal, merchant, victim, fraudster, mule_t1, mule_t2, mule_t3, cashout` — ground truth, never noisy |
-| `is_fraud` | int 0/1 | 1 for `fraudster, mule_t1, mule_t2, mule_t3, cashout`; victims are 0. About 1.5% of labels are deliberately flipped (label noise), prevalence unchanged |
+| `is_fraud` | int 0/1 | 1 for `fraudster, mule_t1, mule_t2, mule_t3, cashout`; victims are 0. Label noise: 1.5% of fraud accounts are flipped to 0 and the same number of genuine (non-victim) accounts to 1, so prevalence is unchanged (on the real data, 9 each way). Use `role` for ground truth |
 
 ## 2. `data/generated/transactions.csv` (produced by A)
 
@@ -49,17 +49,25 @@ finite (A* edge cost). Train accounts get out-of-fold scores from folds that
 keep each fraud ring together; val/test accounts are scored by the model
 fitted on train.
 
+What a score describes: each account's behaviour inside its own split's 30-day
+feature window (train days 31-60, val 46-75, test 61-90), not the whole 90 days.
+Train scores come from five fold models and val/test scores from one model
+fitted on all of train, so their distributions can differ slightly; compare
+scores within a split when that matters.
+
 ## 5. Saved models (produced by A, end of week 5)
 
-`models/<name>.joblib`, each a dict `{"pipeline", "threshold", "feature_columns"}`
-where `pipeline` has `predict_proba`. Also `models/feature_columns.json`
+`models/<name>.joblib`, each a dict with at least `pipeline` (has `predict_proba`),
+`threshold` and `feature_columns`. `explain()` also needs `name`, `feature_mean`,
+`feature_std` and `fallback_importances`, which every saved bundle has (plus
+`params` and `val_metrics`); load bundles with `load_model` rather than building them. Also `models/feature_columns.json`
 (ordered feature names) and `models/best_model.txt`. Load with
 `mulehunt.models.load_model(name)`; top contributing features with
 `mulehunt.models.explain(bundle, row)`.
 
 The eight names are `decision_tree, logistic_regression, knn, naive_bayes,
 bagging, random_forest, adaboost, gradient_boosting`. Scoring one account
-for the dashboard:
+for the dashboard (run from the repo root; the paths are relative):
 
 ```python
 import pandas as pd
@@ -82,6 +90,9 @@ training mean, so `+` means "higher than a typical account" and `-` "lower".
 
 ## 6. Getting the data (no large files in git)
 
+Run every command from the repo root: paths such as `simulator/config.yaml`,
+`models/` and `data/` are relative to it.
+
 Git holds only: the toy CSVs in `data/generated/toy/`,
 `data/generated/CHECKSUMS.txt`, `models/risk_scores.csv` and
 `models/*.joblib`. Rebuild the real data yourself (the output is identical for
@@ -93,6 +104,9 @@ python -m mulehunt.features
 ```
 
 Then compare the SHA-256 of your files with `data/generated/CHECKSUMS.txt`.
+`python -m mulehunt.pipeline` rebuilds everything (about 6 minutes). For a quick
+development run use `python -m mulehunt.pipeline --small`: it writes only under
+`build/small/` and never touches the committed files.
 
 **Fallback:** when `data/generated/accounts.csv` / `transactions.csv` are
 missing, code must read `data/generated/toy/accounts.csv` /
