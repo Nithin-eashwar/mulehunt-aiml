@@ -378,13 +378,13 @@ def write_report(path, checks, patterns_fraud, patterns_all, ibm, figures, unsou
     Path(path).write_text("\n".join(parts), encoding="utf-8", newline="\n")
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Validate the generated MuleHunt dataset")
     parser.add_argument("--data", default="data/generated")
     parser.add_argument("--config", default=str(DEFAULT_PATH))
     parser.add_argument("--ibm", default=str(DEFAULT_IBM))
     parser.add_argument("--report", default=str(REPORT))
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     cfg = load_config(args.config)
     accounts = read_accounts(Path(args.data) / "accounts.csv")
@@ -398,10 +398,17 @@ def main() -> None:
                f"{len(txns):,} transactions ({txns.is_fraud.mean():.3%} fraud)")
     write_report(args.report, checks, fraud_patterns, all_patterns, ibm, figures,
                  unsourced_keys(load_raw_config(args.config)), summary)
+    from mulehunt.report import write_simulator_report
+
+    sim_report = write_simulator_report(Path(args.report).parent / "a_01_simulator.md",
+                                        raw_cfg=load_raw_config(args.config), accounts=accounts, txns=txns,
+                                        data_dir=args.data, checks=checks, fraud_patterns=fraud_patterns,
+                                        all_patterns=all_patterns, ibm=ibm, figures=figures,
+                                        fig_dir=Path(args.report).parent / "a_figures")
     print(md_table(checks))
     print("\nfraud-graph patterns:", fraud_patterns)
     print("IBM check:", ", ".join(f"{r.ibm_pattern}={r.status}" for r in ibm.itertuples()))
-    print(f"wrote {args.report}")
+    print(f"wrote {args.report} and {sim_report}")
 
 
 if __name__ == "__main__":

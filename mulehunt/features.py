@@ -41,6 +41,30 @@ FEATURE_GROUPS = {
     "device_location": ["device_count", "device_shared_accounts", "counterparty_state_mismatch_share"],
 }
 FEATURE_COLUMNS = [c for group in FEATURE_GROUPS.values() for c in group]
+# One line each, for the reports (the formulas are in the module docstring).
+FEATURE_DESCRIPTIONS = {
+    "total_inflow": "Rupees received in the window",
+    "total_outflow": "Rupees sent in the window",
+    "pass_through_ratio": "Rupees sent on within 24 h of arriving / rupees received (FIFO matching, each rupee once)",
+    "avg_dwell_hours": "Amount-weighted hours money stays before it is sent on; unsent money counts until window end",
+    "in_degree": "Distinct accounts that sent money to this account",
+    "out_degree": "Distinct accounts this account sent money to",
+    "new_counterparty_share": "Share of counterparties not seen in the 30 days before the window",
+    "fan_in_max_24h": "Most distinct senders within any 24 h",
+    "fan_out_max_24h": "Most distinct receivers within any 24 h",
+    "neighbor_suspicious_share": "Share of counterparties whose own pass-through is >= 0.8 (label-free)",
+    "txn_count": "Transactions sent or received",
+    "night_txn_share": "Share of transactions between 23:00 and 04:59 IST",
+    "round_amount_share": "Share of amounts >= Rs 1,000 that are a multiple of Rs 500",
+    "below_threshold_share": "Share of amounts in [90%, 100%) of Rs 10k / 25k / 50k",
+    "burstiness": "(sd - mean) / (sd + mean) of gaps between transactions; 0 with fewer than 3",
+    "has_large_receipt": "1 if the account received a single payment >= Rs 10,000",
+    "account_age_at_first_large_receipt_days": "Account age in days at its first receipt >= Rs 10,000 (age at window "
+                                               "end if none)",
+    "device_count": "Distinct devices the account sent from",
+    "device_shared_accounts": "Other accounts that sent from any of the same devices",
+    "counterparty_state_mismatch_share": "Share of counterparties registered in a different state",
+}
 TXN_ONLY = FEATURE_GROUPS["flow"] + FEATURE_GROUPS["behavioural"] + FEATURE_GROUPS["device_location"]
 
 SPLITS = ("train", "val", "test")
@@ -244,12 +268,12 @@ def _update_checksum(checksums: Path, target: Path) -> None:
     checksums.write_text("\n".join(kept + [line]) + "\n", encoding="utf-8", newline="\n")
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Build per-account features")
     parser.add_argument("--data", default="data/generated")
     parser.add_argument("--config", default=str(DEFAULT_PATH))
     parser.add_argument("--out", default=str(OUT_PATH))
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     data = Path(args.data)
     cfg = load_config(args.config)
     accounts = read_accounts(data / "accounts.csv")

@@ -508,14 +508,14 @@ def explain(model_bundle: dict, x_row: pd.Series, top_k: int = 5) -> list[tuple[
     return [(columns[i], float(contribution[i])) for i in order]
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Train and evaluate the fraud models")
     parser.add_argument("--features", default=str(FEATURES))
     parser.add_argument("--tree", action="store_true", help="run the decision-tree study")
     parser.add_argument("--models", action="store_true", help="run the model zoo, leaderboard and analyses")
     parser.add_argument("--all", action="store_true",
                         help="tree study + model study, then write models/risk_scores.csv and models/*.joblib")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     splits = load_splits(args.features)
     if args.tree or args.all:
         print(run_tree_study(splits))
@@ -535,6 +535,9 @@ def main() -> None:
             risk = write_risk_scores(fitted[best], splits, groups=load_groups(splits["train"][2]))
             save_models(fitted, splits)
             print(f"risk scores from {best}: {len(risk):,} accounts -> {RISK_SCORES}; models saved to {MODELS_DIR}/")
+            from mulehunt.report import write_classifier_report
+
+            print(f"wrote {write_classifier_report(features_path=args.features)}")
 
 
 if __name__ == "__main__":

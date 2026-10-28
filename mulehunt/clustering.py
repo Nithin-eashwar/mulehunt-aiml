@@ -288,12 +288,12 @@ def run_clustering_study(features_path=FEATURES, accounts_path=ACCOUNTS, ks=rang
             "sweep": sweep, "validity": validity, "lifts": lifts}
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Label-free clustering with validity checks against true roles")
     parser.add_argument("--features", default=str(FEATURES))
     parser.add_argument("--accounts", default=str(ACCOUNTS))
     parser.add_argument("--k", type=int, default=None, help="number of clusters (default: best silhouette)")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     out = run_clustering_study(args.features, args.accounts, k=args.k)
     print(f"{out['n_active']:,} active accounts, {out['n_mules']} mules; best-silhouette K = {out['k_best']}")
     print(out["sweep"].round(3).to_string(index=False))
@@ -301,6 +301,9 @@ def main() -> None:
     for (method, k), lift in out["lifts"].items():
         print(f"\n{method}, K={k}: mule lift per cluster (top 5)")
         print(lift.head(5).round(3).to_string(index=False))
+    from mulehunt.report import write_clustering_report
+
+    print(f"\nwrote {write_clustering_report()}")
 
 
 if __name__ == "__main__":
