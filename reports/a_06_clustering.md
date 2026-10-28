@@ -108,7 +108,7 @@ About 99% of accounts are not mules, so purity is high for any clustering and AR
 
 ## 7. Significance: shuffled baseline
 
-Each feature column is permuted independently (same distributions, no joint structure) and clustered again, 20 times per K. Real silhouette is at least 7 standard deviations above the shuffled mean at every K reported, and real SSE is lower, so the structure is not chance.
+Each feature column is permuted independently (same distributions, no joint structure) and clustered again, 20 times per K. Real silhouette is at least 6.7 standard deviations above the shuffled mean at every K reported, and real SSE is lower, so the structure is not chance.
 
 | k | real_silhouette | real_sse | shuffled_silhouette_mean | shuffled_silhouette_sd | shuffled_sse_mean | silhouette_gap_in_sd |
 |---|---|---|---|---|---|---|

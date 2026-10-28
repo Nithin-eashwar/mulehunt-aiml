@@ -580,7 +580,7 @@ def write_clustering_report(path=CLUSTERING_REPORT, *, tab_dir=TABLES, fig_dir=F
     sig_text = ("Each feature column is permuted independently (same distributions, no joint structure) and clustered "
                 f"again, {int(shuffle.groupby('k').size().min())} times per K. ")
     if (sig.silhouette_gap_in_sd > 3).all() and (sig.real_sse < sig.shuffled_sse_mean).all():
-        sig_text += (f"Real silhouette is at least {sig.silhouette_gap_in_sd.min():.0f} standard deviations above the "
+        sig_text += (f"Real silhouette is at least {sig.silhouette_gap_in_sd.min():.1f} standard deviations above the "
                      "shuffled mean at every K reported, and real SSE is lower, so the structure is not chance.")
     else:
         sig_text += "At some K the real silhouette is within 3 standard deviations of shuffled data; see the table."
