@@ -1,5 +1,4 @@
 import re
-import shutil
 from pathlib import Path
 
 import pandas as pd
@@ -9,7 +8,6 @@ from mulehunt import pipeline
 from mulehunt.features import FEATURE_COLUMNS, FEATURE_DESCRIPTIONS
 from mulehunt.report import write_markdown_report
 
-REPO = Path(__file__).resolve().parents[2]
 REPORTS = ("a_01_simulator.md", "a_05_classifiers.md", "a_06_clustering.md")
 
 
@@ -48,14 +46,37 @@ def test_every_feature_has_a_description():
     assert all(len(d) > 10 for d in FEATURE_DESCRIPTIONS.values())
 
 
-def test_pipeline_stage_subset(monkeypatch):
+def record_stages(monkeypatch):
     calls = []
     for name in pipeline.STAGE_ORDER:
-        monkeypatch.setitem(pipeline.STAGES, name, lambda cfg, small, n=name: calls.append((n, small)))
-    times = pipeline.run_pipeline(stages=["validate", "generate"], small=True)
-    assert calls == [("generate", True), ("validate", True)]       # always in pipeline order
+        monkeypatch.setitem(pipeline.STAGES, name,
+                            lambda cfg, small, cwd, n=name: calls.append((n, small, cwd)))
+    return calls
+
+
+def test_pipeline_stage_subset(monkeypatch, tmp_path):
+    calls = record_stages(monkeypatch)
+    times = pipeline.run_pipeline(stages=["validate", "generate"], small=True, out_root=tmp_path)
+    assert [(n, s) for n, s, _ in calls] == [("generate", True), ("validate", True)]   # always in pipeline order
     assert list(times) == ["generate", "validate"]
     assert all(t >= 0 for t in times.values())
+
+
+def test_small_run_never_writes_committed_paths(monkeypatch, tmp_path):
+    # A --small run must land in build/small with its own inputs, not in data/, models/ or reports/.
+    calls = record_stages(monkeypatch)
+    monkeypatch.chdir(tmp_path)
+    pipeline.run_pipeline(small=True, stages=["generate"])
+    assert calls == [("generate", True, pipeline.SMALL_OUT_ROOT)]
+    assert (tmp_path / "build/small/simulator/config.yaml").exists()
+    assert (tmp_path / "build/small/data/raw").is_dir()
+    assert sorted(p.name for p in tmp_path.iterdir()) == ["build"]
+
+
+def test_default_run_writes_in_place(monkeypatch):
+    calls = record_stages(monkeypatch)
+    pipeline.run_pipeline(stages=["models"])
+    assert calls == [("models", False, None)]
 
 
 def test_pipeline_unknown_stage():
@@ -64,15 +85,9 @@ def test_pipeline_unknown_stage():
 
 
 @pytest.mark.slow
-def test_pipeline_small_end_to_end(tmp_path, monkeypatch):
-    # Inputs the stages read, copied into an empty folder; every output lands there too.
-    for rel in ("simulator/config.yaml", "data/raw"):
-        src, dst = REPO / rel, tmp_path / rel
-        dst.parent.mkdir(parents=True, exist_ok=True)
-        (shutil.copytree if src.is_dir() else shutil.copy)(src, dst)
-    shutil.copytree(REPO / "data/generated/toy", tmp_path / "data/generated/toy")
-    monkeypatch.chdir(tmp_path)
-    times = pipeline.run_pipeline(small=True)
+def test_pipeline_small_end_to_end(tmp_path):
+    # The stages run inside tmp_path with copies of their inputs; every output lands there too.
+    times = pipeline.run_pipeline(small=True, out_root=tmp_path)
     assert list(times) == list(pipeline.STAGE_ORDER)
     for name in REPORTS:
         report = tmp_path / "reports" / name

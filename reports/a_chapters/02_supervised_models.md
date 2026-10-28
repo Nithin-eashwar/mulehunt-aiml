@@ -23,7 +23,7 @@ A model that catches nobody is 98.7% accurate, so accuracy hides everything that
 - **5** are genuine users, out of 12,490
 - **42** fraud accounts are missed
 
-Lowering the threshold to allow a 1% false-alarm rate would catch 156 fraud accounts but wrongly flag 125 genuine users. That trade-off is a policy decision, not a modelling one. It is why the dashboard shows a score and its reasons, and why a flag should prompt review rather than an automatic freeze.
+Lowering the threshold catches more: 156 of the 170 fraud accounts are caught once 92 genuine users are flagged, and allowing the full 1% false-alarm rate (up to 124 genuine users) catches no more than that. Where to set the threshold is a policy decision, not a modelling one. We therefore recommend that the dashboard show each score with its reasons, and that a flag prompt a human review rather than an automatic freeze.
 
 ## 2.2 Features
 
@@ -163,4 +163,5 @@ Fake KYC is the hardest. It has one victim per ring and by far the fewest fraud 
 - **A small test set.** It has 20 rings and 170 fraud accounts, so every metric carries a wide interval. We report ring-level confidence intervals for that reason.
 - **Simulated data.** The models learn the patterns we simulated (Chapter 1.6). Real performance would be lower and would need retraining on real labels.
 - **Static features.** Each account gets one 30-day snapshot. A deployed system would score accounts continuously, and mules would adapt to whatever the model rewards.
+- **FIFO pass-through favours fresh mules.** In an account that already holds money, a quick forward is matched to the older money first, so it counts as slow. Mules whose accounts existed before the window (mostly sleepers) have a median pass-through of 0.44, against 0.83 for freshly opened mules. This is a property of the feature definition, not of the simulated behaviour; it makes sleepers harder to catch, much as in reality.
 - **A Gini-only leaderboard tree**, as noted in 2.4.

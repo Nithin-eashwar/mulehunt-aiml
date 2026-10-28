@@ -50,7 +50,7 @@ Volume follows an hour-of-day curve, weekends and month-start, and festival effe
 
 The scenarios differ on purpose: a digital-arrest victim pays several large instalments, a job-task victim a few small "fees". Across all victims the mean loss is Rs 10,032. The only official figure, the Lok Sabha FY2024-25 average (₹981 crore over 12.64 lakh incidents ≈ Rs 7,761), is per *reported incident*, and one victim can report several. So it is a sanity check, not a target to hit exactly.
 
-**Mule networks.** Each ring has one fraudster, 2–4 tier-1 mules, 1–3 tier-2, 0–2 tier-3 and one cash-out account. Money is laundered with the patterns the handoff names:
+**Mule networks.** Each ring has one fraudster, mule tiers and one cash-out account. Most rings have 2–4 tier-1 mules, 1–3 tier-2 and 0–2 tier-3. In fake-KYC and digital-arrest rings the victim pays a single account, so there is one tier-1 mule that fans out to 2–6 tier-2 mules. Money is laundered with the patterns the handoff names:
 
 - fan-out
 - fan-in

@@ -29,6 +29,8 @@ TIER_COLOURS = {"victim": "#8C8C8C", "fraudster": "#C44E52", "mule_t1": "#DD8452
                 "mule_t3": "#55A868", "cashout": "#4C72B0"}
 SLEEPER_HISTORY_DAYS = 21
 RULE_LEVELS = 3
+COLLINEAR_TOP_K = 4
+COLLINEAR_MIN_R = 0.8
 
 
 # ---------------------------------------------------------------- generic writer
@@ -438,11 +440,15 @@ def write_classifier_report(path=CLASSIFIER_REPORT, *, tab_dir=TABLES, fig_dir=F
     abl = t["ablation"].set_index("features")
     gain = abl.loc["with_network", "test_pr_auc"] - abl.loc["transaction_only", "test_pr_auc"]
     coefs = t["lr_coefficients"].reindex(t["lr_coefficients"].coefficient.abs().sort_values(ascending=False).index)
-    corr = table[FEATURE_COLUMNS].corr().abs().where(lambda c: c < 1)
-    pair = corr.stack().idxmax()
-    collinear = (f"`{pair[0]}` and `{pair[1]}` are {corr.loc[pair]:.2f} correlated, so the model gives them large "
-                 "weights of opposite sign that mostly cancel: read them together, not as two separate risk factors. "
-                 "That is collinearity, and it is why the tree models are used for explanations.")
+    # Only claim collinearity for a pair the LR really weights heavily with opposite signs.
+    top = coefs.head(COLLINEAR_TOP_K).set_index("feature").coefficient
+    corr = table[list(top.index)].corr().abs().where(lambda c: c < 1)
+    pair = corr.stack().idxmax() if corr.notna().any().any() else None
+    collinear = ""
+    if pair and corr.loc[pair] >= COLLINEAR_MIN_R and np.sign(top[pair[0]]) != np.sign(top[pair[1]]):
+        collinear = (f"`{pair[0]}` ({top[pair[0]]:+.2f}) and `{pair[1]}` ({top[pair[1]]:+.2f}) are "
+                     f"{corr.loc[pair]:.2f} correlated, so their large opposite-sign weights mostly cancel: read them "
+                     "together, not as two separate risk factors. That is collinearity.")
     imb = t["imbalance_comparison"]
     imb_best = imb.loc[imb.val_pr_auc.idxmax(), "method"]
     imb_text = (f"On validation PR-AUC, `{imb_best}` is best for logistic regression. PR-AUC only measures ranking, "

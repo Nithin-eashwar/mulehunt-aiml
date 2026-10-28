@@ -185,7 +185,7 @@ Standardised features, so coefficients are comparable. An odds ratio above 1 rai
 | below_threshold_share | 0.08974 | 1.094 |
 | avg_dwell_hours | 0.06185 | 1.064 |
 
-`in_degree` and `txn_count` are 0.97 correlated, so the model gives them large weights of opposite sign that mostly cancel: read them together, not as two separate risk factors. That is collinearity, and it is why the tree models are used for explanations.
+`in_degree` (-15.34) and `txn_count` (+11.45) are 0.97 correlated, so their large opposite-sign weights mostly cancel: read them together, not as two separate risk factors. That is collinearity.
 
 ## Ablation: what network features add
 
