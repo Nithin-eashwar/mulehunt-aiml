@@ -1,0 +1,166 @@
+# MuleHunt simulator calibration.
+#
+# Every number is a leaf {value, source, status}:
+#   status: sourced  -> taken or derived from the cited source
+#   status: assumed  -> no public source; the reason is in `source`
+# Sources are listed in full in data/raw/calibration_sources.md.
+# `python -c "from simulator.config import *; print(unsourced_keys(load_raw_config()))"`
+# prints everything that is still an assumption.
+
+seed: {value: 42, source: "assumed: fixed seed for reproducibility", status: assumed}
+
+window:
+  start: {value: "2025-08-13", source: "plan D5 (our choice): 90-day window covering Dussehra (day 51) and Diwali (day 69), with NPCI data for the same months", status: assumed}
+  days: {value: 90, source: "handoff §4.1: about 90 days", status: sourced}
+
+splits:
+  train: {value: [1, 60], source: "handoff §6: train = days 1-60", status: sourced}
+  val: {value: [61, 75], source: "handoff §6: validation = days 61-75", status: sourced}
+  test: {value: [76, 90], source: "handoff §6: test = days 76-90", status: sourced}
+  shares: {value: {train: 0.50, val: 0.25, test: 0.25}, source: "plan D7/D8: rings and normal accounts split 50/25/25", status: assumed}
+  lookback_days: {value: 30, source: "plan D8: features use a 30-day window ending on the split's last day", status: assumed}
+  new_counterparty_history_days: {value: 30, source: "plan rev 2: fixed 30-day history for new_counterparty_share", status: assumed}
+  ring_tail_days: {value: 6, source: "plan D8 / rev 4: rings start at least 6 days before their split ends, leaving room for patient hops", status: assumed}
+
+population:
+  n_accounts: {value: 50000, source: "plan D6, inside handoff §4.1 range of 20k-50k", status: assumed}
+  small_n_accounts: {value: 5000, source: "plan D6: --small config for development and tests", status: assumed}
+  type_mix:
+    value: {salaried: 0.42, student: 0.18, gig_worker: 0.15, small_merchant: 0.20, large_merchant: 0.05}
+    source: "assumed: no public split of UPI users by occupation; merchants about a quarter of accounts"
+    status: assumed
+  new_account_share: {value: 0.08, source: "plan D24: normal accounts opened during the window, so being new is not unique to mules", status: assumed}
+  shared_device_household_share: {value: 0.04, source: "plan D24: households sharing one phone, so device sharing is not unique to mules", status: assumed}
+  family_size: {value: [1, 4], source: "assumed: 1-4 family accounts per user for P2P transfers", status: assumed}
+
+bank_mix:
+  value: {SBI: 0.30, HDFC: 0.18, ICICI: 0.15, Axis: 0.10, PNB: 0.08, Kotak: 0.07, IndusInd: 0.06, Yes Bank: 0.06}
+  source: "assumed: bank list and market-share weighting idea from the Kaggle synthetic 'UPI Transactions 2024' dataset (secondary, design idea only)"
+  status: assumed
+
+state_mix:
+  value: {Maharashtra: 0.16, Uttar Pradesh: 0.14, Karnataka: 0.12, Tamil Nadu: 0.11, Delhi: 0.09, West Bengal: 0.08, Gujarat: 0.08, Telangana: 0.08, Rajasthan: 0.07, Andhra Pradesh: 0.07}
+  source: "assumed: state list from the Kaggle synthetic UPI dataset (secondary); weights roughly by population and digital adoption"
+  status: assumed
+
+ticket_size:
+  target_mean_inr:
+    value: 1280
+    source: "NPCI UPI daily statistics, 13 Aug - 10 Nov 2025: total value / total volume = Rs 1,280 (data/raw/npci/upi_daily_2025-08_to_2025-11.csv)"
+    status: sourced
+  # Per-behaviour lognormal amounts (median in rupees, sigma of log-amount).
+  p2m: {value: {median: 120, sigma: 1.0}, source: "assumed; tuned with bills so that about 86% of all P2M payments are <= Rs 500 (secondary: Outlook Money, Feb 2025)", status: assumed}
+  p2p_family: {value: {median: 1600, sigma: 0.9}, source: "assumed", status: assumed}
+  bills: {value: {median: 350, sigma: 0.7}, source: "assumed: bills and mobile recharges", status: assumed}
+  rent: {value: {median: 8000, sigma: 0.5}, source: "assumed", status: assumed}
+  salary: {value: {median: 15000, sigma: 0.5}, source: "assumed: wages paid over UPI come mostly from small employers (shops, domestic work); corporate salaries use NEFT", status: assumed}
+  gig_payout: {value: {median: 2000, sigma: 0.6}, source: "assumed: weekly gig-platform payouts", status: assumed}
+  supplier: {value: {median: 4000, sigma: 0.8}, source: "assumed: merchant payments to suppliers", status: assumed}
+
+channel_mix:
+  value: {P2P: 0.38, P2M: 0.62}
+  source: "secondary, not NPCI: Outlook Money (FY2024-25 to Jan 2025) reports 62.35% P2M by volume; Meetanshi (Feb 2026, citing NPCI) 62.4%. NPCI's ecosystem statistics page was unavailable on 2026-10-27 (API 503/403)"
+  status: assumed
+
+hour_of_day:
+  # Relative weights for hours 0-23 (normalised by the simulator).
+  value: [0.8, 0.4, 0.25, 0.2, 0.2, 0.4, 1.2, 2.8, 4.5, 5.5, 6.3, 6.6, 6.8, 6.4, 5.9, 5.8, 5.9, 6.3, 6.9, 7.2, 6.9, 5.6, 3.6, 1.9]
+  source: "assumed: NPCI publishes no hour-of-day data; daytime plateau with an evening peak and a night trough"
+  status: assumed
+
+weekend:
+  volume_uplift: {value: 0.0, source: "NPCI daily statistics Aug-Nov 2025: Saturday/Sunday volume within 1.2% of the weekly mean", status: sourced}
+  sunday_value_factor: {value: 0.83, source: "NPCI daily statistics Aug-Nov 2025: Sunday value = 0.832 x mean daily value", status: sourced}
+
+month_start:
+  value_uplift_days_1_5: {value: 0.17, source: "NPCI daily statistics Aug-Nov 2025: value on days 1-5 = 1.167 x other days (salary and rent week); validation target", status: sourced}
+
+festivals:
+  value:
+    # volume_uplift: multiplier the simulator applies on those days.
+    # observed_uplift: what NPCI shows vs baseline_start..baseline_end (the validation target).
+    - {name: Dussehra, start: "2025-10-02", end: "2025-10-02", volume_uplift: -0.03, observed_uplift: 0.003, baseline_start: "2025-09-22", baseline_end: "2025-10-01"}
+    - {name: Dhanteras-Diwali, start: "2025-10-16", end: "2025-10-20", volume_uplift: 0.047, observed_uplift: 0.047, baseline_start: "2025-10-06", baseline_end: "2025-10-15"}
+    - {name: post-Diwali, start: "2025-10-21", end: "2025-10-30", volume_uplift: -0.113, observed_uplift: -0.113, baseline_start: "2025-10-06", baseline_end: "2025-10-15"}
+  source: "NPCI daily statistics: 16-20 Oct volume +4.7% and 21-30 Oct -11.3% vs 6-15 Oct; 2 Oct +0.3% vs 22 Sep-1 Oct but -3.0% vs 3-5 Oct (a public holiday inside the month-start week, so the simulator applies -3%). Diwali 20 Oct 2025 (Tribune India); Dhanteras 18 Oct = NPCI's busiest day in the window. Dussehra date to verify against an official holiday list"
+  status: sourced
+
+behaviours:
+  # Expected events per account. *_per_day: Poisson rates; *_per_month: monthly counts.
+  salaried: {value: {p2m_per_day: 0.30, p2p_per_day: 0.10, bills_per_month: 2, rent_share: 0.12}, source: "assumed; rates tuned so the default config gives about 1.5M transactions (plan D6) with the NPCI mean ticket", status: assumed}
+  student: {value: {p2m_per_day: 0.22, p2p_per_day: 0.08, bills_per_month: 1, rent_share: 0.05}, source: "assumed", status: assumed}
+  gig_worker: {value: {p2m_per_day: 0.26, p2p_per_day: 0.12, bills_per_month: 2, rent_share: 0.11}, source: "assumed; weekly platform payouts", status: assumed}
+  small_merchant: {value: {p2m_per_day: 0.06, p2p_per_day: 0.08, supplier_per_month: 2}, source: "assumed: merchants mostly receive", status: assumed}
+  large_merchant: {value: {p2m_per_day: 0.03, p2p_per_day: 0.02, supplier_per_month: 3}, source: "assumed; large merchants also pay salaries and gig payouts (plan D13)", status: assumed}
+  salary_via_upi_share: {value: 0.05, source: "assumed: most salaries arrive by NEFT/IMPS, not UPI; only these salary credits appear in UPI data", status: assumed}
+  merchant_size_weight: {value: {small_merchant: 1.0, large_merchant: 8.0}, source: "assumed: large merchants receive about 8x the P2M payments of small ones", status: assumed}
+  phone_change_share: {value: 0.02, source: "assumed: accounts that change phone once mid-window", status: assumed}
+
+hard_cases:
+  # Plan rev 4: normal behaviour that looks a little like a mule, so no feature is a giveaway.
+  money_collector_share: {value: 0.05, source: "assumed: people who collect money from several others and pass it on the same day (group funds, family pooling, informal agents)", status: assumed}
+  collections_per_month: {value: 4, source: "assumed", status: assumed}
+  collection_size: {value: [3, 8], source: "assumed: payers per collection", status: assumed}
+  collection_amount: {value: {median: 1500, sigma: 0.8}, source: "assumed", status: assumed}
+  forward_share: {value: [0.85, 1.0], source: "assumed: share of the collected money passed on", status: assumed}
+  forward_delay: {value: {median_h: 3.0, sigma: 0.8}, source: "assumed: hours before passing the money on", status: assumed}
+  shop_phone_group_share: {value: 0.05, source: "assumed: small shops where the owner and staff pay from one phone", status: assumed}
+  shop_phone_group_size: {value: [3, 6], source: "assumed: accounts per shared shop phone (the shop plus 2-5 staff)", status: assumed}
+  new_account_large_receipt_share: {value: 0.40, source: "assumed: new accounts whose first large receipt is a first salary, fees or a family transfer", status: assumed}
+  new_account_large_receipt_days: {value: [1, 20], source: "assumed: days after opening", status: assumed}
+  new_account_large_receipt_amount: {value: [10000, 60000], source: "assumed", status: assumed}
+  night_worker_share: {value: 0.30, source: "assumed: gig workers on night shifts (delivery, ride-hailing)", status: assumed}
+  night_shift_hours: {value: 12, source: "assumed: their hour-of-day curve is shifted by 12 hours", status: assumed}
+
+outliers:
+  account_rate: {value: 0.01, source: "assumed: genuine one-off spikes (wedding, hospital bill, phone purchase)", status: assumed}
+  multiplier: {value: [10, 40], source: "assumed: outlier amount = 10-40x the account's median", status: assumed}
+
+fraud:
+  rings_per_scenario: {value: 15, source: "plan D7 (review rev 2)", status: assumed}
+  small_rings_per_scenario: {value: 4, source: "assumed: --small development config (5,000 accounts) keeps the fraud share moderate", status: assumed}
+  ring_size:
+    value: {mule_t1: [2, 4], mule_t2: [1, 3], mule_t3: [0, 2], cashout: [1, 1]}
+    source: "plan D7: about 8 accounts per ring with the fraudster"
+    status: assumed
+  max_ring_days: {value: 8, source: "plan D8: rings fit inside the 15-day val/test periods", status: assumed}
+  sleeper_share: {value: 0.50, source: "plan D14 / handoff §4.5 sleeper mules; raised to 0.50 in plan rev 4 (many mules are recruited existing accounts)", status: assumed}
+  sleeper_min_history_days: {value: 21, source: "plan D14", status: assumed}
+  fresh_mule_age_days: {value: [3, 20], source: "plan D14: fresh mules opened 3-20 days before the ring", status: assumed}
+  threshold_split_share: {value: 0.30, source: "plan D14", status: assumed}
+  thresholds: {value: [10000, 25000, 50000], source: "handoff §4.3: Person B's minimax thresholds", status: sourced}
+  threshold_band: {value: [0.90, 0.999], source: "plan D12/D14: same band as the below_threshold feature", status: assumed}
+  hop_delay: {value: {median_h: 2.0, sigma: 1.5, cap_h: 48}, source: "plan D14 (rev 2): about 95% of hops within 24 h; Person B's 48 h hop rule", status: assumed}
+  mule_commission: {value: [0.92, 0.99], source: "plan Task 5: each mule forwards 92-99% of what it received", status: assumed}
+  mule_devices_per_ring: {value: [2, 4], source: "plan rev 4: fresh mules and the fraudster spread over 2-4 ring phones (fewer accounts per phone); sleepers use their own", status: assumed}
+  patient_mule_share: {value: 0.30, source: "plan rev 4: about 30% of mules wait before forwarding (hard case for pass-through)", status: assumed}
+  patient_delay_h: {value: [24, 47], source: "plan rev 4: patient mules wait 1-2 days, kept inside Person B's 48 h hop window", status: assumed}
+
+label_noise:
+  rate: {value: 0.015, source: "handoff §4.5: about 1-2% label noise; plan D9 keeps prevalence", status: sourced}
+
+scenarios:
+  fake_kyc:
+    value: {victims: [1, 1], payments_per_victim: [1, 1], amount: [10000, 50000]}
+    source: "handoff §4.3 shape; amounts assumed, scaled (plan rev 4) so the average loss per victim is near the Lok Sabha Rs 7,761 per incident"
+    status: assumed
+  digital_arrest:
+    value: {victims: [1, 1], payments_per_victim: [3, 8], amount: [10000, 40000], days: [2, 8]}
+    source: "handoff §4.3 shape; amounts assumed, scaled (plan rev 4) so the average loss per victim is near the Lok Sabha Rs 7,761 per incident"
+    status: assumed
+  job_task:
+    value: {victims: [15, 60], payments_per_victim: [1, 1], amount: [500, 5000]}
+    source: "handoff §4.3 shape; amounts assumed, scaled (plan rev 4) so the average loss per victim is near the Lok Sabha Rs 7,761 per incident"
+    status: assumed
+  loan_app:
+    value: {victims: [10, 40], payments_per_victim: [2, 5], amount: [500, 5000]}
+    source: "handoff §4.3 shape; amounts assumed, scaled (plan rev 4) so the average loss per victim is near the Lok Sabha Rs 7,761 per incident"
+    status: assumed
+  fake_investment:
+    value: {victims: [5, 20], returns_per_victim: [1, 3], return_amount: [200, 2000], amount: [10000, 40000], cycle_ring_share: 0.25}
+    source: "handoff §4.3 shape; amounts assumed, scaled (plan rev 4) so the average loss per victim is near the Lok Sabha Rs 7,761 per incident"
+    status: assumed
+  avg_loss_check_inr:
+    value: 7761
+    source: "Lok Sabha Unstarred Q 2481 (15 Dec 2025): FY2024-25 Rs 981 crore / 12.64 lakh incidents = Rs 7,761 per incident; sanity check for victim amounts"
+    status: sourced
