@@ -55,7 +55,30 @@ fitted on train.
 where `pipeline` has `predict_proba`. Also `models/feature_columns.json`
 (ordered feature names) and `models/best_model.txt`. Load with
 `mulehunt.models.load_model(name)`; top contributing features with
-`mulehunt.models.explain(bundle, row)`. A loading snippet is added here in week 5.
+`mulehunt.models.explain(bundle, row)`.
+
+The eight names are `decision_tree, logistic_regression, knn, naive_bayes,
+bagging, random_forest, adaboost, gradient_boosting`. Scoring one account
+for the dashboard:
+
+```python
+import pandas as pd
+from mulehunt.models import explain, load_model
+
+name = open("models/best_model.txt").read().strip()           # "random_forest"
+bundle = load_model(name)
+row = pd.read_parquet("data/processed/features.parquet").set_index("account_id").loc["ACC000123"]
+X = row[bundle["feature_columns"]].to_frame().T.astype(float)  # one-row frame, columns in order
+prob = bundle["pipeline"].predict_proba(X)[0, 1]
+flagged = prob >= bundle["threshold"]                          # threshold tuned for best validation F1
+print(f"{name}: risk {prob:.3f}, flagged={flagged}")
+for feature, effect in explain(bundle, row):                    # top 5, largest |effect| first
+    print(f"  {feature:40s} {effect:+.3f}")
+```
+
+Sign of `effect`: for `logistic_regression`, `+` pushes towards fraud. For the
+other models it is importance × the row's standardised deviation from the
+training mean, so `+` means "higher than a typical account" and `-` "lower".
 
 ## 6. Getting the data (no large files in git)
 

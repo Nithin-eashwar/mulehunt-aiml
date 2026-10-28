@@ -368,3 +368,19 @@ def test_explain_returns_top_k_known_features(fitted, splits, tmp_path):
         assert len(out) == 5
         assert all(f in FEATURE_COLUMNS and np.isfinite(v) for f, v in out)
         assert [abs(v) for _, v in out] == sorted((abs(v) for _, v in out), reverse=True)
+
+
+def test_contracts_loading_snippet_runs(capsys):
+    # The dashboard snippet in CONTRACTS.md §5 must run as written against the committed models.
+    import re
+    from pathlib import Path
+
+    if not Path("data/processed/features.parquet").exists():
+        pytest.skip("real features not built (python -m mulehunt.features)")
+    text = Path("CONTRACTS.md").read_text(encoding="utf-8")
+    section = text[text.index("## 5. Saved models"):text.index("## 6.")]
+    code = re.search(r"```python\n(.*?)```", section, re.S).group(1)
+    exec(compile(code, "CONTRACTS.md", "exec"), {})
+    lines = capsys.readouterr().out.strip().splitlines()
+    assert lines[0].startswith(Path("models/best_model.txt").read_text().strip() + ": risk ")
+    assert len(lines) == 6
