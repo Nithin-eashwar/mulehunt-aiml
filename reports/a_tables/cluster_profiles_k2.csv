@@ -1,0 +1,3 @@
+cluster,size,total_inflow,total_outflow,pass_through_ratio,avg_dwell_hours,in_degree,out_degree,new_counterparty_share,fan_in_max_24h,fan_out_max_24h,neighbor_suspicious_share,night_txn_share,burstiness,role_merchant,role_mule_t1,role_mule_t2,role_mule_t3,role_normal,role_victim
+0,43903,11039.2,12858.7,0.08014,179.184,4.88677,11.2018,0.924057,1.59499,2.39154,0.0177731,0.0623157,-0.056073,0.226294,0.000751657,0.00257386,0.000341662,0.744915,0.0251236
+1,4612,77440.9,59429.6,0.277782,126.205,75.7346,12.448,0.968374,9.02212,3.10451,0.0217835,0.0831778,0.13013,0.549219,0.0297051,0.0218994,0.0121422,0.373157,0.0138768

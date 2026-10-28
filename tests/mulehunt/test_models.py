@@ -284,3 +284,103 @@ def test_lr_coefficients(fitted):
     assert sorted(table.feature) == sorted(FEATURE_COLUMNS)
     assert np.allclose(table.odds_ratio, np.exp(table.coefficient))
     assert table.coefficient.abs().is_monotonic_decreasing
+
+
+# ---------------------------------------------------------------- Task 11: risk scores, saving, explain
+
+import json  # noqa: E402
+
+from mulehunt.models import explain, load_model, oof_folds, save_models, write_risk_scores  # noqa: E402
+
+
+def ring_groups(ids, y, size=4):
+    """Positives in rings of `size`; everyone else is their own group."""
+    pos = ids[y == 1].reset_index(drop=True)
+    ring = {a: f"ring-{i // size}" for i, a in enumerate(pos)}
+    return ids.map(lambda a: ring.get(a, a))
+
+
+def test_risk_scores_columns_and_coverage(fitted, splits, parquet, tmp_path):
+    X_tr, y_tr, ids_tr = splits["train"]
+    out = write_risk_scores(fitted["logistic_regression"], splits, tmp_path / "risk.csv",
+                            groups=ring_groups(ids_tr, y_tr))
+    on_disk = pd.read_csv(tmp_path / "risk.csv")
+    assert list(on_disk.columns) == ["account_id", "risk_prob"]
+    assert len(on_disk) == len(pd.read_parquet(parquet)) and on_disk.account_id.is_unique
+    assert len(out) == len(on_disk)
+
+
+def test_risk_scores_clipped(splits, tmp_path):
+    from sklearn.pipeline import Pipeline
+    from sklearn.tree import DecisionTreeClassifier
+
+    X_tr, y_tr, _ = splits["train"]
+    tree = Pipeline([("model", DecisionTreeClassifier(random_state=0))]).fit(X_tr, y_tr)  # outputs exactly 0 or 1
+    out = write_risk_scores(FittedModel("tree", tree, 0.5, {}), splits, tmp_path / "risk.csv")
+    on_disk = pd.read_csv(tmp_path / "risk.csv")
+    for frame in (out, on_disk):
+        assert frame.risk_prob.min() >= 1e-6 and frame.risk_prob.max() <= 1 - 1e-6
+        assert np.isfinite(-np.log(frame.risk_prob)).all()
+
+
+def test_train_scores_are_out_of_fold(fitted, splits, tmp_path):
+    fm = fitted["random_forest"]
+    X_tr, y_tr, ids_tr = splits["train"]
+    out = write_risk_scores(fm, splits, tmp_path / "risk.csv").set_index("account_id")
+    in_sample = np.clip(fm.predict_proba(X_tr), 1e-6, 1 - 1e-6)
+    assert (np.abs(out.risk_prob.loc[ids_tr].to_numpy() - in_sample) > 1e-6).any()
+    assert len(np.unique(oof_folds(y_tr, pd.Series(np.arange(len(y_tr))), 5))) == 5
+
+
+def test_val_test_scores_from_train_model(fitted, splits, tmp_path):
+    fm = fitted["logistic_regression"]
+    out = write_risk_scores(fm, splits, tmp_path / "risk.csv").set_index("account_id")
+    X_te, _, ids_te = splits["test"]
+    assert np.allclose(out.risk_prob.loc[ids_te].to_numpy(), np.clip(fm.predict_proba(X_te), 1e-6, 1 - 1e-6))
+
+
+def test_oof_folds_keep_rings_together(splits):
+    _, y_tr, ids_tr = splits["train"]
+    groups = ring_groups(ids_tr, y_tr)
+    folds = pd.Series(oof_folds(y_tr, groups, 5), index=groups.index)
+    assert (folds.groupby(groups.to_numpy()).nunique() == 1).all()
+
+
+def test_save_load_roundtrip(fitted, splits, tmp_path):
+    subset = {k: fitted[k] for k in ("logistic_regression", "random_forest", "knn")}
+    save_models(subset, splits, tmp_path)
+    X_va = splits["val"][0]
+    for name, fm in subset.items():
+        bundle = load_model(name, tmp_path)
+        assert set(bundle) >= {"pipeline", "threshold", "feature_columns"}
+        assert bundle["threshold"] == fm.threshold
+        assert np.allclose(bundle["pipeline"].predict_proba(X_va)[:, 1], fm.predict_proba(X_va))
+    assert json.loads((tmp_path / "feature_columns.json").read_text()) == FEATURE_COLUMNS
+    best = (tmp_path / "best_model.txt").read_text().strip()
+    assert best == max(subset, key=lambda k: subset[k].val_metrics["pr_auc"])
+
+
+def test_explain_returns_top_k_known_features(fitted, splits, tmp_path):
+    save_models({k: fitted[k] for k in ("logistic_regression", "random_forest", "knn")}, splits, tmp_path)
+    row = splits["test"][0].iloc[0]
+    for name in ("logistic_regression", "random_forest", "knn"):
+        out = explain(load_model(name, tmp_path), row, top_k=5)
+        assert len(out) == 5
+        assert all(f in FEATURE_COLUMNS and np.isfinite(v) for f, v in out)
+        assert [abs(v) for _, v in out] == sorted((abs(v) for _, v in out), reverse=True)
+
+
+def test_contracts_loading_snippet_runs(capsys):
+    # The dashboard snippet in CONTRACTS.md §5 must run as written against the committed models.
+    import re
+    from pathlib import Path
+
+    if not Path("data/processed/features.parquet").exists():
+        pytest.skip("real features not built (python -m mulehunt.features)")
+    text = Path("CONTRACTS.md").read_text(encoding="utf-8")
+    section = text[text.index("## 5. Saved models"):text.index("## 6.")]
+    code = re.search(r"```python\n(.*?)```", section, re.S).group(1)
+    exec(compile(code, "CONTRACTS.md", "exec"), {})
+    lines = capsys.readouterr().out.strip().splitlines()
+    assert lines[0].startswith(Path("models/best_model.txt").read_text().strip() + ": risk ")
+    assert len(lines) == 6
