@@ -10,7 +10,11 @@ os.chdir(ROOT)
 
 import streamlit as st  # noqa: E402
 
-st.set_page_config(page_title="MuleHunt", page_icon=":mag:", layout="wide")
+st.set_page_config(page_title="MuleHunt", page_icon=":material/travel_explore:", layout="wide")
+
+from app import style  # noqa: E402
+
+style.setup()
 pages = [
     st.Page("views/1_transaction_check.py", title="Transaction check", icon=":material/fact_check:", default=True),
     st.Page("views/2_mule_trail.py", title="Mule trail explorer", icon=":material/account_tree:"),

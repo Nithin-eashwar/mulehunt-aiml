@@ -96,20 +96,23 @@ def ring_of(account, rings):
 
 
 def risk_colour(p):
+    """Calm green-grey at 0 to signal vermilion at 1."""
     if p is None:
-        return "#BBBBBB"
-    r = int(255 * min(1, max(0, p)))
-    return f"#{r:02x}{int(200 * (1 - p)):02x}50"
+        return "#D6D2C8"
+    p = min(1.0, max(0.0, p))
+    stops = [(0x7F, 0x9A, 0x8A), (0xE0, 0xA8, 0x5E), (0xC2, 0x41, 0x0C)]  # muted green, amber, vermilion
+    lo, hi, t = (stops[0], stops[1], p / 0.5) if p < 0.5 else (stops[1], stops[2], (p - 0.5) / 0.5)
+    return "#" + "".join(f"{round(a + (b - a) * t):02x}" for a, b in zip(lo, hi))
 
 
-TIER_COLOURS = {"victim": "#8C8C8C", "fraudster": "#C44E52", "mule_t1": "#DD8452", "mule_t2": "#CCB974",
-                "mule_t3": "#55A868", "cashout": "#4C72B0", None: "#EEEEEE"}
+from app.style import TIER as TIER_COLOURS  # noqa: E402
 
 
 def trail_html(graph, txn_id, path, risk, rings=None, reveal=False, threshold=0.5, height="480px") -> str:
     from pyvis.network import Network
     edges, context = trail_context(graph, txn_id, path)
-    net = Network(height=height, width="100%", directed=True, cdn_resources="in_line")
+    net = Network(height=height, width="100%", directed=True, cdn_resources="in_line", bgcolor="#FFFFFF",
+                  font_color="#1B2333")
     trail_nodes = {edges[0].sender} | {e.receiver for e in edges}
     for e in edges + context:
         for a in (e.sender, e.receiver):
@@ -125,12 +128,25 @@ def trail_html(graph, txn_id, path, risk, rings=None, reveal=False, threshold=0.
                 label += f"\n{tier or 'genuine'}"
                 if tier in MULE_TIERS and (p is None or p < threshold):
                     label += "\n(classifier missed)"
-            net.add_node(a, label=label, title=title, color=colour, size=22 if a in trail_nodes else 10)
+            net.add_node(a, label=label, title=title, color=colour, size=20 if a in trail_nodes else 8,
+                         font={"face": "IBM Plex Mono", "size": 12 if a in trail_nodes else 10,
+                               "color": "#1B2333" if a in trail_nodes else "#8A8F98"},
+                         borderWidth=0)
     for e in edges:
-        net.add_edge(e.sender, e.receiver, title=f"Rs {e.amount:,.0f}", label=f"Rs {e.amount:,.0f}", width=3)
+        net.add_edge(e.sender, e.receiver, title=f"Rs {e.amount:,.0f}", label=f"Rs {e.amount:,.0f}", width=2.5,
+                     color="#1B2333", font={"face": "IBM Plex Mono", "size": 11, "strokeWidth": 4,
+                                            "strokeColor": "#FFFFFF"})
     for e in context:
-        net.add_edge(e.sender, e.receiver, color="#CCCCCC", width=1)
-    return net.generate_html()
+        net.add_edge(e.sender, e.receiver, color="#E2DED5", width=1)
+    net.set_options('{"physics": {"barnesHut": {"springLength": 130}, "stabilization": {"iterations": 200}},'
+                    ' "edges": {"arrows": {"to": {"scaleFactor": 0.6}}, "smooth": false},'
+                    ' "interaction": {"hover": true}}')
+    page = net.generate_html()
+    fonts = ("<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500"
+             "&family=IBM+Plex+Sans:wght@400;600&display=swap'><style>body{margin:0}#mynetwork{border:0!important;"
+             "border-radius:12px}div.vis-tooltip{font-family:'IBM Plex Mono',monospace;font-size:12px;"
+             "background:#1B2333;color:#F7F5F0;border:0;border-radius:6px;padding:6px 8px}</style>")
+    return page.replace("</head>", fonts + "</head>", 1)
 
 
 def trail_metrics(result, cost_fn=None) -> pd.DataFrame:
