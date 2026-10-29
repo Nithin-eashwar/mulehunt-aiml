@@ -1,0 +1,13 @@
+by,value,messages
+scam_type,genuine,8
+scam_type,fake_kyc,5
+scam_type,digital_arrest,5
+scam_type,job_task,5
+scam_type,loan_app,5
+scam_type,fake_investment,5
+scam_type,other_scam,3
+language,english,22
+language,hinglish,14
+channel,sms,16
+channel,whatsapp,16
+channel,other,4

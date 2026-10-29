@@ -1,0 +1,37 @@
+msg_id,text,label,scam_type,language,channel,source
+SYN0001,"Dear Customer, your SBI KYC has expired and your account will be blocked today. Update PAN at <URL> immediately.",scam,fake_kyc,english,sms,self
+SYN0002,Your bank a/c will be suspended in 24 hrs due to incomplete KYC. Call <PHONE> to verify Aadhaar.,scam,fake_kyc,english,sms,self
+SYN0003,"Aapka KYC pending hai, aaj raat tak update nahi kiya to account band ho jayega. Link: <URL>",scam,fake_kyc,hinglish,whatsapp,self
+SYN0004,"Priy grahak, apka PAN card link nahi hai. Turant <URL> par update karein warna khata block.",scam,fake_kyc,hinglish,sms,self
+SYN0005,Electricity connection will be disconnected tonight 9.30 pm as KYC not updated. Contact officer <PHONE>.,scam,fake_kyc,english,sms,self
+SYN0006,"This is CBI cyber cell. A parcel in your name contains drugs. You are under digital arrest, stay on video call.",scam,digital_arrest,english,whatsapp,self
+SYN0007,"Mumbai police se baat kar rahe hain, aapke Aadhaar se money laundering hua hai. Case band karne ke liye Rs 2,00,000 transfer karein.",scam,digital_arrest,hinglish,other,self
+SYN0008,"Customs department: illegal items found in courier booked with your ID. Do not disconnect, verification fee Rs 95,000.",scam,digital_arrest,english,other,self
+SYN0009,Court notice: arrest warrant issued against you. Join video call with officer now and do not inform family.,scam,digital_arrest,english,whatsapp,self
+SYN0010,Apke number par FIR darj hui hai. Digital arrest se bachne ke liye RBI safe account me paisa bhejo.,scam,digital_arrest,hinglish,other,self
+SYN0011,"Part time job! Earn Rs 3,000 daily by liking YouTube videos. Contact HR on Telegram <URL>",scam,job_task,english,whatsapp,self
+SYN0012,"Ghar baithe kamao 5000 rupees roz. Bas hotel reviews dena hai. Pehle Rs 1,000 task deposit karo.",scam,job_task,hinglish,whatsapp,self
+SYN0013,"Congratulations, you are selected for an Amazon work from home role. Prepaid task Rs 500, return Rs 800 guaranteed.",scam,job_task,english,sms,self
+SYN0014,"Hello sir, part time kaam chahiye? Daily payment milega, task complete karke commission paao. Reply YES.",scam,job_task,hinglish,whatsapp,self
+SYN0015,"Your task wallet shows Rs 12,400 profit. Recharge Rs 10,000 to unlock withdrawal of all earnings.",scam,job_task,english,whatsapp,self
+SYN0016,"Instant loan approved Rs 50,000 without CIBIL. Download app <URL> and pay processing fee Rs 2,999.",scam,loan_app,english,sms,self
+SYN0017,"Loan chahiye? Sirf Aadhaar se 5 minute me 1 lakh. Processing charge Rs 1,500 pehle bhejein <UPI>.",scam,loan_app,hinglish,sms,self
+SYN0018,"Your loan EMI is overdue. Pay Rs 8,000 now or your morphed photos will be sent to all your contacts.",scam,loan_app,english,whatsapp,self
+SYN0019,"Tumne loan ka paisa nahi diya, tumhari photo contacts ko bhej denge. Abhi <UPI> pe payment karo.",scam,loan_app,hinglish,whatsapp,self
+SYN0020,"Pre-approved personal loan of Rs 3,00,000 at 0% interest. Pay insurance charge Rs 4,999 to disburse.",scam,loan_app,english,sms,self
+SYN0021,"Join our VIP stock tips group, 300% return in 30 days guaranteed. Invest via app <URL>",scam,fake_investment,english,whatsapp,self
+SYN0022,"Crypto me paisa lagao, double in 15 din pakka. Pehla profit Rs 2,000 maine bhej diya, ab bada invest karo.",scam,fake_investment,hinglish,whatsapp,self
+SYN0023,"IPO allotment for premium members only. Deposit Rs 1,00,000 in institutional account to get shares at discount.",scam,fake_investment,english,other,self
+SYN0024,Trading mentor here. Our members made Rs 5 lakh last week. Transfer to the fund manager <UPI> to start.,scam,fake_investment,english,whatsapp,self
+SYN0025,"Gold scheme me invest karo, har mahine 20% return. Limited slots, abhi Rs 50,000 bhejo.",scam,fake_investment,hinglish,whatsapp,self
+SYN0026,"You have won Rs 25,00,000 in KBC lucky draw. Pay tax Rs 12,500 to claim your prize. Call <PHONE>",scam,other_scam,english,sms,self
+SYN0027,"Aapka bijli bill bakaya hai, aaj 9 baje connection kat jayega. Turant officer se sampark karein <PHONE>.",scam,other_scam,hinglish,sms,self
+SYN0028,Your FASTag is blocked. Recharge through <URL> to avoid penalty.,scam,other_scam,english,sms,self
+SYN0029,"Rs 1,250 debited from your a/c <ACCOUNT> for UPI payment to Big Bazaar. Not you? Call the number on your card.",genuine,genuine,english,sms,self
+SYN0030,<OTP> is your OTP for login. Do not share it with anyone. Bank never asks for OTP.,genuine,genuine,english,sms,self
+SYN0031,"Bhai kal ka dinner ka paisa Rs 450 bhej diya hai, check kar lena.",genuine,genuine,hinglish,whatsapp,self
+SYN0032,"Your electricity bill of Rs 1,830 for October is generated. Due date 15 Nov. Pay via official app.",genuine,genuine,english,sms,self
+SYN0033,"Hi, the meeting is moved to 4 pm tomorrow. Please bring the project report.",genuine,genuine,english,whatsapp,self
+SYN0034,Aapka order deliver ho gaya hai. Rate karein apna anubhav.,genuine,genuine,hinglish,sms,self
+SYN0035,"Salary of Rs 32,000 credited to your account. Available balance updated.",genuine,genuine,english,sms,self
+SYN0036,Mummy ne bola ghar aate waqt doodh le aana. Paise main de dungi.,genuine,genuine,hinglish,whatsapp,self
