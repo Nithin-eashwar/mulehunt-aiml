@@ -18,6 +18,8 @@
 
 **Why Naive Bayes on character n-grams?** Hinglish has no fixed spelling ("aapka/apka/apke"); char n-grams share pieces, so the variants support each other. NB has few parameters, which suits a few hundred messages; independence is false but mostly affects calibration, not ranking.
 
+**Where does the scam-message data come from?** Three labelled parts: the real UCI SMS Spam Collection (CC BY 4.0), 56 Indian scam messages we wrote from 26 cited advisories and news reports, and 560 synthetic messages from seeded templates. Nothing was collected from people, and the report says so. The headline is a transfer test: train on synthetic + UCI, test on the reported set it never saw. It catches 54 of 56, an upper bound because one person wrote both sets.
+
 **Why is accuracy misleading?** Only 1.2% of accounts are fraud, so "nobody is fraud" scores 98.8% accuracy. We use PR-AUC, recall and cost (C_FN · FN + FP) instead.
 
 **Why is the simulator credible?** Its parameters are sourced from NPCI/RBI (daily volumes, P2P/P2M mix, amount distribution) and tagged sourced/assumed in `config.yaml`. Its patterns (fan-in, fan-out, scatter-gather, cycles) are checked against the IBM AML benchmark. It includes hard cases: sleeper mules, evasive splitting, benign money collectors, shared shop phones. It also makes the data reproducible byte for byte. It is still simulated, and we say so everywhere.

@@ -2,7 +2,7 @@
 
 Detecting and tracing UPI money-mule networks: a course project for *IS353IA Artificial Intelligence and Machine Learning* (RVCE, Semester V).
 
-> Real transaction data is legally unavailable; we built a simulator calibrated to NPCI/RBI statistics and validated against the IBM AML benchmark. The scam-message dataset is the one fully real dataset.
+> Real transaction data is legally unavailable; we built a simulator calibrated to NPCI/RBI statistics and validated against the IBM AML benchmark. The scam-message corpus combines the real UCI SMS Spam Collection with Indian messages we wrote from cited reports and from templates; no message was collected from a person.
 
 ## Repo map
 
@@ -54,7 +54,7 @@ streamlit run app/streamlit_app.py     # the dashboard
 | Alpha-beta node savings (R = 3) | 691 vs 18,631 nodes (96.3% fewer), same value | `reports/b_tables/game_nodes.csv` |
 | Best feature subset (local search) | 11 of 20 features, val PR-AUC 0.778 vs 0.756; test PR-AUC 0.816 | `reports/b_tables/local_fs_*.csv` |
 | Cost-tuned threshold (C_FN = 50), test | cost 617 vs 2,105 at the F1 threshold; recall 0.95 vs 0.75 | `reports/b_tables/local_threshold_test.csv` |
-| Scam-message NB macro-F1 | pending real data | `reports/b_07_scam_text.md` |
+| Scam-message classifier, transfer test | catches 54 / 56 cited Indian scam messages it never saw; 0.4% false alarms on genuine SMS; NB macro-F1 0.976 (words + chars) | `reports/b_tables/text_transfer_*.csv` |
 
 ## Syllabus mapping
 
@@ -75,7 +75,7 @@ streamlit run app/streamlit_app.py     # the dashboard
 
 - Transactions are simulated; results show what the methods *can* do on realistic structure, not measured performance on a bank's data.
 - No Kaggle "UPI" or PaySim data, and no real person's UPI statement, is used.
-- Scam messages are collected with consent, scrubbed automatically and reviewed by hand; the raw export never enters git.
+- Scam messages: UCI SMS Spam Collection (Almeida & Hidalgo 2011, CC BY 4.0) plus messages we wrote, each labelled by source; reported messages cite their source URL. All are anonymised.
 - Search assumes the bank knows the cash-out accounts (B-D1).
 - Every flag is a prompt for human review, never an automatic freeze.
 
