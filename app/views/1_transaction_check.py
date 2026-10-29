@@ -8,16 +8,17 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 os.chdir(ROOT)
 
-import pandas as pd  # noqa: E402
+import html  # noqa: E402
+
 import streamlit as st  # noqa: E402
 
-from app import data  # noqa: E402
+from app import data, style  # noqa: E402
 from app.logic import score_account, transaction_check  # noqa: E402
 from mulehunt.features import FEATURE_DESCRIPTIONS  # noqa: E402
 
-st.title("Transaction check")
-st.write("The fraud models score **accounts**, not single payments, so a payment gets the higher risk of its "
-         "sender and receiver, with the top reasons for that account.")
+style.header("Transaction check",
+             "The models score accounts, not single payments. A payment takes the higher risk of its sender and "
+             "receiver; the bars show where each sits against the model's flag threshold.")
 data.data_banner()
 g, kind = data.graph()
 risk, risk_src = data.risk()
@@ -25,53 +26,62 @@ bundle = data.bundle()
 feats = data.features()
 threshold = float(bundle["threshold"]) if bundle and kind == "real" else 0.5
 if feats is None:
-    st.warning("`data/processed/features.parquet` is missing, so only risk scores are shown. "
-               "Regenerate it with `python -m mulehunt.features`.")
+    st.warning("Feature table missing, so only risk scores are shown. Rebuild it with `python -m mulehunt.features`.")
 if kind == "toy":
     feats = None  # the saved models were trained on the real feature table
 
 demo = data.demo_txns()
-mode = st.radio("Look up", ["Demo transaction", "Transaction id", "Account id"], horizontal=True)
-if mode == "Demo transaction":
-    choice = st.selectbox("Demo transaction", demo.txn_id + "  -  " + demo.kind)
-    txn, account = choice.split()[0], None
-elif mode == "Transaction id":
-    txn, account = st.text_input("txn_id", value=str(demo.txn_id.iloc[0])).strip(), None
+c1, c2 = st.columns([1.15, 2], gap="medium")
+mode = c1.segmented_control("Look up", ["Demo payment", "Transaction id", "Account id"], default="Demo payment")
+if mode == "Transaction id":
+    txn, account = c2.text_input("Transaction id", value=str(demo.txn_id.iloc[0])).strip(), None
+elif mode == "Account id":
+    txn, account = None, c2.text_input("Account id", value=g.ids[0]).strip()
 else:
-    txn, account = None, st.text_input("account_id", value=g.ids[0]).strip()
+    choice = c2.selectbox("Demo payment", demo.txn_id + "  ·  " + demo.kind)
+    txn, account = choice.split()[0], None
 
 
-def show(score, heading):
-    st.subheader(heading)
-    p = score["risk_prob"]
-    c1, c2 = st.columns(2)
-    c1.metric("risk_prob", "n/a" if p is None else f"{p:.3f}")
-    c2.metric(f"flagged at {threshold:.3f}", "YES" if score["flagged"] else "no")
-    if score["explain"]:
-        ex = pd.DataFrame(score["explain"], columns=["feature", "effect"])
-        ex["meaning"] = ex.feature.map(FEATURE_DESCRIPTIONS)
-        st.bar_chart(ex.set_index("feature").effect, horizontal=True)
-        st.dataframe(ex, hide_index=True, use_container_width=True)
+def reasons(score, title):
+    st.markdown(f"### {title}")
+    if not score["explain"]:
+        st.caption("No feature row for this account, so no reasons to show.")
+        return
+    st.markdown("<div class='mh-panel'>" + style.reasons(score["explain"], FEATURE_DESCRIPTIONS) + "</div>",
+                unsafe_allow_html=True)
 
 
 try:
     if txn:
         res = transaction_check(g, txn, risk, threshold, feats, bundle)
-        e = res["edge"]
-        st.write(f"**{e.txn_id}**: {e.sender} -> {e.receiver}, Rs {e.amount:,.2f}")
-        d = res["decision"]
-        st.metric("Payment risk (higher of the two accounts)",
-                  "n/a" if d["risk_prob"] is None else f"{d['risk_prob']:.3f}", help=f"from {risk_src}")
-        left, right = st.columns(2)
+        e, d = res["edge"], res["decision"]
+        p = d["risk_prob"]
+        flagged = p is not None and p >= threshold
+        verdict = "Send to review" if flagged else "Below threshold"
+        st.markdown(
+            f"<div class='mh-panel'><div class='mh-verdict'><span class='v' style='color:"
+            f"{style.SIGNAL if flagged else style.CALM}'>{verdict}</span>"
+            f"<span class='n'>payment risk {'n/a' if p is None else f'{p:.3f}'} · threshold {threshold:.3f}</span></div>"
+            f"<p style='margin:.4rem 0 1rem;color:{style.MUTED}'><span class='mh-id'>{html.escape(e.txn_id)}</span> · "
+            f"<span class='mh-id'>{e.sender}</span> → <span class='mh-id'>{e.receiver}</span> · "
+            f"<span class='mh-id'>Rs {e.amount:,.2f}</span></p>"
+            + style.gauge(f"Sender {e.sender}", res["sender"]["risk_prob"], threshold)
+            + style.gauge(f"Receiver {e.receiver}", res["receiver"]["risk_prob"], threshold)
+            + f"<p style='font-size:.78rem;color:{style.MUTED};margin:0'>Scores from {risk_src}. "
+              "The dark tick marks the threshold.</p></div>", unsafe_allow_html=True)
+        left, right = st.columns(2, gap="large")
         with left:
-            show(res["sender"], f"Sender {e.sender}")
+            reasons(res["sender"], "Why the sender scores this way")
         with right:
-            show(res["receiver"], f"Receiver {e.receiver}")
+            reasons(res["receiver"], "Why the receiver scores this way")
     elif account:
         if account not in g.index:
-            st.error(f"Unknown account {account}")
+            st.error(f"No account {account} in this dataset. Ids look like ACC000123.")
         else:
-            show(score_account(account, risk, threshold, feats, bundle), f"Account {account}")
+            s = score_account(account, risk, threshold, feats, bundle)
+            st.markdown("<div class='mh-panel'>" + style.gauge(f"Account {account}", s["risk_prob"], threshold)
+                        + "</div>", unsafe_allow_html=True)
+            reasons(s, "Top reasons")
 except KeyError:
-    st.error(f"Unknown transaction {txn}")
+    st.error(f"No transaction {txn} in this dataset. Ids look like TXN00590803.")
 data.footer()
