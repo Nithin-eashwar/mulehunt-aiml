@@ -68,15 +68,23 @@ def test_load_risk_scores_missing_file(tmp_path):
 
 @pytest.mark.skipif(not REAL.exists(), reason="real data not generated")
 def test_real_graph_load():
-    import resource
-    t0 = time.perf_counter()
-    g, kind = TxGraph.load()
-    elapsed = time.perf_counter() - t0
-    rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-    peak = rss if sys.platform == "darwin" else rss * 1024  # bytes on macOS, KiB on Linux
-    assert kind == "real" and g.n_edges == 1_803_905
-    out = Path("reports/b_tables")
-    out.mkdir(parents=True, exist_ok=True)
-    pd.DataFrame({"edges": [g.n_edges], "accounts": [g.n_accounts], "load_s": [round(elapsed, 2)],
-                  "peak_rss_mb_process": [round(peak / 2**20, 1)]}).to_csv(out / "graph_load_timing.csv", index=False)
-    assert elapsed < 60 and peak < 2**30
+    """Load in a fresh process so the memory figure is the graph's, not the whole test run's."""
+    import json
+    import subprocess
+    code = ("import json, resource, sys, time\n"
+            "t0 = time.perf_counter()\n"
+            "from mulehunt.graph import TxGraph\n"
+            "g, kind = TxGraph.load()\n"
+            "rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss\n"
+            "rss = rss if sys.platform == 'darwin' else rss * 1024\n"
+            "print(json.dumps({'kind': kind, 'edges': g.n_edges, 'accounts': g.n_accounts,"
+            " 'load_s': time.perf_counter() - t0, 'rss': rss}))")
+    out = json.loads(subprocess.run([sys.executable, "-c", code], capture_output=True, text=True,
+                                    check=True).stdout.strip().splitlines()[-1])
+    assert out["kind"] == "real" and out["edges"] == 1_803_905
+    path = Path("reports/b_tables")
+    path.mkdir(parents=True, exist_ok=True)
+    pd.DataFrame({"edges": [out["edges"]], "accounts": [out["accounts"]], "load_s": [round(out["load_s"], 2)],
+                  "peak_rss_mb_process": [round(out["rss"] / 2**20, 1)]}).to_csv(path / "graph_load_timing.csv",
+                                                                                index=False)
+    assert out["load_s"] < 60 and out["rss"] < 2**30
