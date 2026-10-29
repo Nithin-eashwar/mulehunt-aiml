@@ -1,0 +1,13 @@
+scenario,trails,mules,trail_mules,rf_flagged,trail_only,either,genuine_on_trails,rf_recall,trail_recall,combined_recall
+digital_arrest,BFS trail per start,88,66,65,13,78,0,0.739,0.75,0.886
+fake_investment,BFS trail per start,95,94,83,12,95,0,0.874,0.989,1.0
+fake_kyc,BFS trail per start,92,39,32,28,60,0,0.348,0.424,0.652
+job_task,BFS trail per start,95,93,54,40,94,0,0.568,0.979,0.989
+loan_app,BFS trail per start,85,85,75,10,85,0,0.882,1.0,1.0
+all,BFS trail per start,455,377,309,103,412,0,0.679,0.829,0.905
+digital_arrest,all trails <= 6 hops,88,88,65,23,88,0,0.739,1.0,1.0
+fake_investment,all trails <= 6 hops,95,95,83,12,95,1,0.874,1.0,1.0
+fake_kyc,all trails <= 6 hops,92,92,32,60,92,0,0.348,1.0,1.0
+job_task,all trails <= 6 hops,95,95,54,41,95,0,0.568,1.0,1.0
+loan_app,all trails <= 6 hops,85,85,75,10,85,0,0.882,1.0,1.0
+all,all trails <= 6 hops,455,455,309,146,455,1,0.679,1.0,1.0

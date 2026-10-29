@@ -1,0 +1,4 @@
+algorithm,mean_expanded,total_expanded,cost_agrees_with_ucs,expanded_vs_ucs
+ucs,10.0421,22876,1.0,1.0
+astar_h1,10.0421,22876,1.0,1.0
+astar_h2,10.0421,22876,1.0,1.0
