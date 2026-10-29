@@ -1,0 +1,10 @@
+R,method,nodes,cutoffs,value,first_rule
+2,minimax,775,0,68181.11,"(25000, True)"
+2,alpha-beta,287,61,68181.11,"(25000, True)"
+2,alpha-beta + ordering,129,36,68181.11,"(25000, True)"
+3,minimax,18631,0,114271.67,"(25000, True)"
+3,alpha-beta,5675,797,114271.67,"(25000, True)"
+3,alpha-beta + ordering,691,190,114271.67,"(25000, True)"
+4,minimax,447175,0,119427.78,"(25000, True)"
+4,alpha-beta,48996,12469,119427.78,"(25000, True)"
+4,alpha-beta + ordering,5606,1160,119427.78,"(25000, True)"

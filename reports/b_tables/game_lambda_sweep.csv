@@ -1,0 +1,5 @@
+lambda,game_value,detector_rules_by_round,uncaught,caught
+0,10125.0,10k/off 10k/on 10k/on,37500.0,162500.0
+25,41509.0,10k/off 10k/on 10k/on,37500.0,162500.0
+100,114272.0,25k/on 25k/on 25k/on,112500.0,87500.0
+400,157474.0,25k/on 50k/off 50k/off,137500.0,62500.0

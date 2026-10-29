@@ -1,0 +1,7 @@
+threshold,velocity,alerts_per_day,cost_per_round_at_lambda
+10000,False,370.12,37012.0
+10000,True,442.61,44261.0
+25000,False,32.17,3217.0
+25000,True,104.66,10466.0
+50000,False,3.73,373.0
+50000,True,76.22,7622.0
