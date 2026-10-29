@@ -1,0 +1,5 @@
+algorithm,mean_best_fitness,max_best_fitness,mean_val_pr_auc,mean_features,mean_evals_to_99pct
+hill_climbing,0.7519,0.75645,0.7739,11.0,106.0
+simulated_annealing,0.75624,0.75645,0.77824,11.0,79.33333
+local_beam,0.75336,0.75582,0.77602,11.33333,118.33333
+genetic_algorithm,0.7518,0.75359,0.77646,12.33333,136.33333

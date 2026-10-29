@@ -1,0 +1,8 @@
+scam_type,messages,flagged,recall
+digital_arrest,10.0,9.0,0.9
+fake_investment,6.0,5.0,0.833
+fake_kyc,15.0,15.0,1.0
+job_task,9.0,9.0,1.0
+loan_app,6.0,6.0,1.0
+other_scam,10.0,10.0,1.0
+all,56.0,54.0,0.964

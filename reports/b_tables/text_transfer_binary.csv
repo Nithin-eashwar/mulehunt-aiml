@@ -1,0 +1,5 @@
+model,best_params,cv_macro_f1,holdout_macro_f1
+nb_word,{'model__alpha': 0.3},0.975,0.966
+nb_char,{'model__alpha': 0.1},0.963,0.974
+nb_word_char,{'model__alpha': 0.1},0.969,0.976
+lr_tfidf,{'model__C': 3.0},0.985,0.978

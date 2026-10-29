@@ -1,0 +1,13 @@
+C_FN,algorithm,mean_threshold,mean_val_cost,worst_gap_vs_exact,exact_threshold,exact_val_cost
+10,hill_climbing,0.2272,269.6667,0.0112,0.2104,268.0
+10,simulated_annealing,0.2098,269.0,0.0037,0.2104,268.0
+10,local_beam,0.2098,269.0,0.0037,0.2104,268.0
+10,genetic_algorithm,0.2275,269.6667,0.0075,0.2104,268.0
+50,hill_climbing,0.1218,845.6667,0.0048,0.1231,842.0
+50,simulated_annealing,0.1226,843.6667,0.0036,0.1231,842.0
+50,local_beam,0.1226,844.0,0.0036,0.1231,842.0
+50,genetic_algorithm,0.1228,843.0,0.0012,0.1231,842.0
+100,hill_climbing,0.1218,1395.6667,0.0029,0.1231,1392.0
+100,simulated_annealing,0.1224,1394.3333,0.0022,0.1231,1392.0
+100,local_beam,0.1226,1393.6667,0.0022,0.1231,1392.0
+100,genetic_algorithm,0.1204,1398.6667,0.0108,0.1231,1392.0

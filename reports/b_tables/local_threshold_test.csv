@@ -1,0 +1,4 @@
+threshold_source,threshold,test_cost,FN,FP,genuine_flagged_share,precision,recall
+SA threshold (headline),0.1228,617,8,217,0.0174,0.4274,0.9529
+exact val optimum,0.1231,617,8,217,0.0174,0.4274,0.9529
+Person A's F1 threshold,0.4844,2105,42,5,0.0004,0.9624,0.7529

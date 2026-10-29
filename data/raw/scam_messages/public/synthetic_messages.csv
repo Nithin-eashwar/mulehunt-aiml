@@ -1,0 +1,561 @@
+ref_id,text,scam_type,language,channel
+GEN0001,"प्रिय ग्राहक, आपका Canara Bank खाता KYC अपडेट न होने के कारण today बंद हो जाएगा। तुरंत <URL> पर अपडेट करें।",fake_kyc,hindi,sms
+GEN0002,Axis Bank alert: KYC pending. Download SBI_KYC.apk and verify to keep your account active.,fake_kyc,english,whatsapp
+GEN0003,"Dear customer, your SBI account KYC has expired. Account will be blocked 10 pm. Update PAN at <URL>",fake_kyc,english,sms
+GEN0004,"Bijli connection by midnight kat jayega, bill update nahi hua. electricity board officer se baat karein <PHONE>",fake_kyc,hinglish,sms
+GEN0005,electricity board: your electricity KYC is pending. Disconnection by midnight. Update via <URL>,fake_kyc,english,sms
+GEN0006,"Bijli connection today kat jayega, bill update nahi hua. electricity board officer se baat karein <PHONE>",fake_kyc,hinglish,sms
+GEN0007,"Priya grahak, aapka IDFC First KYC expire ho gaya hai. 10 pm account block hoga. Turant <URL> par update karein.",fake_kyc,hinglish,sms
+GEN0008,"Bijli connection 9:30 pm kat jayega, bill update nahi hua. power department officer se baat karein <PHONE>",fake_kyc,hinglish,sms
+GEN0009,"Dear consumer, power will be disconnected today as your bill is not updated. Contact Adani Electricity officer <PHONE>",fake_kyc,english,sms
+GEN0010,"Dear customer, your Bank of Baroda account KYC has expired. Account will be blocked within 1 hour. Update PAN at <URL>",fake_kyc,english,sms
+GEN0011,"प्रिय ग्राहक, आपका HDFC Bank खाता KYC अपडेट न होने के कारण 9:30 pm बंद हो जाएगा। तुरंत <URL> पर अपडेट करें।",fake_kyc,hindi,sms
+GEN0012,"प्रिय ग्राहक, आपका SBI खाता KYC अपडेट न होने के कारण today बंद हो जाएगा। तुरंत <URL> पर अपडेट करें।",fake_kyc,hindi,sms
+GEN0013,"Dear customer, your ICICI Bank account KYC has expired. Account will be blocked tonight. Update PAN at <URL>",fake_kyc,english,sms
+GEN0014,"Dear consumer, power will be disconnected 9:30 pm as your bill is not updated. Contact TPDDL officer <PHONE>",fake_kyc,english,sms
+GEN0015,"Dear customer, your HDFC Bank account KYC has expired. Account will be blocked 9:30 pm. Update PAN at <URL>",fake_kyc,english,sms
+GEN0016,Aapka Vi SIM 24 ghante mein band ho jayega. KYC ke liye <PHONE> par call karein.,fake_kyc,hinglish,whatsapp
+GEN0017,Canara Bank alert: KYC pending. Download Bank of Baroda_KYC.apk and verify to keep your account active.,fake_kyc,english,whatsapp
+GEN0018,"Dear consumer, power will be disconnected by midnight as your bill is not updated. Contact TPDDL officer <PHONE>",fake_kyc,english,sms
+GEN0019,"Bijli connection tonight kat jayega, bill update nahi hua. Adani Electricity officer se baat karein <PHONE>",fake_kyc,hinglish,sms
+GEN0020,Aapka BSNL SIM 24 ghante mein band ho jayega. KYC ke liye <PHONE> par call karein.,fake_kyc,hinglish,whatsapp
+GEN0021,"प्रिय ग्राहक, आपका Canara Bank खाता KYC अपडेट न होने के कारण within 1 hour बंद हो जाएगा। तुरंत <URL> पर अपडेट करें।",fake_kyc,hindi,sms
+GEN0022,"Dear consumer, power will be disconnected 9:30 pm as your bill is not updated. Contact Adani Electricity officer <PHONE>",fake_kyc,english,sms
+GEN0023,"Priya grahak, aapka Bank of Baroda KYC expire ho gaya hai. by midnight account block hoga. Turant <URL> par update karein.",fake_kyc,hinglish,sms
+GEN0024,TPDDL: your electricity KYC is pending. Disconnection 10 pm. Update via <URL>,fake_kyc,english,sms
+GEN0025,"Dear consumer, power will be disconnected within 1 hour as your bill is not updated. Contact TPDDL officer <PHONE>",fake_kyc,english,sms
+GEN0026,"प्रिय ग्राहक, आपका SBI खाता KYC अपडेट न होने के कारण by midnight बंद हो जाएगा। तुरंत <URL> पर अपडेट करें।",fake_kyc,hindi,sms
+GEN0027,TPDDL: your electricity KYC is pending. Disconnection within 1 hour. Update via <URL>,fake_kyc,english,sms
+GEN0028,"Priya grahak, aapka ICICI Bank KYC expire ho gaya hai. 10 pm account block hoga. Turant <URL> par update karein.",fake_kyc,hinglish,sms
+GEN0029,"Dear BSNL user, your SIM KYC is incomplete. SIM will be blocked in 12 hours. Call <PHONE>",fake_kyc,english,sms
+GEN0030,Bank of Baroda alert: KYC pending. Download Canara Bank_KYC.apk and verify to keep your account active.,fake_kyc,english,whatsapp
+GEN0031,"Dear customer, your SBI account KYC has expired. Account will be blocked tonight. Update PAN at <URL>",fake_kyc,english,sms
+GEN0032,"प्रिय ग्राहक, आपका PNB खाता KYC अपडेट न होने के कारण within 1 hour बंद हो जाएगा। तुरंत <URL> पर अपडेट करें।",fake_kyc,hindi,sms
+GEN0033,"Dear Jio user, your SIM KYC is incomplete. SIM will be blocked in 48 hours. Call <PHONE>",fake_kyc,english,sms
+GEN0034,"प्रिय ग्राहक, आपका SBI खाता KYC अपडेट न होने के कारण 9:30 pm बंद हो जाएगा। तुरंत <URL> पर अपडेट करें।",fake_kyc,hindi,sms
+GEN0035,Aapka Airtel SIM 24 ghante mein band ho jayega. KYC ke liye <PHONE> par call karein.,fake_kyc,hinglish,whatsapp
+GEN0036,Union Bank: Your NetBanking access will be suspended in 12 hrs. Complete KYC now <URL>,fake_kyc,english,sms
+GEN0037,"प्रिय ग्राहक, आपका Bank of Baroda खाता KYC अपडेट न होने के कारण within 1 hour बंद हो जाएगा। तुरंत <URL> पर अपडेट करें।",fake_kyc,hindi,sms
+GEN0038,Bank of Baroda alert: KYC pending. Download SBI_KYC.apk and verify to keep your account active.,fake_kyc,english,whatsapp
+GEN0039,"Priya grahak, aapka PNB KYC expire ho gaya hai. by midnight account block hoga. Turant <URL> par update karein.",fake_kyc,hinglish,sms
+GEN0040,IDFC First alert: KYC pending. Download SBI_KYC.apk and verify to keep your account active.,fake_kyc,english,whatsapp
+GEN0041,"Priya grahak, aapka Kotak KYC expire ho gaya hai. by midnight account block hoga. Turant <URL> par update karein.",fake_kyc,hinglish,sms
+GEN0042,"Dear BSNL user, your SIM KYC is incomplete. SIM will be blocked in 24 hours. Call <PHONE>",fake_kyc,english,sms
+GEN0043,"प्रिय ग्राहक, आपका HDFC Bank खाता KYC अपडेट न होने के कारण within 1 hour बंद हो जाएगा। तुरंत <URL> पर अपडेट करें।",fake_kyc,hindi,sms
+GEN0044,आपका बिजली कनेक्शन 9:30 pm काट दिया जाएगा। तुरंत अधिकारी से संपर्क करें <PHONE>,fake_kyc,hindi,sms
+GEN0045,"Dear consumer, power will be disconnected 9:30 pm as your bill is not updated. Contact electricity board officer <PHONE>",fake_kyc,english,sms
+GEN0046,electricity board: your electricity KYC is pending. Disconnection within 1 hour. Update via <URL>,fake_kyc,english,sms
+GEN0047,आपका बिजली कनेक्शन tonight काट दिया जाएगा। तुरंत अधिकारी से संपर्क करें <PHONE>,fake_kyc,hindi,sms
+GEN0048,PNB alert: KYC pending. Download SBI_KYC.apk and verify to keep your account active.,fake_kyc,english,whatsapp
+GEN0049,Adani Electricity: your electricity KYC is pending. Disconnection within 1 hour. Update via <URL>,fake_kyc,english,sms
+GEN0050,"Dear consumer, power will be disconnected tonight as your bill is not updated. Contact TPDDL officer <PHONE>",fake_kyc,english,sms
+GEN0051,BESCOM: your electricity KYC is pending. Disconnection within 1 hour. Update via <URL>,fake_kyc,english,sms
+GEN0052,"Dear customer, your PNB account KYC has expired. Account will be blocked 10 pm. Update PAN at <URL>",fake_kyc,english,sms
+GEN0053,"Bijli connection within 1 hour kat jayega, bill update nahi hua. power department officer se baat karein <PHONE>",fake_kyc,hinglish,sms
+GEN0054,आपका बिजली कनेक्शन by midnight काट दिया जाएगा। तुरंत अधिकारी से संपर्क करें <PHONE>,fake_kyc,hindi,sms
+GEN0055,HDFC Bank alert: KYC pending. Download HDFC Bank_KYC.apk and verify to keep your account active.,fake_kyc,english,whatsapp
+GEN0056,"Bijli connection by midnight kat jayega, bill update nahi hua. Adani Electricity officer se baat karein <PHONE>",fake_kyc,hinglish,sms
+GEN0057,Aapka BSNL SIM 48 ghante mein band ho jayega. KYC ke liye <PHONE> par call karein.,fake_kyc,hinglish,whatsapp
+GEN0058,"Dear customer, your HDFC Bank account KYC has expired. Account will be blocked by midnight. Update PAN at <URL>",fake_kyc,english,sms
+GEN0059,"Dear customer, your IDFC First account KYC has expired. Account will be blocked within 1 hour. Update PAN at <URL>",fake_kyc,english,sms
+GEN0060,Kotak: Your NetBanking access will be suspended in 48 hrs. Complete KYC now <URL>,fake_kyc,english,sms
+GEN0061,"Arrest warrant issued against you by RBI. Pay Rs 2,00,000 security deposit to avoid arrest today.",digital_arrest,english,whatsapp
+GEN0062,आपके नाम से Thailand भेजे गए पार्सल में MDMA मिला है। Mumbai Police अधिकारी से बात करने के लिए 1 दबाएं।,digital_arrest,hindi,other
+GEN0063,You are under digital arrest by RBI. Stay on the call. Transfer your balance to the verification account for checking.,digital_arrest,english,other
+GEN0064,आपके नाम से Dubai भेजे गए पार्सल में foreign currency मिला है। Mumbai Police अधिकारी से बात करने के लिए 1 दबाएं।,digital_arrest,hindi,other
+GEN0065,You are under digital arrest by Customs. Stay on the call. Transfer your balance to the verification account for checking.,digital_arrest,english,other
+GEN0066,Money laundering case linked to your bank account. Cyber Crime Cell officer will call you on video. Keep it confidential.,digital_arrest,english,whatsapp
+GEN0067,Your mobile number will be disconnected in 48 hours due to illegal activity reported by Mumbai Police. Press 9.,digital_arrest,english,other
+GEN0068,Main CBI se bol raha hoon. Aapke Aadhaar se Dubai parcel gaya hai jisme illegal SIM cards mila hai. Call mat kaatna.,digital_arrest,hinglish,other
+GEN0069,ED notice: a case is registered against your Aadhaar. Join video call for statement. Do not tell anyone.,digital_arrest,english,whatsapp
+GEN0070,Money laundering case linked to your bank account. CBI officer will call you on video. Keep it confidential.,digital_arrest,english,whatsapp
+GEN0071,आपके खिलाफ गिरफ्तारी वारंट जारी हुआ है। वीडियो कॉल से जुड़ें और किसी को न बताएं।,digital_arrest,hindi,whatsapp
+GEN0072,"Aap digital arrest mein ho. Video call par bane raho aur Rs 2,00,000 RBI safe account mein bhejo.",digital_arrest,hinglish,whatsapp
+GEN0073,This is FedEx. A parcel in your name to Iran containing drugs has been seized. Press 1 to speak to the officer.,digital_arrest,english,other
+GEN0074,Money laundering case linked to your bank account. RBI officer will call you on video. Keep it confidential.,digital_arrest,english,whatsapp
+GEN0075,You are under digital arrest by CBI. Stay on the call. Transfer your balance to the verification account for checking.,digital_arrest,english,other
+GEN0076,Your mobile number will be disconnected in 24 hours due to illegal activity reported by TRAI. Press 9.,digital_arrest,english,other
+GEN0077,This is Blue Dart. A parcel in your name to Cambodia containing MDMA has been seized. Press 1 to speak to the officer.,digital_arrest,english,other
+GEN0078,Your mobile number will be disconnected in 48 hours due to illegal activity reported by TRAI. Press 9.,digital_arrest,english,other
+GEN0079,You are under digital arrest by Mumbai Police. Stay on the call. Transfer your balance to the verification account for checking.,digital_arrest,english,other
+GEN0080,CBI notice: a case is registered against your Aadhaar. Join video call for statement. Do not tell anyone.,digital_arrest,english,whatsapp
+GEN0081,आपके नाम से Dubai भेजे गए पार्सल में fake passports मिला है। ED अधिकारी से बात करने के लिए 1 दबाएं।,digital_arrest,hindi,other
+GEN0082,"Aap digital arrest mein ho. Video call par bane raho aur Rs 10,00,000 RBI safe account mein bhejo.",digital_arrest,hinglish,whatsapp
+GEN0083,This is Blue Dart. A parcel in your name to Thailand containing MDMA has been seized. Press 1 to speak to the officer.,digital_arrest,english,other
+GEN0084,Your mobile number will be disconnected in 12 hours due to illegal activity reported by Customs. Press 9.,digital_arrest,english,other
+GEN0085,आपके नाम से Iran भेजे गए पार्सल में illegal SIM cards मिला है। TRAI अधिकारी से बात करने के लिए 1 दबाएं।,digital_arrest,hindi,other
+GEN0086,Main Narcotics Control Bureau se bol raha hoon. Aapke Aadhaar se Taiwan parcel gaya hai jisme fake passports mila hai. Call mat kaatna.,digital_arrest,hinglish,other
+GEN0087,You are under digital arrest by ED. Stay on the call. Transfer your balance to the verification account for checking.,digital_arrest,english,other
+GEN0088,This is DHL. A parcel in your name to Dubai containing drugs has been seized. Press 1 to speak to the officer.,digital_arrest,english,other
+GEN0089,आपके नाम से Taiwan भेजे गए पार्सल में foreign currency मिला है। Customs अधिकारी से बात करने के लिए 1 दबाएं।,digital_arrest,hindi,other
+GEN0090,This is Blue Dart. A parcel in your name to Dubai containing illegal SIM cards has been seized. Press 1 to speak to the officer.,digital_arrest,english,other
+GEN0091,Narcotics Control Bureau notice: a case is registered against your Aadhaar. Join video call for statement. Do not tell anyone.,digital_arrest,english,whatsapp
+GEN0092,You are under digital arrest by Cyber Crime Cell. Stay on the call. Transfer your balance to the verification account for checking.,digital_arrest,english,other
+GEN0093,Money laundering case linked to your bank account. Narcotics Control Bureau officer will call you on video. Keep it confidential.,digital_arrest,english,whatsapp
+GEN0094,"Aap digital arrest mein ho. Video call par bane raho aur Rs 5,00,000 RBI safe account mein bhejo.",digital_arrest,hinglish,whatsapp
+GEN0095,"Aap digital arrest mein ho. Video call par bane raho aur Rs 1,50,000 RBI safe account mein bhejo.",digital_arrest,hinglish,whatsapp
+GEN0096,This is DHL. A parcel in your name to Thailand containing drugs has been seized. Press 1 to speak to the officer.,digital_arrest,english,other
+GEN0097,Your mobile number will be disconnected in 12 hours due to illegal activity reported by Narcotics Control Bureau. Press 9.,digital_arrest,english,other
+GEN0098,Your mobile number will be disconnected in 24 hours due to illegal activity reported by RBI. Press 9.,digital_arrest,english,other
+GEN0099,Money laundering case linked to your bank account. TRAI officer will call you on video. Keep it confidential.,digital_arrest,english,whatsapp
+GEN0100,Main RBI se bol raha hoon. Aapke Aadhaar se Taiwan parcel gaya hai jisme fake passports mila hai. Call mat kaatna.,digital_arrest,hinglish,other
+GEN0101,Main Narcotics Control Bureau se bol raha hoon. Aapke Aadhaar se Thailand parcel gaya hai jisme foreign currency mila hai. Call mat kaatna.,digital_arrest,hinglish,other
+GEN0102,This is FedEx. A parcel in your name to Cambodia containing foreign currency has been seized. Press 1 to speak to the officer.,digital_arrest,english,other
+GEN0103,You are under digital arrest by TRAI. Stay on the call. Transfer your balance to the verification account for checking.,digital_arrest,english,other
+GEN0104,आपके नाम से Cambodia भेजे गए पार्सल में fake passports मिला है। RBI अधिकारी से बात करने के लिए 1 दबाएं।,digital_arrest,hindi,other
+GEN0105,Main CBI se bol raha hoon. Aapke Aadhaar se Iran parcel gaya hai jisme foreign currency mila hai. Call mat kaatna.,digital_arrest,hinglish,other
+GEN0106,Cyber Crime Cell notice: a case is registered against your Aadhaar. Join video call for statement. Do not tell anyone.,digital_arrest,english,whatsapp
+GEN0107,"Arrest warrant issued against you by RBI. Pay Rs 10,00,000 security deposit to avoid arrest today.",digital_arrest,english,whatsapp
+GEN0108,Money laundering case linked to your bank account. ED officer will call you on video. Keep it confidential.,digital_arrest,english,whatsapp
+GEN0109,"Aap digital arrest mein ho. Video call par bane raho aur Rs 3,50,000 RBI safe account mein bhejo.",digital_arrest,hinglish,whatsapp
+GEN0110,"Arrest warrant issued against you by CBI. Pay Rs 3,50,000 security deposit to avoid arrest today.",digital_arrest,english,whatsapp
+GEN0111,This is Blue Dart. A parcel in your name to Thailand containing drugs has been seized. Press 1 to speak to the officer.,digital_arrest,english,other
+GEN0112,"Arrest warrant issued against you by TRAI. Pay Rs 1,50,000 security deposit to avoid arrest today.",digital_arrest,english,whatsapp
+GEN0113,"Arrest warrant issued against you by Cyber Crime Cell. Pay Rs 3,50,000 security deposit to avoid arrest today.",digital_arrest,english,whatsapp
+GEN0114,Main RBI se bol raha hoon. Aapke Aadhaar se Dubai parcel gaya hai jisme drugs mila hai. Call mat kaatna.,digital_arrest,hinglish,other
+GEN0115,This is Blue Dart. A parcel in your name to Thailand containing fake passports has been seized. Press 1 to speak to the officer.,digital_arrest,english,other
+GEN0116,"Arrest warrant issued against you by RBI. Pay Rs 1,50,000 security deposit to avoid arrest today.",digital_arrest,english,whatsapp
+GEN0117,"Arrest warrant issued against you by Customs. Pay Rs 10,00,000 security deposit to avoid arrest today.",digital_arrest,english,whatsapp
+GEN0118,आपके नाम से Thailand भेजे गए पार्सल में fake passports मिला है। Mumbai Police अधिकारी से बात करने के लिए 1 दबाएं।,digital_arrest,hindi,other
+GEN0119,TRAI notice: a case is registered against your Aadhaar. Join video call for statement. Do not tell anyone.,digital_arrest,english,whatsapp
+GEN0120,Main Cyber Crime Cell se bol raha hoon. Aapke Aadhaar se Dubai parcel gaya hai jisme fake passports mila hai. Call mat kaatna.,digital_arrest,hinglish,other
+GEN0121,"Part-time job from Amazon! Earn Rs 999 to Rs 49,000 per day by liking videos. No joining fee. Reply YES.",job_task,english,whatsapp
+GEN0122,"Task 4 complete! Recharge Rs 12,500 to unlock VIP tasks and withdraw your Rs 8,000 profit.",job_task,english,whatsapp
+GEN0123,"Sir premium task ke liye Rs 8,000 deposit karo, 50% commission milega aaj hi.",job_task,hinglish,whatsapp
+GEN0124,"Sir premium task ke liye Rs 25,000 deposit karo, 200% commission milega aaj hi.",job_task,hinglish,whatsapp
+GEN0125,"Flipkart mein part time job, roz Rs 499 payment. Training fee Rs 499 pehle bhejein <UPI>",job_task,hinglish,sms
+GEN0126,"Ghar baithe roz Rs 999 kamao, sirf YouTube videos like karne hain. Interested ho to YES likho.",job_task,hinglish,whatsapp
+GEN0127,"Hi, HR here. Rate hotels and earn Rs 150 per task. Daily payment. Join our Telegram <URL>",job_task,english,whatsapp
+GEN0128,"Sir premium task ke liye Rs 75,000 deposit karo, 300% commission milega aaj hi.",job_task,hinglish,whatsapp
+GEN0129,"Your task wallet is frozen due to wrong operation. Pay Rs 25,000 to recover your funds.",job_task,english,whatsapp
+GEN0130,"घर बैठे रोज़ Rs 1,999 कमाएं। सिर्फ वीडियो लाइक करने हैं। अभी जुड़ें <URL>",job_task,hindi,whatsapp
+GEN0131,"You are selected for a YouTube work from home role. Salary Rs 75,000/month. Pay registration fee Rs 499 <URL>",job_task,english,sms
+GEN0132,"Ghar baithe roz Rs 1,999 kamao, sirf YouTube videos like karne hain. Interested ho to YES likho.",job_task,hinglish,whatsapp
+GEN0133,"a 5-star hotel chain mein part time job, roz Rs 1,999 payment. Training fee Rs 2,500 pehle bhejein <UPI>",job_task,hinglish,sms
+GEN0134,"Sir premium task ke liye Rs 49,000 deposit karo, 50% commission milega aaj hi.",job_task,hinglish,whatsapp
+GEN0135,"घर बैठे रोज़ Rs 5,000 कमाएं। सिर्फ वीडियो लाइक करने हैं। अभी जुड़ें <URL>",job_task,hindi,whatsapp
+GEN0136,"Part-time job from Myntra! Earn Rs 3,000 to Rs 8,000 per day by liking videos. No joining fee. Reply YES.",job_task,english,whatsapp
+GEN0137,"Task 4 complete! Recharge Rs 25,000 to unlock VIP tasks and withdraw your Rs 12,500 profit.",job_task,english,whatsapp
+GEN0138,"Sir premium task ke liye Rs 75,000 deposit karo, 30% commission milega aaj hi.",job_task,hinglish,whatsapp
+GEN0139,"Amazon mein part time job, roz Rs 1,999 payment. Training fee Rs 499 pehle bhejein <UPI>",job_task,hinglish,sms
+GEN0140,"Task 4 complete! Recharge Rs 8,000 to unlock VIP tasks and withdraw your Rs 75,000 profit.",job_task,english,whatsapp
+GEN0141,घर बैठे रोज़ Rs 499 कमाएं। सिर्फ वीडियो लाइक करने हैं। अभी जुड़ें <URL>,job_task,hindi,whatsapp
+GEN0142,"a 5-star hotel chain mein part time job, roz Rs 1,500 payment. Training fee Rs 3,000 pehle bhejein <UPI>",job_task,hinglish,sms
+GEN0143,"घर बैठे रोज़ Rs 3,000 कमाएं। सिर्फ वीडियो लाइक करने हैं। अभी जुड़ें <URL>",job_task,hindi,whatsapp
+GEN0144,"Sir premium task ke liye Rs 12,500 deposit karo, 200% commission milega aaj hi.",job_task,hinglish,whatsapp
+GEN0145,"a 5-star hotel chain mein part time job, roz Rs 999 payment. Training fee Rs 1,500 pehle bhejein <UPI>",job_task,hinglish,sms
+GEN0146,"Task 4 complete! Recharge Rs 49,000 to unlock VIP tasks and withdraw your Rs 25,000 profit.",job_task,english,whatsapp
+GEN0147,"Task 4 complete! Recharge Rs 25,000 to unlock VIP tasks and withdraw your Rs 25,000 profit.",job_task,english,whatsapp
+GEN0148,"घर बैठे रोज़ Rs 1,500 कमाएं। सिर्फ वीडियो लाइक करने हैं। अभी जुड़ें <URL>",job_task,hindi,whatsapp
+GEN0149,"Part-time job from Meesho! Earn Rs 3,000 to Rs 12,500 per day by liking videos. No joining fee. Reply YES.",job_task,english,whatsapp
+GEN0150,"Flipkart mein part time job, roz Rs 499 payment. Training fee Rs 1,500 pehle bhejein <UPI>",job_task,hinglish,sms
+GEN0151,"Sir premium task ke liye Rs 12,500 deposit karo, 300% commission milega aaj hi.",job_task,hinglish,whatsapp
+GEN0152,"Part-time job from YouTube! Earn Rs 499 to Rs 75,000 per day by liking videos. No joining fee. Reply YES.",job_task,english,whatsapp
+GEN0153,"Part-time job from Meesho! Earn Rs 1,500 to Rs 75,000 per day by liking videos. No joining fee. Reply YES.",job_task,english,whatsapp
+GEN0154,"Ghar baithe roz Rs 5,000 kamao, sirf YouTube videos like karne hain. Interested ho to YES likho.",job_task,hinglish,whatsapp
+GEN0155,"Sir premium task ke liye Rs 25,000 deposit karo, 300% commission milega aaj hi.",job_task,hinglish,whatsapp
+GEN0156,"Your task wallet is frozen due to wrong operation. Pay Rs 12,500 to recover your funds.",job_task,english,whatsapp
+GEN0157,"Amazon mein part time job, roz Rs 2,500 payment. Training fee Rs 5,000 pehle bhejein <UPI>",job_task,hinglish,sms
+GEN0158,"You are selected for a Flipkart work from home role. Salary Rs 25,000/month. Pay registration fee Rs 3,000 <URL>",job_task,english,sms
+GEN0159,"Part-time job from Flipkart! Earn Rs 1,500 to Rs 75,000 per day by liking videos. No joining fee. Reply YES.",job_task,english,whatsapp
+GEN0160,"Part-time job from Meesho! Earn Rs 1,999 to Rs 8,000 per day by liking videos. No joining fee. Reply YES.",job_task,english,whatsapp
+GEN0161,"You are selected for a Myntra work from home role. Salary Rs 8,000/month. Pay registration fee Rs 5,000 <URL>",job_task,english,sms
+GEN0162,"You are selected for a YouTube work from home role. Salary Rs 49,000/month. Pay registration fee Rs 1,500 <URL>",job_task,english,sms
+GEN0163,"Task 4 complete! Recharge Rs 75,000 to unlock VIP tasks and withdraw your Rs 25,000 profit.",job_task,english,whatsapp
+GEN0164,"घर बैठे रोज़ Rs 2,500 कमाएं। सिर्फ वीडियो लाइक करने हैं। अभी जुड़ें <URL>",job_task,hindi,whatsapp
+GEN0165,"Part-time job from Amazon! Earn Rs 2,500 to Rs 49,000 per day by liking videos. No joining fee. Reply YES.",job_task,english,whatsapp
+GEN0166,"Ghar baithe roz Rs 499 kamao, sirf YouTube videos like karne hain. Interested ho to YES likho.",job_task,hinglish,whatsapp
+GEN0167,"a 5-star hotel chain mein part time job, roz Rs 1,999 payment. Training fee Rs 999 pehle bhejein <UPI>",job_task,hinglish,sms
+GEN0168,"Myntra mein part time job, roz Rs 5,000 payment. Training fee Rs 999 pehle bhejein <UPI>",job_task,hinglish,sms
+GEN0169,"Task 4 complete! Recharge Rs 75,000 to unlock VIP tasks and withdraw your Rs 8,000 profit.",job_task,english,whatsapp
+GEN0170,"You are selected for a Meesho work from home role. Salary Rs 49,000/month. Pay registration fee Rs 3,000 <URL>",job_task,english,sms
+GEN0171,"Meesho mein part time job, roz Rs 2,500 payment. Training fee Rs 2,500 pehle bhejein <UPI>",job_task,hinglish,sms
+GEN0172,"Sir premium task ke liye Rs 8,000 deposit karo, 30% commission milega aaj hi.",job_task,hinglish,whatsapp
+GEN0173,"Sir premium task ke liye Rs 12,500 deposit karo, 30% commission milega aaj hi.",job_task,hinglish,whatsapp
+GEN0174,घर बैठे रोज़ Rs 999 कमाएं। सिर्फ वीडियो लाइक करने हैं। अभी जुड़ें <URL>,job_task,hindi,whatsapp
+GEN0175,"Ghar baithe roz Rs 1,500 kamao, sirf YouTube videos like karne hain. Interested ho to YES likho.",job_task,hinglish,whatsapp
+GEN0176,"Your task wallet is frozen due to wrong operation. Pay Rs 49,000 to recover your funds.",job_task,english,whatsapp
+GEN0177,"Part-time job from Flipkart! Earn Rs 2,500 to Rs 12,500 per day by liking videos. No joining fee. Reply YES.",job_task,english,whatsapp
+GEN0178,"You are selected for a Myntra work from home role. Salary Rs 75,000/month. Pay registration fee Rs 999 <URL>",job_task,english,sms
+GEN0179,"Task 4 complete! Recharge Rs 8,000 to unlock VIP tasks and withdraw your Rs 12,500 profit.",job_task,english,whatsapp
+GEN0180,"Part-time job from Myntra! Earn Rs 999 to Rs 49,000 per day by liking videos. No joining fee. Reply YES.",job_task,english,whatsapp
+GEN0181,लोन की राशि तुरंत चुकाएं वरना आपकी फोटो सभी कॉन्टैक्ट्स को भेज दी जाएगी।,loan_app,hindi,whatsapp
+GEN0182,"Pre-approved loan Rs 1,50,000 at 0% interest. Pay processing fee Rs 3,000 to disburse today.",loan_app,english,sms
+GEN0183,"EasyPaisa Loan: Loan of Rs 12,500 credited. Repay Rs 49,000 within 15 days. Late fee Rs 1,000 per day.",loan_app,english,sms
+GEN0184,"We have your contacts and gallery. Repay Rs 8,000 today or we will message your family and office.",loan_app,english,whatsapp
+GEN0185,"Pre-approved loan Rs 3,50,000 at 0% interest. Pay processing fee Rs 2,500 to disburse today.",loan_app,english,sms
+GEN0186,MoneyNow ka paisa abhi bhejo warna teri photos sab contacts ko bhej denge.,loan_app,hinglish,whatsapp
+GEN0187,EasyPaisa Loan ka paisa abhi bhejo warna teri photos sab contacts ko bhej denge.,loan_app,hinglish,whatsapp
+GEN0188,"RupeeFast: Loan of Rs 8,000 credited. Repay Rs 49,000 within 7 days. Late fee Rs 1,000 per day.",loan_app,english,sms
+GEN0189,"Instant loan up to Rs 5,00,000 approved without CIBIL. Download CashKaro Now <URL> and get money in 5 minutes.",loan_app,english,sms
+GEN0190,"We have your contacts and gallery. Repay Rs 49,000 today or we will message your family and office.",loan_app,english,whatsapp
+GEN0191,"Sirf Aadhaar se Rs 1,50,000 ka loan. Processing charge Rs 5,000 <UPI> par bhejein.",loan_app,hinglish,sms
+GEN0192,"Pre-approved loan Rs 3,50,000 at 0% interest. Pay processing fee Rs 1,500 to disburse today.",loan_app,english,sms
+GEN0193,"Pre-approved loan Rs 2,00,000 at 0% interest. Pay processing fee Rs 999 to disburse today.",loan_app,english,sms
+GEN0194,"Pre-approved loan Rs 3,50,000 at 0% interest. Pay processing fee Rs 3,000 to disburse today.",loan_app,english,sms
+GEN0195,"Your LoanTurbo loan is overdue. Pay Rs 12,500 now or your photos will be sent to all your contacts.",loan_app,english,whatsapp
+GEN0196,"Pre-approved loan Rs 10,00,000 at 0% interest. Pay processing fee Rs 3,000 to disburse today.",loan_app,english,sms
+GEN0197,"Your CashKaro Now loan is overdue. Pay Rs 75,000 now or your photos will be sent to all your contacts.",loan_app,english,whatsapp
+GEN0198,"We have your contacts and gallery. Repay Rs 75,000 today or we will message your family and office.",loan_app,english,whatsapp
+GEN0199,"Your RupeeFast loan is overdue. Pay Rs 8,000 now or your photos will be sent to all your contacts.",loan_app,english,whatsapp
+GEN0200,QuickCash ka paisa abhi bhejo warna teri photos sab contacts ko bhej denge.,loan_app,hinglish,whatsapp
+GEN0201,"Pre-approved loan Rs 10,00,000 at 0% interest. Pay processing fee Rs 1,999 to disburse today.",loan_app,english,sms
+GEN0202,"Instant loan up to Rs 3,50,000 approved without CIBIL. Download EasyPaisa Loan <URL> and get money in 5 minutes.",loan_app,english,sms
+GEN0203,"We have your contacts and gallery. Repay Rs 12,500 today or we will message your family and office.",loan_app,english,whatsapp
+GEN0204,"Sirf Aadhaar se Rs 3,50,000 ka loan. Processing charge Rs 999 <UPI> par bhejein.",loan_app,hinglish,sms
+GEN0205,LoanTurbo ka paisa abhi bhejo warna teri photos sab contacts ko bhej denge.,loan_app,hinglish,whatsapp
+GEN0206,RupeeFast ka paisa abhi bhejo warna teri photos sab contacts ko bhej denge.,loan_app,hinglish,whatsapp
+GEN0207,"Instant loan up to Rs 2,00,000 approved without CIBIL. Download RupeeFast <URL> and get money in 5 minutes.",loan_app,english,sms
+GEN0208,CashKaro Now ka paisa abhi bhejo warna teri photos sab contacts ko bhej denge.,loan_app,hinglish,whatsapp
+GEN0209,"Sirf Aadhaar se Rs 10,00,000 ka loan. Processing charge Rs 1,500 <UPI> par bhejein.",loan_app,hinglish,sms
+GEN0210,"Instant loan up to Rs 1,50,000 approved without CIBIL. Download RupeeFast <URL> and get money in 5 minutes.",loan_app,english,sms
+GEN0211,"Pre-approved loan Rs 3,50,000 at 0% interest. Pay processing fee Rs 999 to disburse today.",loan_app,english,sms
+GEN0212,"Sirf Aadhaar se Rs 10,00,000 ka loan. Processing charge Rs 499 <UPI> par bhejein.",loan_app,hinglish,sms
+GEN0213,"Sirf Aadhaar se Rs 1,50,000 ka loan. Processing charge Rs 1,500 <UPI> par bhejein.",loan_app,hinglish,sms
+GEN0214,"Sirf Aadhaar se Rs 5,00,000 ka loan. Processing charge Rs 999 <UPI> par bhejein.",loan_app,hinglish,sms
+GEN0215,"MoneyNow: Loan of Rs 49,000 credited. Repay Rs 49,000 within 30 days. Late fee Rs 1,000 per day.",loan_app,english,sms
+GEN0216,"EasyPaisa Loan: Loan of Rs 8,000 credited. Repay Rs 8,000 within 15 days. Late fee Rs 1,000 per day.",loan_app,english,sms
+GEN0217,"Instant loan up to Rs 3,50,000 approved without CIBIL. Download MoneyNow <URL> and get money in 5 minutes.",loan_app,english,sms
+GEN0218,"Pre-approved loan Rs 10,00,000 at 0% interest. Pay processing fee Rs 1,500 to disburse today.",loan_app,english,sms
+GEN0219,"Instant loan up to Rs 1,50,000 approved without CIBIL. Download QuickCash <URL> and get money in 5 minutes.",loan_app,english,sms
+GEN0220,"Sirf Aadhaar se Rs 2,00,000 ka loan. Processing charge Rs 999 <UPI> par bhejein.",loan_app,hinglish,sms
+GEN0221,"Sirf Aadhaar se Rs 1,50,000 ka loan. Processing charge Rs 1,999 <UPI> par bhejein.",loan_app,hinglish,sms
+GEN0222,"EasyPaisa Loan: Loan of Rs 75,000 credited. Repay Rs 49,000 within 30 days. Late fee Rs 1,000 per day.",loan_app,english,sms
+GEN0223,"Sirf Aadhaar se Rs 3,50,000 ka loan. Processing charge Rs 5,000 <UPI> par bhejein.",loan_app,hinglish,sms
+GEN0224,"EasyPaisa Loan: Loan of Rs 75,000 credited. Repay Rs 25,000 within 30 days. Late fee Rs 1,000 per day.",loan_app,english,sms
+GEN0225,"Your EasyPaisa Loan loan is overdue. Pay Rs 8,000 now or your photos will be sent to all your contacts.",loan_app,english,whatsapp
+GEN0226,"Your CashKaro Now loan is overdue. Pay Rs 8,000 now or your photos will be sent to all your contacts.",loan_app,english,whatsapp
+GEN0227,"Your QuickCash loan is overdue. Pay Rs 25,000 now or your photos will be sent to all your contacts.",loan_app,english,whatsapp
+GEN0228,"Pre-approved loan Rs 5,00,000 at 0% interest. Pay processing fee Rs 999 to disburse today.",loan_app,english,sms
+GEN0229,"CashKaro Now: Loan of Rs 25,000 credited. Repay Rs 8,000 within 30 days. Late fee Rs 1,000 per day.",loan_app,english,sms
+GEN0230,"Your EasyPaisa Loan loan is overdue. Pay Rs 75,000 now or your photos will be sent to all your contacts.",loan_app,english,whatsapp
+GEN0231,"Instant loan up to Rs 5,00,000 approved without CIBIL. Download RupeeFast <URL> and get money in 5 minutes.",loan_app,english,sms
+GEN0232,"Pre-approved loan Rs 2,00,000 at 0% interest. Pay processing fee Rs 1,500 to disburse today.",loan_app,english,sms
+GEN0233,"EasyPaisa Loan: Loan of Rs 49,000 credited. Repay Rs 12,500 within 15 days. Late fee Rs 1,000 per day.",loan_app,english,sms
+GEN0234,"Sirf Aadhaar se Rs 5,00,000 ka loan. Processing charge Rs 3,000 <UPI> par bhejein.",loan_app,hinglish,sms
+GEN0235,"CashKaro Now: Loan of Rs 25,000 credited. Repay Rs 49,000 within 7 days. Late fee Rs 1,000 per day.",loan_app,english,sms
+GEN0236,"EasyPaisa Loan: Loan of Rs 49,000 credited. Repay Rs 49,000 within 7 days. Late fee Rs 1,000 per day.",loan_app,english,sms
+GEN0237,"Instant loan up to Rs 2,00,000 approved without CIBIL. Download EasyPaisa Loan <URL> and get money in 5 minutes.",loan_app,english,sms
+GEN0238,"QuickCash: Loan of Rs 75,000 credited. Repay Rs 75,000 within 15 days. Late fee Rs 1,000 per day.",loan_app,english,sms
+GEN0239,"Sirf Aadhaar se Rs 5,00,000 ka loan. Processing charge Rs 1,999 <UPI> par bhejein.",loan_app,hinglish,sms
+GEN0240,"Sirf Aadhaar se Rs 1,50,000 ka loan. Processing charge Rs 3,000 <UPI> par bhejein.",loan_app,hinglish,sms
+GEN0241,"Group ke members ne aaj 30% profit kamaya. Aap bhi Rs 12,500 invest karo, double pakka.",fake_investment,hinglish,whatsapp
+GEN0242,"Crypto trading bot doubles your money in 15 days. Minimum investment Rs 25,000. Guaranteed returns.",fake_investment,english,whatsapp
+GEN0243,"Gold scheme: invest Rs 8,000, get 300% monthly return. Limited slots. Call <PHONE>",fake_investment,english,sms
+GEN0244,"Trading mentor ki free class join karo, roz ka buy/sell call milega. Link <URL>",fake_investment,hinglish,whatsapp
+GEN0245,"Today our members made Rs 3,50,000 profit! Transfer to fund manager <UPI> for tomorrow's call.",fake_investment,english,whatsapp
+GEN0246,"Exclusive IPO allotment for group members. Deposit Rs 5,00,000 in the institutional account to get shares.",fake_investment,english,whatsapp
+GEN0247,"30 दिन में पैसा दोगुना। अभी Rs 75,000 निवेश करें। लिंक <URL>",fake_investment,hindi,whatsapp
+GEN0248,Join our VIP stock group. Members earned 20% returns in 30 days. Invest via <URL>,fake_investment,english,whatsapp
+GEN0249,"Exclusive IPO allotment for group members. Deposit Rs 1,50,000 in the institutional account to get shares.",fake_investment,english,whatsapp
+GEN0250,"Group ke members ne aaj 200% profit kamaya. Aap bhi Rs 8,000 invest karo, double pakka.",fake_investment,hinglish,whatsapp
+GEN0251,"Group ke members ne aaj 50% profit kamaya. Aap bhi Rs 8,000 invest karo, double pakka.",fake_investment,hinglish,whatsapp
+GEN0252,Join our VIP stock group. Members earned 300% returns in 15 days. Invest via <URL>,fake_investment,english,whatsapp
+GEN0253,"Exclusive IPO allotment for group members. Deposit Rs 10,00,000 in the institutional account to get shares.",fake_investment,english,whatsapp
+GEN0254,Join our VIP stock group. Members earned 50% returns in 15 days. Invest via <URL>,fake_investment,english,whatsapp
+GEN0255,Join our VIP stock group. Members earned 20% returns in 15 days. Invest via <URL>,fake_investment,english,whatsapp
+GEN0256,Join our VIP stock group. Members earned 200% returns in 30 days. Invest via <URL>,fake_investment,english,whatsapp
+GEN0257,"Group ke members ne aaj 300% profit kamaya. Aap bhi Rs 75,000 invest karo, double pakka.",fake_investment,hinglish,whatsapp
+GEN0258,"Crypto trading bot doubles your money in 7 days. Minimum investment Rs 8,000. Guaranteed returns.",fake_investment,english,whatsapp
+GEN0259,"Group ke members ne aaj 300% profit kamaya. Aap bhi Rs 12,500 invest karo, double pakka.",fake_investment,hinglish,whatsapp
+GEN0260,"Gold scheme: invest Rs 49,000, get 50% monthly return. Limited slots. Call <PHONE>",fake_investment,english,sms
+GEN0261,"Crypto trading bot doubles your money in 15 days. Minimum investment Rs 49,000. Guaranteed returns.",fake_investment,english,whatsapp
+GEN0262,"Group ke members ne aaj 50% profit kamaya. Aap bhi Rs 25,000 invest karo, double pakka.",fake_investment,hinglish,whatsapp
+GEN0263,Join our VIP stock group. Members earned 30% returns in 7 days. Invest via <URL>,fake_investment,english,whatsapp
+GEN0264,"Gold scheme: invest Rs 12,500, get 50% monthly return. Limited slots. Call <PHONE>",fake_investment,english,sms
+GEN0265,"Today our members made Rs 2,00,000 profit! Transfer to fund manager <UPI> for tomorrow's call.",fake_investment,english,whatsapp
+GEN0266,"Gold scheme: invest Rs 12,500, get 30% monthly return. Limited slots. Call <PHONE>",fake_investment,english,sms
+GEN0267,"Gold scheme: invest Rs 75,000, get 200% monthly return. Limited slots. Call <PHONE>",fake_investment,english,sms
+GEN0268,"Gold scheme: invest Rs 49,000, get 300% monthly return. Limited slots. Call <PHONE>",fake_investment,english,sms
+GEN0269,"Gold scheme: invest Rs 25,000, get 300% monthly return. Limited slots. Call <PHONE>",fake_investment,english,sms
+GEN0270,"Exclusive IPO allotment for group members. Deposit Rs 3,50,000 in the institutional account to get shares.",fake_investment,english,whatsapp
+GEN0271,"Gold scheme: invest Rs 8,000, get 20% monthly return. Limited slots. Call <PHONE>",fake_investment,english,sms
+GEN0272,"30 दिन में पैसा दोगुना। अभी Rs 25,000 निवेश करें। लिंक <URL>",fake_investment,hindi,whatsapp
+GEN0273,Join our VIP stock group. Members earned 30% returns in 15 days. Invest via <URL>,fake_investment,english,whatsapp
+GEN0274,"15 दिन में पैसा दोगुना। अभी Rs 75,000 निवेश करें। लिंक <URL>",fake_investment,hindi,whatsapp
+GEN0275,Join our VIP stock group. Members earned 200% returns in 7 days. Invest via <URL>,fake_investment,english,whatsapp
+GEN0276,"Gold scheme: invest Rs 75,000, get 300% monthly return. Limited slots. Call <PHONE>",fake_investment,english,sms
+GEN0277,"Exclusive IPO allotment for group members. Deposit Rs 2,00,000 in the institutional account to get shares.",fake_investment,english,whatsapp
+GEN0278,"Today our members made Rs 10,00,000 profit! Transfer to fund manager <UPI> for tomorrow's call.",fake_investment,english,whatsapp
+GEN0279,"Group ke members ne aaj 30% profit kamaya. Aap bhi Rs 25,000 invest karo, double pakka.",fake_investment,hinglish,whatsapp
+GEN0280,"Gold scheme: invest Rs 25,000, get 200% monthly return. Limited slots. Call <PHONE>",fake_investment,english,sms
+GEN0281,"Today our members made Rs 1,50,000 profit! Transfer to fund manager <UPI> for tomorrow's call.",fake_investment,english,whatsapp
+GEN0282,"Gold scheme: invest Rs 25,000, get 30% monthly return. Limited slots. Call <PHONE>",fake_investment,english,sms
+GEN0283,"Crypto trading bot doubles your money in 7 days. Minimum investment Rs 49,000. Guaranteed returns.",fake_investment,english,whatsapp
+GEN0284,"Crypto trading bot doubles your money in 30 days. Minimum investment Rs 49,000. Guaranteed returns.",fake_investment,english,whatsapp
+GEN0285,"Crypto trading bot doubles your money in 15 days. Minimum investment Rs 75,000. Guaranteed returns.",fake_investment,english,whatsapp
+GEN0286,"Gold scheme: invest Rs 12,500, get 200% monthly return. Limited slots. Call <PHONE>",fake_investment,english,sms
+GEN0287,"7 दिन में पैसा दोगुना। अभी Rs 8,000 निवेश करें। लिंक <URL>",fake_investment,hindi,whatsapp
+GEN0288,"Crypto trading bot doubles your money in 30 days. Minimum investment Rs 12,500. Guaranteed returns.",fake_investment,english,whatsapp
+GEN0289,"Group ke members ne aaj 300% profit kamaya. Aap bhi Rs 25,000 invest karo, double pakka.",fake_investment,hinglish,whatsapp
+GEN0290,"Group ke members ne aaj 300% profit kamaya. Aap bhi Rs 49,000 invest karo, double pakka.",fake_investment,hinglish,whatsapp
+GEN0291,Join our VIP stock group. Members earned 300% returns in 7 days. Invest via <URL>,fake_investment,english,whatsapp
+GEN0292,"15 दिन में पैसा दोगुना। अभी Rs 25,000 निवेश करें। लिंक <URL>",fake_investment,hindi,whatsapp
+GEN0293,"Crypto trading bot doubles your money in 7 days. Minimum investment Rs 25,000. Guaranteed returns.",fake_investment,english,whatsapp
+GEN0294,"Crypto trading bot doubles your money in 30 days. Minimum investment Rs 25,000. Guaranteed returns.",fake_investment,english,whatsapp
+GEN0295,"Gold scheme: invest Rs 49,000, get 200% monthly return. Limited slots. Call <PHONE>",fake_investment,english,sms
+GEN0296,"Group ke members ne aaj 20% profit kamaya. Aap bhi Rs 12,500 invest karo, double pakka.",fake_investment,hinglish,whatsapp
+GEN0297,"7 दिन में पैसा दोगुना। अभी Rs 49,000 निवेश करें। लिंक <URL>",fake_investment,hindi,whatsapp
+GEN0298,"Gold scheme: invest Rs 75,000, get 20% monthly return. Limited slots. Call <PHONE>",fake_investment,english,sms
+GEN0299,Join our VIP stock group. Members earned 30% returns in 30 days. Invest via <URL>,fake_investment,english,whatsapp
+GEN0300,"Group ke members ne aaj 200% profit kamaya. Aap bhi Rs 49,000 invest karo, double pakka.",fake_investment,hinglish,whatsapp
+GEN0301,India Post: your parcel is held due to incomplete address. Update within 24 hours <URL>,other_scam,english,sms
+GEN0302,"Your HDFC Bank credit card reward points worth Rs 2,500 expire by midnight. Redeem <URL>",other_scam,english,sms
+GEN0303,"Aapka challan pending hai, Rs 1,500 9:30 pm bharein warna court notice aayega <URL>",other_scam,hinglish,sms
+GEN0304,India Post: your parcel is held due to incomplete address. Update within 48 hours <URL>,other_scam,english,sms
+GEN0305,"Your Canara Bank credit card reward points worth Rs 5,000 expire tonight. Redeem <URL>",other_scam,english,sms
+GEN0306,"Your vehicle was caught overspeeding. Pay challan Rs 1,500 9:30 pm <URL> to avoid licence suspension.",other_scam,english,sms
+GEN0307,"Congratulations! You won Rs 10,00,000 in KBC lucky draw. Pay tax Rs 2,500 to claim. Call <PHONE>",other_scam,english,sms
+GEN0308,"Your IDFC First credit card reward points worth Rs 2,500 expire within 1 hour. Redeem <URL>",other_scam,english,sms
+GEN0309,India Post: your parcel is held due to incomplete address. Update within 2 hours <URL>,other_scam,english,sms
+GEN0310,Your FASTag is blocked. Recharge via <URL> to avoid penalty.,other_scam,english,sms
+GEN0311,"Congratulations! You won Rs 3,50,000 in KBC lucky draw. Pay tax Rs 1,999 to claim. Call <PHONE>",other_scam,english,sms
+GEN0312,India Post: your parcel is held due to incomplete address. Update within 12 hours <URL>,other_scam,english,sms
+GEN0313,Your Bank of Baroda credit card reward points worth Rs 999 expire by midnight. Redeem <URL>,other_scam,english,sms
+GEN0314,"You are approved for an income tax refund of Rs 12,500. Verify your bank account <URL>",other_scam,english,sms
+GEN0315,आपका पार्सल पता अधूरा होने के कारण रुका है। 48 घंटे में पता अपडेट करें <URL>,other_scam,hindi,sms
+GEN0316,"Your vehicle was caught overspeeding. Pay challan Rs 2,500 10 pm <URL> to avoid licence suspension.",other_scam,english,sms
+GEN0317,आपका पार्सल पता अधूरा होने के कारण रुका है। 12 घंटे में पता अपडेट करें <URL>,other_scam,hindi,sms
+GEN0318,Your vehicle was caught overspeeding. Pay challan Rs 999 within 1 hour <URL> to avoid licence suspension.,other_scam,english,sms
+GEN0319,आपका पार्सल पता अधूरा होने के कारण रुका है। 2 घंटे में पता अपडेट करें <URL>,other_scam,hindi,sms
+GEN0320,Your Bank of Baroda credit card reward points worth Rs 499 expire within 1 hour. Redeem <URL>,other_scam,english,sms
+GEN0321,"Congratulations! You won Rs 2,00,000 in KBC lucky draw. Pay tax Rs 999 to claim. Call <PHONE>",other_scam,english,sms
+GEN0322,"Aapka challan pending hai, Rs 1,999 within 1 hour bharein warna court notice aayega <URL>",other_scam,hinglish,sms
+GEN0323,"Aapka challan pending hai, Rs 1,500 today bharein warna court notice aayega <URL>",other_scam,hinglish,sms
+GEN0324,"Aapka challan pending hai, Rs 999 tonight bharein warna court notice aayega <URL>",other_scam,hinglish,sms
+GEN0325,"Your IDFC First credit card reward points worth Rs 1,999 expire tonight. Redeem <URL>",other_scam,english,sms
+GEN0326,"Your Union Bank credit card reward points worth Rs 1,999 expire within 1 hour. Redeem <URL>",other_scam,english,sms
+GEN0327,"Aapka challan pending hai, Rs 5,000 by midnight bharein warna court notice aayega <URL>",other_scam,hinglish,sms
+GEN0328,"Your SBI credit card reward points worth Rs 1,500 expire 9:30 pm. Redeem <URL>",other_scam,english,sms
+GEN0329,"Congratulations! You won Rs 3,50,000 in KBC lucky draw. Pay tax Rs 1,500 to claim. Call <PHONE>",other_scam,english,sms
+GEN0330,"Your vehicle was caught overspeeding. Pay challan Rs 3,000 tonight <URL> to avoid licence suspension.",other_scam,english,sms
+GEN0331,"You are approved for an income tax refund of Rs 25,000. Verify your bank account <URL>",other_scam,english,sms
+GEN0332,"Congratulations! You won Rs 3,50,000 in KBC lucky draw. Pay tax Rs 499 to claim. Call <PHONE>",other_scam,english,sms
+GEN0333,"Your SBI credit card reward points worth Rs 2,500 expire 10 pm. Redeem <URL>",other_scam,english,sms
+GEN0334,"You are approved for an income tax refund of Rs 75,000. Verify your bank account <URL>",other_scam,english,sms
+GEN0335,Your Axis Bank credit card reward points worth Rs 999 expire by midnight. Redeem <URL>,other_scam,english,sms
+GEN0336,"Your Union Bank credit card reward points worth Rs 5,000 expire by midnight. Redeem <URL>",other_scam,english,sms
+GEN0337,Your vehicle was caught overspeeding. Pay challan Rs 499 today <URL> to avoid licence suspension.,other_scam,english,sms
+GEN0338,"Aapka challan pending hai, Rs 1,500 10 pm bharein warna court notice aayega <URL>",other_scam,hinglish,sms
+GEN0339,"Congratulations! You won Rs 5,00,000 in KBC lucky draw. Pay tax Rs 3,000 to claim. Call <PHONE>",other_scam,english,sms
+GEN0340,"Congratulations! You won Rs 1,50,000 in KBC lucky draw. Pay tax Rs 999 to claim. Call <PHONE>",other_scam,english,sms
+GEN0341,Your PNB credit card reward points worth Rs 999 expire today. Redeem <URL>,other_scam,english,sms
+GEN0342,"Your vehicle was caught overspeeding. Pay challan Rs 3,000 9:30 pm <URL> to avoid licence suspension.",other_scam,english,sms
+GEN0343,"Your Union Bank credit card reward points worth Rs 5,000 expire within 1 hour. Redeem <URL>",other_scam,english,sms
+GEN0344,"Your PNB credit card reward points worth Rs 3,000 expire by midnight. Redeem <URL>",other_scam,english,sms
+GEN0345,"Your ICICI Bank credit card reward points worth Rs 3,000 expire 10 pm. Redeem <URL>",other_scam,english,sms
+GEN0346,"Aapka challan pending hai, Rs 5,000 within 1 hour bharein warna court notice aayega <URL>",other_scam,hinglish,sms
+GEN0347,Your ICICI Bank credit card reward points worth Rs 999 expire tonight. Redeem <URL>,other_scam,english,sms
+GEN0348,"Congratulations! You won Rs 3,50,000 in KBC lucky draw. Pay tax Rs 2,500 to claim. Call <PHONE>",other_scam,english,sms
+GEN0349,"Aapka challan pending hai, Rs 1,999 9:30 pm bharein warna court notice aayega <URL>",other_scam,hinglish,sms
+GEN0350,"Aapka challan pending hai, Rs 3,000 within 1 hour bharein warna court notice aayega <URL>",other_scam,hinglish,sms
+GEN0351,"Congratulations! You won Rs 10,00,000 in KBC lucky draw. Pay tax Rs 999 to claim. Call <PHONE>",other_scam,english,sms
+GEN0352,आपका पार्सल पता अधूरा होने के कारण रुका है। 24 घंटे में पता अपडेट करें <URL>,other_scam,hindi,sms
+GEN0353,"Your IDFC First credit card reward points worth Rs 5,000 expire 10 pm. Redeem <URL>",other_scam,english,sms
+GEN0354,"Aapka challan pending hai, Rs 499 within 1 hour bharein warna court notice aayega <URL>",other_scam,hinglish,sms
+GEN0355,"Your vehicle was caught overspeeding. Pay challan Rs 5,000 9:30 pm <URL> to avoid licence suspension.",other_scam,english,sms
+GEN0356,"Congratulations! You won Rs 2,00,000 in KBC lucky draw. Pay tax Rs 5,000 to claim. Call <PHONE>",other_scam,english,sms
+GEN0357,"Congratulations! You won Rs 5,00,000 in KBC lucky draw. Pay tax Rs 1,500 to claim. Call <PHONE>",other_scam,english,sms
+GEN0358,"Aapka challan pending hai, Rs 3,000 today bharein warna court notice aayega <URL>",other_scam,hinglish,sms
+GEN0359,Your SBI credit card reward points worth Rs 999 expire within 1 hour. Redeem <URL>,other_scam,english,sms
+GEN0360,"Congratulations! You won Rs 10,00,000 in KBC lucky draw. Pay tax Rs 499 to claim. Call <PHONE>",other_scam,english,sms
+GEN0361,Reached office. Will call you at lunch.,genuine,english,whatsapp
+GEN0362,"Your EMI of Rs 75,000 is due on the 5th. Please keep sufficient balance in your PNB account.",genuine,english,sms
+GEN0363,Kal college kitne baje aana hai? Assignment submit karna hai.,genuine,hinglish,whatsapp
+GEN0364,"Your EMI of Rs 8,000 is due on the 5th. Please keep sufficient balance in your Bank of Baroda account.",genuine,english,sms
+GEN0365,"Your EMI of Rs 75,000 is due on the 5th. Please keep sufficient balance in your Bank of Baroda account.",genuine,english,sms
+GEN0366,Your Swiggy order is out for delivery. Delivery partner will call you.,genuine,english,sms
+GEN0367,Can you send the notes from today's lecture?,genuine,english,whatsapp
+GEN0368,Aapka order deliver ho gaya hai. BookMyShow ko rate karein.,genuine,hinglish,sms
+GEN0369,Electricity bill of Rs 499 generated for your connection. Due in 15 days. Pay via official TPDDL portal.,genuine,english,sms
+GEN0370,"आपका बिजली बिल Rs 2,500 जारी किया गया है। अंतिम तिथि 30 दिन में।",genuine,hindi,sms
+GEN0371,"Your EMI of Rs 12,500 is due on the 5th. Please keep sufficient balance in your HDFC Bank account.",genuine,english,sms
+GEN0372,Your order from IRCTC has been delivered. Rate your experience in the app.,genuine,english,sms
+GEN0373,Your order from Reliance Fresh has been delivered. Rate your experience in the app.,genuine,english,sms
+GEN0374,"Amit, train late hai, 8 baje tak pahunchunga.",genuine,hinglish,whatsapp
+GEN0375,"आपका बिजली बिल Rs 3,000 जारी किया गया है। अंतिम तिथि 30 दिन में।",genuine,hindi,sms
+GEN0376,Your Kotak KYC update is complete. Thank you for banking with us.,genuine,english,sms
+GEN0377,Aapka order deliver ho gaya hai. Swiggy ko rate karein.,genuine,hinglish,sms
+GEN0378,"Electricity bill of Rs 1,999 generated for your connection. Due in 30 days. Pay via official BESCOM portal.",genuine,english,sms
+GEN0379,"Your BSNL bill of Rs 5,000 is generated. Due date in 7 days. Pay on the official app.",genuine,english,sms
+GEN0380,आपके HDFC Bank खाते से Rs 999 UPI द्वारा BigBasket को भुगतान किया गया।,genuine,hindi,sms
+GEN0381,Your appointment with Dr. Sharma is confirmed for tomorrow 11 am.,genuine,english,sms
+GEN0382,"आपके PNB खाते से Rs 1,500 UPI द्वारा Reliance Fresh को भुगतान किया गया।",genuine,hindi,sms
+GEN0383,"Mummy ne bola Sunday ko sab ghar aa jao, khana yahin hai.",genuine,hinglish,whatsapp
+GEN0384,"<OTP> is your OTP for DMart payment of Rs 5,000. Do not share it with anyone. Canara Bank never asks for OTP.",genuine,english,sms
+GEN0385,"Sneha, train late hai, 8 baje tak pahunchunga.",genuine,hinglish,whatsapp
+GEN0386,"Electricity bill of Rs 1,500 generated for your connection. Due in 15 days. Pay via official power department portal.",genuine,english,sms
+GEN0387,"Your Airtel bill of Rs 2,500 is generated. Due date in 30 days. Pay on the official app.",genuine,english,sms
+GEN0388,Electricity bill of Rs 499 generated for your connection. Due in 7 days. Pay via official electricity board portal.,genuine,english,sms
+GEN0389,"शाम को मंदिर चलेंगे, तैयार रहना।",genuine,hindi,whatsapp
+GEN0390,Rs 499 debited from your HDFC Bank a/c <ACCOUNT> for UPI txn to Reliance Fresh. Not you? Call the number on your card.,genuine,english,sms
+GEN0391,"Your Airtel bill of Rs 1,500 is generated. Due date in 30 days. Pay on the official app.",genuine,english,sms
+GEN0392,"Rs 5,000 debited from your PNB a/c <ACCOUNT> for UPI txn to IRCTC. Not you? Call the number on your card.",genuine,english,sms
+GEN0393,Your order from DMart has been delivered. Rate your experience in the app.,genuine,english,sms
+GEN0394,Your BigBasket order is out for delivery. Delivery partner will call you.,genuine,english,sms
+GEN0395,"Salary of Rs 75,000 credited to your account. - HDFC Bank",genuine,english,sms
+GEN0396,"Dear customer, your Airtel recharge of Rs 499 is successful. Validity 7 days.",genuine,english,sms
+GEN0397,"Hi Pooja, meeting moved to 4 pm tomorrow. Please bring the report.",genuine,english,whatsapp
+GEN0398,"Salary of Rs 8,000 credited to your account. - HDFC Bank",genuine,english,sms
+GEN0399,"Bhaiya, ghar aate waqt doodh le aana.",genuine,hinglish,whatsapp
+GEN0400,"Bhai dinner ke Rs 999 bhej diye, check kar lena.",genuine,hinglish,whatsapp
+GEN0401,"Salary of Rs 12,500 credited to your account. - Kotak",genuine,english,sms
+GEN0402,"Didi, ghar aate waqt doodh le aana.",genuine,hinglish,whatsapp
+GEN0403,Your order from BigBasket has been delivered. Rate your experience in the app.,genuine,english,sms
+GEN0404,"आपका बिजली बिल Rs 5,000 जारी किया गया है। अंतिम तिथि 15 दिन में।",genuine,hindi,sms
+GEN0405,"Dear customer, your Jio recharge of Rs 999 is successful. Validity 30 days.",genuine,english,sms
+GEN0406,"Your Jio bill of Rs 1,999 is generated. Due date in 15 days. Pay on the official app.",genuine,english,sms
+GEN0407,Electricity bill of Rs 999 generated for your connection. Due in 15 days. Pay via official BESCOM portal.,genuine,english,sms
+GEN0408,"Hi Sneha, meeting moved to 4 pm tomorrow. Please bring the report.",genuine,english,whatsapp
+GEN0409,"Rs 1,500 debited from your HDFC Bank a/c <ACCOUNT> for UPI txn to Swiggy. Not you? Call the number on your card.",genuine,english,sms
+GEN0410,"Beta ne bola Sunday ko sab ghar aa jao, khana yahin hai.",genuine,hinglish,whatsapp
+GEN0411,"Rs 3,000 debited from your SBI a/c <ACCOUNT> for UPI txn to Reliance Fresh. Not you? Call the number on your card.",genuine,english,sms
+GEN0412,"आपके Axis Bank खाते से Rs 3,000 UPI द्वारा Swiggy को भुगतान किया गया।",genuine,hindi,sms
+GEN0413,"Rs 8,000 credited to your Union Bank a/c <ACCOUNT>. Available balance updated.",genuine,english,sms
+GEN0414,"Hi Priya, meeting moved to 4 pm tomorrow. Please bring the report.",genuine,english,whatsapp
+GEN0415,Aapka order deliver ho gaya hai. Reliance Fresh ko rate karein.,genuine,hinglish,sms
+GEN0416,"Rs 8,000 credited to your PNB a/c <ACCOUNT>. Available balance updated.",genuine,english,sms
+GEN0417,"Dear customer, your Vi recharge of Rs 999 is successful. Validity 15 days.",genuine,english,sms
+GEN0418,Your PNB KYC update is complete. Thank you for banking with us.,genuine,english,sms
+GEN0419,Your HDFC Bank KYC update is complete. Thank you for banking with us.,genuine,english,sms
+GEN0420,"आपके PNB खाते से Rs 1,500 UPI द्वारा Swiggy को भुगतान किया गया।",genuine,hindi,sms
+GEN0421,"Didi ne bola Sunday ko sab ghar aa jao, khana yahin hai.",genuine,hinglish,whatsapp
+GEN0422,आपके ICICI Bank खाते से Rs 999 UPI द्वारा DMart को भुगतान किया गया।,genuine,hindi,sms
+GEN0423,Rs 999 debited from your SBI a/c <ACCOUNT> for UPI txn to Reliance Fresh. Not you? Call the number on your card.,genuine,english,sms
+GEN0424,"Rs 1,999 debited from your PNB a/c <ACCOUNT> for UPI txn to Big Bazaar. Not you? Call the number on your card.",genuine,english,sms
+GEN0425,"Your BSNL bill of Rs 3,000 is generated. Due date in 15 days. Pay on the official app.",genuine,english,sms
+GEN0426,Happy birthday Priya! Have a great year ahead.,genuine,english,whatsapp
+GEN0427,"Rs 75,000 credited to your Canara Bank a/c <ACCOUNT>. Available balance updated.",genuine,english,sms
+GEN0428,"Rs 49,000 credited to your IDFC First a/c <ACCOUNT>. Available balance updated.",genuine,english,sms
+GEN0429,PNR status: your train ticket booked via IRCTC is confirmed. Happy journey.,genuine,english,sms
+GEN0430,Happy birthday Sneha! Have a great year ahead.,genuine,english,whatsapp
+GEN0431,"Rs 2,500 debited from your Kotak a/c <ACCOUNT> for UPI txn to Reliance Fresh. Not you? Call the number on your card.",genuine,english,sms
+GEN0432,Your IRCTC order is out for delivery. Delivery partner will call you.,genuine,english,sms
+GEN0433,"Mummy, ghar aate waqt doodh le aana.",genuine,hinglish,whatsapp
+GEN0434,Your BookMyShow order is out for delivery. Delivery partner will call you.,genuine,english,sms
+GEN0435,"Dear customer, your Airtel recharge of Rs 5,000 is successful. Validity 15 days.",genuine,english,sms
+GEN0436,Your order from Swiggy has been delivered. Rate your experience in the app.,genuine,english,sms
+GEN0437,"Electricity bill of Rs 2,500 generated for your connection. Due in 30 days. Pay via official TPDDL portal.",genuine,english,sms
+GEN0438,Happy birthday Neha! Have a great year ahead.,genuine,english,whatsapp
+GEN0439,"Your Vi bill of Rs 5,000 is generated. Due date in 15 days. Pay on the official app.",genuine,english,sms
+GEN0440,Aapka order deliver ho gaya hai. Zomato ko rate karein.,genuine,hinglish,sms
+GEN0441,"<OTP> is your OTP for Swiggy payment of Rs 5,000. Do not share it with anyone. Bank of Baroda never asks for OTP.",genuine,english,sms
+GEN0442,"Papa ne bola Sunday ko sab ghar aa jao, khana yahin hai.",genuine,hinglish,whatsapp
+GEN0443,"Priya, train late hai, 8 baje tak pahunchunga.",genuine,hinglish,whatsapp
+GEN0444,"Your EMI of Rs 75,000 is due on the 5th. Please keep sufficient balance in your Union Bank account.",genuine,english,sms
+GEN0445,"Salary of Rs 75,000 credited to your account. - Union Bank",genuine,english,sms
+GEN0446,Your Axis Bank KYC update is complete. Thank you for banking with us.,genuine,english,sms
+GEN0447,"आपका बिजली बिल Rs 2,500 जारी किया गया है। अंतिम तिथि 15 दिन में।",genuine,hindi,sms
+GEN0448,"Electricity bill of Rs 5,000 generated for your connection. Due in 15 days. Pay via official electricity board portal.",genuine,english,sms
+GEN0449,"आपका बिजली बिल Rs 5,000 जारी किया गया है। अंतिम तिथि 30 दिन में।",genuine,hindi,sms
+GEN0450,"Hi Arjun, meeting moved to 4 pm tomorrow. Please bring the report.",genuine,english,whatsapp
+GEN0451,"Dear customer, your Jio recharge of Rs 499 is successful. Validity 15 days.",genuine,english,sms
+GEN0452,"Rs 1,999 debited from your Union Bank a/c <ACCOUNT> for UPI txn to DMart. Not you? Call the number on your card.",genuine,english,sms
+GEN0453,Happy birthday Rahul! Have a great year ahead.,genuine,english,whatsapp
+GEN0454,"Bhai dinner ke Rs 3,000 bhej diye, check kar lena.",genuine,hinglish,whatsapp
+GEN0455,"Your EMI of Rs 25,000 is due on the 5th. Please keep sufficient balance in your IDFC First account.",genuine,english,sms
+GEN0456,Happy birthday Vikram! Have a great year ahead.,genuine,english,whatsapp
+GEN0457,"Your EMI of Rs 12,500 is due on the 5th. Please keep sufficient balance in your Kotak account.",genuine,english,sms
+GEN0458,आपका बिजली बिल Rs 999 जारी किया गया है। अंतिम तिथि 15 दिन में।,genuine,hindi,sms
+GEN0459,"Bhai dinner ke Rs 5,000 bhej diye, check kar lena.",genuine,hinglish,whatsapp
+GEN0460,"आपका बिजली बिल Rs 1,500 जारी किया गया है। अंतिम तिथि 15 दिन में।",genuine,hindi,sms
+GEN0461,"Dear customer, your Airtel recharge of Rs 999 is successful. Validity 15 days.",genuine,english,sms
+GEN0462,"Rahul, train late hai, 8 baje tak pahunchunga.",genuine,hinglish,whatsapp
+GEN0463,<OTP> is your OTP for Big Bazaar payment of Rs 499. Do not share it with anyone. Axis Bank never asks for OTP.,genuine,english,sms
+GEN0464,Your order from BookMyShow has been delivered. Rate your experience in the app.,genuine,english,sms
+GEN0465,"Pooja, train late hai, 8 baje tak pahunchunga.",genuine,hinglish,whatsapp
+GEN0466,"Bhaiya ne bola Sunday ko sab ghar aa jao, khana yahin hai.",genuine,hinglish,whatsapp
+GEN0467,"Your EMI of Rs 75,000 is due on the 5th. Please keep sufficient balance in your Axis Bank account.",genuine,english,sms
+GEN0468,Your Airtel bill of Rs 999 is generated. Due date in 30 days. Pay on the official app.,genuine,english,sms
+GEN0469,"आपका बिजली बिल Rs 1,999 जारी किया गया है। अंतिम तिथि 30 दिन में।",genuine,hindi,sms
+GEN0470,Rs 999 debited from your Union Bank a/c <ACCOUNT> for UPI txn to Reliance Fresh. Not you? Call the number on your card.,genuine,english,sms
+GEN0471,"आपके SBI खाते से Rs 2,500 UPI द्वारा Big Bazaar को भुगतान किया गया।",genuine,hindi,sms
+GEN0472,"आपके Union Bank खाते से Rs 5,000 UPI द्वारा Reliance Fresh को भुगतान किया गया।",genuine,hindi,sms
+GEN0473,"Rs 25,000 credited to your Kotak a/c <ACCOUNT>. Available balance updated.",genuine,english,sms
+GEN0474,Your IDFC First KYC update is complete. Thank you for banking with us.,genuine,english,sms
+GEN0475,"Rs 5,000 debited from your Canara Bank a/c <ACCOUNT> for UPI txn to Reliance Fresh. Not you? Call the number on your card.",genuine,english,sms
+GEN0476,"Rs 12,500 credited to your IDFC First a/c <ACCOUNT>. Available balance updated.",genuine,english,sms
+GEN0477,"Salary of Rs 75,000 credited to your account. - Kotak",genuine,english,sms
+GEN0478,Rs 999 debited from your HDFC Bank a/c <ACCOUNT> for UPI txn to BookMyShow. Not you? Call the number on your card.,genuine,english,sms
+GEN0479,आपके HDFC Bank खाते से Rs 499 UPI द्वारा IRCTC को भुगतान किया गया।,genuine,hindi,sms
+GEN0480,"Papa, ghar aate waqt doodh le aana.",genuine,hinglish,whatsapp
+GEN0481,"Dear customer, your Vi recharge of Rs 3,000 is successful. Validity 7 days.",genuine,english,sms
+GEN0482,"Bhai dinner ke Rs 1,999 bhej diye, check kar lena.",genuine,hinglish,whatsapp
+GEN0483,"<OTP> is your OTP for Reliance Fresh payment of Rs 1,999. Do not share it with anyone. Canara Bank never asks for OTP.",genuine,english,sms
+GEN0484,"आपके HDFC Bank खाते से Rs 3,000 UPI द्वारा Swiggy को भुगतान किया गया।",genuine,hindi,sms
+GEN0485,Aapka order deliver ho gaya hai. IRCTC ko rate karein.,genuine,hinglish,sms
+GEN0486,"<OTP> is your OTP for Big Bazaar payment of Rs 1,500. Do not share it with anyone. ICICI Bank never asks for OTP.",genuine,english,sms
+GEN0487,"Arjun, train late hai, 8 baje tak pahunchunga.",genuine,hinglish,whatsapp
+GEN0488,"Rs 49,000 credited to your SBI a/c <ACCOUNT>. Available balance updated.",genuine,english,sms
+GEN0489,"Dear customer, your Jio recharge of Rs 1,500 is successful. Validity 7 days.",genuine,english,sms
+GEN0490,"Your Vi bill of Rs 2,500 is generated. Due date in 30 days. Pay on the official app.",genuine,english,sms
+GEN0491,"<OTP> is your OTP for Big Bazaar payment of Rs 1,500. Do not share it with anyone. SBI never asks for OTP.",genuine,english,sms
+GEN0492,"Rs 3,000 debited from your Kotak a/c <ACCOUNT> for UPI txn to IRCTC. Not you? Call the number on your card.",genuine,english,sms
+GEN0493,Happy birthday Amit! Have a great year ahead.,genuine,english,whatsapp
+GEN0494,Your Zomato order is out for delivery. Delivery partner will call you.,genuine,english,sms
+GEN0495,"Rs 12,500 credited to your ICICI Bank a/c <ACCOUNT>. Available balance updated.",genuine,english,sms
+GEN0496,"Dear customer, your Jio recharge of Rs 999 is successful. Validity 7 days.",genuine,english,sms
+GEN0497,Electricity bill of Rs 999 generated for your connection. Due in 7 days. Pay via official electricity board portal.,genuine,english,sms
+GEN0498,"Rs 75,000 credited to your HDFC Bank a/c <ACCOUNT>. Available balance updated.",genuine,english,sms
+GEN0499,आपका बिजली बिल Rs 999 जारी किया गया है। अंतिम तिथि 30 दिन में।,genuine,hindi,sms
+GEN0500,"<OTP> is your OTP for Swiggy payment of Rs 5,000. Do not share it with anyone. PNB never asks for OTP.",genuine,english,sms
+GEN0501,"Beta, ghar aate waqt doodh le aana.",genuine,hinglish,whatsapp
+GEN0502,"Bhai dinner ke Rs 499 bhej diye, check kar lena.",genuine,hinglish,whatsapp
+GEN0503,Your SBI KYC update is complete. Thank you for banking with us.,genuine,english,sms
+GEN0504,"Hi Neha, meeting moved to 4 pm tomorrow. Please bring the report.",genuine,english,whatsapp
+GEN0505,"आपके HDFC Bank खाते से Rs 1,500 UPI द्वारा Zomato को भुगतान किया गया।",genuine,hindi,sms
+GEN0506,Rs 499 debited from your Kotak a/c <ACCOUNT> for UPI txn to Zomato. Not you? Call the number on your card.,genuine,english,sms
+GEN0507,"Your Vi bill of Rs 1,999 is generated. Due date in 30 days. Pay on the official app.",genuine,english,sms
+GEN0508,"Salary of Rs 49,000 credited to your account. - Axis Bank",genuine,english,sms
+GEN0509,"Hi Vikram, meeting moved to 4 pm tomorrow. Please bring the report.",genuine,english,whatsapp
+GEN0510,"Your Jio bill of Rs 5,000 is generated. Due date in 7 days. Pay on the official app.",genuine,english,sms
+GEN0511,"<OTP> is your OTP for Zomato payment of Rs 1,500. Do not share it with anyone. HDFC Bank never asks for OTP.",genuine,english,sms
+GEN0512,"<OTP> is your OTP for Swiggy payment of Rs 3,000. Do not share it with anyone. PNB never asks for OTP.",genuine,english,sms
+GEN0513,Rs 999 debited from your ICICI Bank a/c <ACCOUNT> for UPI txn to Swiggy. Not you? Call the number on your card.,genuine,english,sms
+GEN0514,Rs 999 debited from your IDFC First a/c <ACCOUNT> for UPI txn to IRCTC. Not you? Call the number on your card.,genuine,english,sms
+GEN0515,"Your Airtel bill of Rs 1,999 is generated. Due date in 30 days. Pay on the official app.",genuine,english,sms
+GEN0516,"आपका बिजली बिल Rs 1,999 जारी किया गया है। अंतिम तिथि 15 दिन में।",genuine,hindi,sms
+GEN0517,Aapka order deliver ho gaya hai. BigBasket ko rate karein.,genuine,hinglish,sms
+GEN0518,Your order from Zomato has been delivered. Rate your experience in the app.,genuine,english,sms
+GEN0519,"Electricity bill of Rs 3,000 generated for your connection. Due in 7 days. Pay via official power department portal.",genuine,english,sms
+GEN0520,Electricity bill of Rs 499 generated for your connection. Due in 15 days. Pay via official MSEDCL portal.,genuine,english,sms
+GEN0521,"Salary of Rs 49,000 credited to your account. - Union Bank",genuine,english,sms
+GEN0522,"आपके PNB खाते से Rs 1,500 UPI द्वारा BigBasket को भुगतान किया गया।",genuine,hindi,sms
+GEN0523,"Your EMI of Rs 8,000 is due on the 5th. Please keep sufficient balance in your ICICI Bank account.",genuine,english,sms
+GEN0524,"Hi Rahul, meeting moved to 4 pm tomorrow. Please bring the report.",genuine,english,whatsapp
+GEN0525,Aapka order deliver ho gaya hai. Big Bazaar ko rate karein.,genuine,hinglish,sms
+GEN0526,आपका बिजली बिल Rs 499 जारी किया गया है। अंतिम तिथि 15 दिन में।,genuine,hindi,sms
+GEN0527,"Rs 49,000 credited to your Kotak a/c <ACCOUNT>. Available balance updated.",genuine,english,sms
+GEN0528,आपका बिजली बिल Rs 999 जारी किया गया है। अंतिम तिथि 7 दिन में।,genuine,hindi,sms
+GEN0529,"Your EMI of Rs 75,000 is due on the 5th. Please keep sufficient balance in your ICICI Bank account.",genuine,english,sms
+GEN0530,Your Jio bill of Rs 499 is generated. Due date in 7 days. Pay on the official app.,genuine,english,sms
+GEN0531,"Dear customer, your Airtel recharge of Rs 2,500 is successful. Validity 15 days.",genuine,english,sms
+GEN0532,"Bhai dinner ke Rs 1,500 bhej diye, check kar lena.",genuine,hinglish,whatsapp
+GEN0533,"Rs 1,999 debited from your Bank of Baroda a/c <ACCOUNT> for UPI txn to BookMyShow. Not you? Call the number on your card.",genuine,english,sms
+GEN0534,"Salary of Rs 75,000 credited to your account. - Canara Bank",genuine,english,sms
+GEN0535,"Vikram, train late hai, 8 baje tak pahunchunga.",genuine,hinglish,whatsapp
+GEN0536,"Your EMI of Rs 8,000 is due on the 5th. Please keep sufficient balance in your Kotak account.",genuine,english,sms
+GEN0537,"आपके Union Bank खाते से Rs 1,999 UPI द्वारा Reliance Fresh को भुगतान किया गया।",genuine,hindi,sms
+GEN0538,"आपका बिजली बिल Rs 1,500 जारी किया गया है। अंतिम तिथि 30 दिन में।",genuine,hindi,sms
+GEN0539,आपके Canara Bank खाते से Rs 499 UPI द्वारा Big Bazaar को भुगतान किया गया।,genuine,hindi,sms
+GEN0540,"<OTP> is your OTP for IRCTC payment of Rs 5,000. Do not share it with anyone. SBI never asks for OTP.",genuine,english,sms
+GEN0541,Rs 499 debited from your Canara Bank a/c <ACCOUNT> for UPI txn to Reliance Fresh. Not you? Call the number on your card.,genuine,english,sms
+GEN0542,आपका बिजली बिल Rs 499 जारी किया गया है। अंतिम तिथि 30 दिन में।,genuine,hindi,sms
+GEN0543,Your order from Big Bazaar has been delivered. Rate your experience in the app.,genuine,english,sms
+GEN0544,"Salary of Rs 8,000 credited to your account. - IDFC First",genuine,english,sms
+GEN0545,"आपके Kotak खाते से Rs 1,999 UPI द्वारा Reliance Fresh को भुगतान किया गया।",genuine,hindi,sms
+GEN0546,"Rs 3,000 debited from your SBI a/c <ACCOUNT> for UPI txn to DMart. Not you? Call the number on your card.",genuine,english,sms
+GEN0547,"<OTP> is your OTP for BigBasket payment of Rs 2,500. Do not share it with anyone. IDFC First never asks for OTP.",genuine,english,sms
+GEN0548,"Rs 25,000 credited to your IDFC First a/c <ACCOUNT>. Available balance updated.",genuine,english,sms
+GEN0549,"Electricity bill of Rs 5,000 generated for your connection. Due in 15 days. Pay via official Adani Electricity portal.",genuine,english,sms
+GEN0550,"Dear customer, your BSNL recharge of Rs 499 is successful. Validity 15 days.",genuine,english,sms
+GEN0551,"<OTP> is your OTP for BigBasket payment of Rs 1,999. Do not share it with anyone. Bank of Baroda never asks for OTP.",genuine,english,sms
+GEN0552,Happy birthday Pooja! Have a great year ahead.,genuine,english,whatsapp
+GEN0553,आपके HDFC Bank खाते से Rs 999 UPI द्वारा Reliance Fresh को भुगतान किया गया।,genuine,hindi,sms
+GEN0554,"आपके ICICI Bank खाते से Rs 3,000 UPI द्वारा Reliance Fresh को भुगतान किया गया।",genuine,hindi,sms
+GEN0555,आपके Canara Bank खाते से Rs 499 UPI द्वारा BigBasket को भुगतान किया गया।,genuine,hindi,sms
+GEN0556,"Electricity bill of Rs 2,500 generated for your connection. Due in 7 days. Pay via official MSEDCL portal.",genuine,english,sms
+GEN0557,"Your BSNL bill of Rs 1,999 is generated. Due date in 15 days. Pay on the official app.",genuine,english,sms
+GEN0558,Your DMart order is out for delivery. Delivery partner will call you.,genuine,english,sms
+GEN0559,"Salary of Rs 49,000 credited to your account. - SBI",genuine,english,sms
+GEN0560,"Dear customer, your Vi recharge of Rs 3,000 is successful. Validity 15 days.",genuine,english,sms

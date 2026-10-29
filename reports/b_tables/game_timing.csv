@@ -1,0 +1,10 @@
+R,method,seconds
+2,minimax,0.001
+2,alpha-beta,0.001
+2,alpha-beta + ordering,0.001
+3,minimax,0.023
+3,alpha-beta,0.007
+3,alpha-beta + ordering,0.004
+4,minimax,0.596
+4,alpha-beta,0.059
+4,alpha-beta + ordering,0.023
