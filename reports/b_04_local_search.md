@@ -34,7 +34,7 @@ and one budget of `EVAL_BUDGET = 200` **unique** fitness evaluations, counted by
 
 Solution: a 20-bit string in `FEATURE_COLUMNS` order. Fitness (B-D13): validation PR-AUC of
 `mulehunt.models.make_baseline_lr()` fitted on train with the selected columns, minus
-0.002 per feature; the empty set scores -1. One fit takes 3.34 s.
+0.002 per feature; the empty set scores -1. Fit and run times are in `b_tables/local_fs_timing.csv`.
 
 Per algorithm (over seeds):
 
