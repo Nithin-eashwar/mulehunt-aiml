@@ -24,7 +24,7 @@ COLUMNS = ["msg_id", "text", "label", "scam_type", "language", "channel", "sourc
 LABELS = ("scam", "genuine")
 LANGUAGES = ("english", "hindi", "hinglish", "other")
 CHANNELS = ("sms", "whatsapp", "other")
-SOURCES = ("form", "self", "public")
+SOURCES = ("form", "self", "public", "reported", "synthetic")
 TYPE_WORDS = {"kyc": "fake_kyc", "arrest": "digital_arrest", "police": "digital_arrest", "job": "job_task",
               "task": "job_task", "loan": "loan_app", "invest": "fake_investment", "trading": "fake_investment",
               "genuine": "genuine", "real": "genuine", "not a scam": "genuine"}

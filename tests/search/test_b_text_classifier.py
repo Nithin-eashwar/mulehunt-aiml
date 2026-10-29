@@ -66,3 +66,23 @@ def test_import_form(tmp_path):
     assert "9876543210" not in " ".join(saved.text)
     assert set(saved.scam_type) == {"fake_kyc", "other_scam"} and set(saved.source) == {"form"}
     assert df.needs_review.tolist() == [False, True]
+
+
+def test_corpus_sources_are_labelled():
+    from text.build_corpus import REPORTED, build
+    import tempfile, os
+    with tempfile.TemporaryDirectory() as d:
+        df = build(os.path.join(d, "messages.csv"))
+    assert validate_messages(df) == []
+    assert set(df.source) == {"public", "reported", "synthetic"}
+    assert len(df) >= 500
+    assert df[df.source == "public"].msg_id.str.startswith("UCI").all()
+    assert df[df.source == "synthetic"].msg_id.str.startswith("GEN").all()
+    rep = pd.read_csv(REPORTED)
+    assert rep.source_url.str.startswith("https://").all()  # every reported message cites a source
+
+
+def test_synthetic_generator_is_seeded():
+    from text.synthetic import generate
+    assert generate(10, 10, seed=0) == generate(10, 10, seed=0)
+    assert generate(10, 10, seed=0) != generate(10, 10, seed=1)

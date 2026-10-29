@@ -1,0 +1,11 @@
+class,precision,recall,f1-score,support
+digital_arrest,1.0,1.0,1.0,10.0
+fake_investment,1.0,1.0,1.0,6.0
+fake_kyc,1.0,1.0,1.0,15.0
+genuine,0.0,0.0,0.0,0.0
+job_task,0.9,1.0,0.947,9.0
+loan_app,0.857,1.0,0.923,6.0
+other_scam,1.0,0.8,0.889,10.0
+accuracy,0.964,0.964,0.964,0.964
+macro avg,0.822,0.829,0.823,56.0
+weighted avg,0.969,0.964,0.963,56.0
