@@ -8,13 +8,13 @@ import streamlit as st
 from mulehunt.b_params import HONEST_FRAMING
 
 
-@st.cache_resource(show_spinner="Loading the transaction graph...")
+@st.cache_resource(show_spinner="Loading 1.8 million payments into the graph (first visit only)")
 def graph():
     from mulehunt.graph import TxGraph
     return TxGraph.load()
 
 
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 def risk():
     from mulehunt.graph import load_risk_scores, placeholder_risk_scores
     g, kind = graph()
@@ -24,7 +24,7 @@ def risk():
     return (r, "models/risk_scores.csv") if r is not None else (placeholder_risk_scores(g), "placeholder")
 
 
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 def bundle():
     from mulehunt.models import load_model
     try:
@@ -33,20 +33,20 @@ def bundle():
         return None
 
 
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 def features():
     path = Path("data/processed/features.parquet")
     return pd.read_parquet(path).set_index("account_id") if path.exists() else None
 
 
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 def rings():
     from mulehunt.trace import load_rings
     g, kind = graph()
     return load_rings(g.data_dir)
 
 
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 def demo_txns():
     from app.logic import demo_transactions
     pre = Path("build/b_app/demo_transactions.csv")
@@ -56,22 +56,22 @@ def demo_txns():
     return demo_transactions(g, rings())
 
 
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 def false_alarms():
     from mulehunt.adversarial import measure_false_alarms
     g, _ = graph()
     return measure_false_alarms(g.eval_tx)
 
 
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 def text_model():
     from text.classifier import load_artifact
     return load_artifact()
 
 
 def footer():
-    st.divider()
-    st.caption(HONEST_FRAMING + " Flags are prompts for human review, not automatic freezes.")
+    st.markdown(f"<div class='mh-foot'>{HONEST_FRAMING} Every flag here is a prompt for an analyst to review, "
+                "never an automatic freeze.</div>", unsafe_allow_html=True)
 
 
 def data_banner():
