@@ -1,3 +1,5 @@
-language,messages,accuracy,macro_f1
-english,7,0.857,0.462
-hinglish,1,0.0,0.0
+language,subset,messages,accuracy,macro_f1
+english,UCI,1010,0.991,0.978
+english,Indian,94,1.0,1.0
+hindi,Indian,15,1.0,1.0
+hinglish,Indian,26,1.0,1.0
