@@ -1,0 +1,13 @@
+algorithm,seed,seconds
+hill_climbing,0,10.67
+hill_climbing,1,8.69
+hill_climbing,2,10.11
+simulated_annealing,0,6.73
+simulated_annealing,1,6.07
+simulated_annealing,2,5.29
+local_beam,0,7.27
+local_beam,1,6.98
+local_beam,2,6.48
+genetic_algorithm,0,6.77
+genetic_algorithm,1,6.79
+genetic_algorithm,2,7.09
