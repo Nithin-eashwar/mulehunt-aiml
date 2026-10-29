@@ -395,6 +395,7 @@ def run_feature_selection_study(path=FEATURES, fig_dir=FIGURES, tab_dir=TABLES):
     runs = runs.drop(columns=["_best"])
     runs.to_csv(tab_dir / "local_fs_runs.csv", index=False)
     summary.to_csv(tab_dir / "local_fs_summary.csv", index=False)
+    timing.insert(0, {"algorithm": "one baseline LR fit (all features)", "seed": "-", "seconds": round(one_fit, 3)})
     pd.DataFrame(timing).to_csv(tab_dir / "local_fs_timing.csv", index=False)
     fig = convergence_figure(hist, P.EVAL_BUDGET, fig_dir / "local_fs_convergence.png", "fitness (val PR-AUC - penalty)")
     ablation = Path("reports/a_tables/ablation.csv")
@@ -516,7 +517,7 @@ and one budget of `EVAL_BUDGET = {P.EVAL_BUDGET}` **unique** fitness evaluations
         ("Feature selection", [f"""
 Solution: a 20-bit string in `FEATURE_COLUMNS` order. Fitness (B-D13): validation PR-AUC of
 `mulehunt.models.make_baseline_lr()` fitted on train with the selected columns, minus
-{P.FEATURE_PENALTY} per feature; the empty set scores -1. One fit takes {fs['one_fit_s']:.2f} s.""",
+{P.FEATURE_PENALTY} per feature; the empty set scores -1. Fit and run times are in `b_tables/local_fs_timing.csv`.""",
                                "Per algorithm (over seeds):", fs["summary"], "Every run:", fs["runs"],
                                "Baseline:", fs["baseline"], fs["figure"]] +
          (["Person A's per-group ablation (random forest), for comparison:", fs["ablation"]]
