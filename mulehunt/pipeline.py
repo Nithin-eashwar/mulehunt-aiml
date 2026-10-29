@@ -9,8 +9,8 @@ Each stage is the same CLI you can run on its own, run as its own Python process
 each writes its own report: validate -> reports/a_01_simulator.md, models ->
 a_05_classifiers.md, clustering -> a_06_clustering.md.
 
-A default run writes the committed deliverables (data/generated/CHECKSUMS.txt,
-models/, reports/). Any other run writes under --out-root instead: the stages run
+A default run writes the committed deliverables (data/generated/CHECKSUMS.txt and
+FEATURES_CHECKSUM.txt, models/, reports/). Any other run writes under --out-root instead: the stages run
 there with their own copy of the inputs, so a development run never touches the
 files Person B relies on. --small does this by default.
 
