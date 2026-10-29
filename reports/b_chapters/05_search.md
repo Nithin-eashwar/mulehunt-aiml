@@ -66,7 +66,7 @@ For each ring, we compare the mules (tiers 1-3) found on trails with those the r
 
 *All trails* collects every account on any time-respecting trail of ≤ 6 hops from the start to a cash-out. With only the single BFS trail per start, trails find 377 mules (0.83), 103 missed by the classifier, and together the two reach 0.905. Fan-out rings (one tier-1 mule paying 3-5 tier-2 mules) are why one shortest trail is not enough.
 
-**This is the headline:** the classifier misses 65% of `fake_kyc` mules (sleepers with normal history), and following the money from one flagged victim payment recovers all of them, at the cost of one genuine account. The B-D1 assumption matters here: the goal set is the true cash-out accounts.
+**This is the headline, and it is a best case.** The classifier misses 65% of `fake_kyc` mules (sleepers with normal history), and following the money from one flagged victim payment recovers all of them, touching one genuine account. But search is told exactly which accounts are cash-outs (B-D1), and in the simulator cash-out accounts forward nothing. So "75/75 rings traced", "trail precision 1.0" and "1 genuine account touched" are partly guaranteed by that assumption. With a partial or noisy goal set, all three would be lower.
 
 ## 5.5 Window sensitivity
 

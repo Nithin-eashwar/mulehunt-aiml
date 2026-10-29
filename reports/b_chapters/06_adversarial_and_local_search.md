@@ -52,13 +52,13 @@ One framework (`Problem`, a memoising cache that counts **unique** evaluations, 
 | Local beam | 0.7534 | 0.7760 | 11.3 | 118 |
 | Genetic algorithm | 0.7518 | 0.7765 | 12.3 | 136 |
 
-All 20 features give val PR-AUC 0.7560; the best subset keeps 11 (`total_inflow, total_outflow, pass_through_ratio, in_degree, out_degree, new_counterparty_share, fan_out_max_24h, neighbor_suspicious_share, txn_count, night_txn_share, below_threshold_share`) and scores 0.7784. All 12 runs keep the same core six (`pass_through_ratio, in_degree, out_degree, new_counterparty_share, fan_out_max_24h, txn_count`); `device_count` and `counterparty_state_mismatch_share` are never chosen. Four of the core six are network features, which agrees with Person A's ablation: adding the network group lifts the random forest's test PR-AUC from 0.835 to 0.921. **Test PR-AUC of that subset, refit on train, reported once: 0.8159.**
+All 20 features give val PR-AUC 0.7560; the best subset keeps 11 (`total_inflow, total_outflow, pass_through_ratio, in_degree, out_degree, new_counterparty_share, fan_out_max_24h, neighbor_suspicious_share, txn_count, night_txn_share, below_threshold_share`) and scores 0.7784. All 12 runs keep the same core six (`pass_through_ratio, in_degree, out_degree, new_counterparty_share, fan_out_max_24h, txn_count`); `device_count` and `counterparty_state_mismatch_share` are never chosen. Four of the core six are network features, which agrees with Person A's ablation: adding the network group lifts the random forest's test PR-AUC from 0.835 to 0.921. **On test the gain disappears:** the subset scores 0.8159, against 0.8322 for the same logistic regression on all 20 features. The subset was chosen on a validation split with only 20 rings, so part of its validation advantage is fit to that split. This is a normal result: local search found a simpler model, not a better one.
 
 **Threshold tuning** (B-D15): choose the random forest's flag threshold to minimise `C_FN × FN + FP` on validation. The exact optimum is found by scanning every distinct probability, so each local-search result can be *checked*; that is why a 1-D problem is still a fair demonstration. Every algorithm lands within 1.2% of the exact cost at all three ratios. At the headline C_FN = 50, SA picks t = 0.123. On test (once):
 
-| Threshold | Test cost | FN | FP | Precision | Recall |
-|---|---|---|---|---|---|
-| SA, C_FN = 50 (0.123) | **617** | 8 | 217 | 0.427 | 0.953 |
-| Person A's F1 threshold (0.484) | 2,105 | 42 | 5 | 0.962 | 0.753 |
+| Threshold | Test cost | FN | Genuine accounts flagged | Share of genuine | Precision | Recall |
+|---|---|---|---|---|---|---|
+| SA, C_FN = 50 (0.123) | 617 | 8 | **217** | **1.7%** of 12,490 | 0.427 | 0.953 |
+| Person A's F1 threshold (0.484) | 2,105 | 42 | 5 | 0.04% | 0.962 | 0.753 |
 
-If a missed mule costs 50 times a false alarm, the bank should flag far more accounts: recall rises from 0.75 to 0.95 at the price of 212 more reviews.
+The cost column favours the tuned threshold by construction, since that is the quantity it was tuned to minimise; read it next to the false-alarm count. If a missed mule really costs 50 times a false alarm, flagging 217 genuine accounts to raise recall from 0.75 to 0.95 is worth it. But that exceeds the 1% false-alarm limit Person A's chapter uses, so it is a policy choice for the bank, not a free win.

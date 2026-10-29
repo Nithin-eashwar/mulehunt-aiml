@@ -55,5 +55,6 @@ The best model flags **54 of the 56** reported Indian scam messages (recall 0.96
 - **No collected messages.** The Indian part is written by us, from cited real cases (reported) or from templates (synthetic). Real messages are messier, with typos, mixed scripts and odd formatting.
 - **One author.** The reported and synthetic messages share a writer, so even the transfer test is easier than truly unseen messages would be. These numbers are an upper bound.
 - **UCI is old and not Indian.** It contributes real genuine SMS and generic spam from about 2011, which we label `other_scam`.
+- **Every genuine message in the test set is a UK or Singapore SMS.** So "0.4% false alarms" says nothing about genuine Indian bank SMS (OTPs, debit alerts, KYC-complete notices), which look a lot like scams. The cheap fix is a held-out set of 30-50 anonymised genuine bank and UPI SMS from our own phones; until then, treat the false-alarm rate as untested on Indian messages.
 - **56 reported messages:** one message changes a type's recall by 10-17 points.
 - **Placeholders hide signal**, such as which domain a link points to.
