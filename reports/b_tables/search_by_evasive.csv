@@ -1,0 +1,15 @@
+evasive,algorithm,success_rate,mean_expanded,trail_precision
+False,astar_h1,0.9944,9.5547,1.0
+False,astar_h2,0.9944,9.5547,1.0
+False,bfs,0.9944,5.1876,1.0
+False,dfs,0.9944,13.7409,1.0
+False,dls,0.9944,3.398,1.0
+False,iddfs,0.9944,7.7474,1.0
+False,ucs,0.9944,9.5547,1.0
+True,astar_h1,1.0,17.4857,1.0
+True,astar_h2,1.0,17.4857,1.0
+True,bfs,1.0,8.8429,1.0
+True,dfs,1.0,5.1714,0.9986
+True,dls,1.0,3.65,0.9986
+True,iddfs,1.0,11.3714,1.0
+True,ucs,1.0,17.4857,1.0

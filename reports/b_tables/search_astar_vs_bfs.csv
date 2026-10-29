@@ -1,0 +1,3 @@
+trail,starts,mean_hops,mean_neg_log_risk_cost,trail_precision,same_trail_share
+BFS (fewest hops),2266,2.7489,0.4367,1.0,0.6359
+A* h2 (most suspicious),2266,2.7489,0.3363,1.0,0.6359
