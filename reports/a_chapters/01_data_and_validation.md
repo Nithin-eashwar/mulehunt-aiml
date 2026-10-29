@@ -25,7 +25,7 @@ A mule network is a *graph* problem: money moves from a victim through tiers of 
 | Fraud accounts | 605 (1.20%): 75 fraudsters, 170 tier-1, 214 tier-2 and 71 tier-3 mules, 75 cash-out accounts |
 | Fraud transactions | 7,347 (0.41%), under the handoff's 1% ceiling |
 
-Output follows the shared contract (`CONTRACTS.md`): `accounts.csv`, `transactions.csv` and the per-account `features.parquet`. Account and device ids are assigned in random order so an id never hints at a role. The whole dataset is reproducible: the same seed and pinned package versions give byte-identical files, which `CHECKSUMS.txt` verifies.
+Output follows the shared contract (`CONTRACTS.md`): `accounts.csv`, `transactions.csv` and the per-account `features.parquet`. Account and device ids are assigned in random order so an id never hints at a role. The whole dataset is reproducible: the same seed and pinned package versions give byte-identical CSVs, which `CHECKSUMS.txt` verifies. The feature table is checked by its contents (`FEATURES_CHECKSUM.txt`), because a parquet file records the version of the library that wrote it: rebuilt with newer numpy, pandas and pyarrow, every feature value was bit-identical but the file bytes were not.
 
 **Normal behaviour.** Five account types (salaried, student, gig worker, small and large merchant) make:
 

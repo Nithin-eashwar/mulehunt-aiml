@@ -1,6 +1,7 @@
 """Per-account features for the fraud models (handoff §6, plan D8/D10/D12).
 
     python -m mulehunt.features [--data data/generated] [--out data/processed/features.parquet]
+    python -m mulehunt.features --verify     check an existing features.parquet against FEATURES_CHECKSUM.txt
 
 Each account belongs to one split and is described by its transactions in that
 split's 30-day feature window [start, end): train days 31-60, val 46-75, test
@@ -78,6 +79,9 @@ LARGE_RECEIPT = 10000
 FAN_WINDOW_H = 24
 HISTORY_DAYS = 30
 OUT_PATH = Path("data/processed/features.parquet")
+# Lives next to CHECKSUMS.txt. A parquet file records the library version that wrote it, so its
+# bytes differ between machines even when the table is identical; this checks the table instead.
+FEATURES_CHECKSUM = "FEATURES_CHECKSUM.txt"
 
 
 def split_windows(cfg: dict) -> dict[str, tuple[pd.Timestamp, pd.Timestamp]]:
@@ -261,11 +265,37 @@ def account_scenarios(txns: pd.DataFrame) -> pd.Series:
     return counts.drop_duplicates("account_id").set_index("account_id").scenario
 
 
-def _update_checksum(checksums: Path, target: Path) -> None:
-    rel = Path("..") / target.relative_to(checksums.parent.parent) if target.is_relative_to(checksums.parent.parent) else target
-    line = f"{hashlib.sha256(target.read_bytes()).hexdigest()}  {rel.as_posix()}"
-    kept = [l for l in checksums.read_text().splitlines() if not l.endswith(f"  {rel.as_posix()}")] if checksums.exists() else []
-    checksums.write_text("\n".join(kept + [line]) + "\n", encoding="utf-8", newline="\n")
+def content_checksum(table: pd.DataFrame) -> str:
+    """SHA-256 of the table's column names, order and exact values, independent of the file format.
+    -0.0 counts as 0.0 and every NaN as the same NaN."""
+    h = hashlib.sha256()
+    for col in table.columns:
+        h.update(f"{col}\0{table[col].dtype}\0".encode())
+        values = table[col].to_numpy()
+        if values.dtype.kind == "f":
+            values = np.where(np.isnan(values), np.nan, values + 0.0).astype("<f8")
+            h.update(values.tobytes())
+        elif values.dtype.kind in "iub":
+            h.update(values.astype("<i8").tobytes())
+        else:
+            h.update("\0".join(map(str, values)).encode())
+    return h.hexdigest()
+
+
+def _checksum_path(data: Path, out: Path) -> Path | None:
+    """FEATURES_CHECKSUM.txt in the data folder, but only for that data's own features.parquet
+    (data/generated -> data/processed/features.parquet); any other --out records nothing."""
+    own = data.parent / "processed" / OUT_PATH.name
+    return data / FEATURES_CHECKSUM if out.resolve() == own.resolve() else None
+
+
+def _verify(data: Path, out: Path) -> None:
+    recorded = (data / FEATURES_CHECKSUM).read_text(encoding="utf-8").split()[0]
+    actual = content_checksum(pd.read_parquet(out))
+    if actual != recorded:
+        print(f"MISMATCH: {out} contents {actual[:16]}..., recorded {recorded[:16]}...")
+        raise SystemExit(1)
+    print(f"OK: {out} matches {data / FEATURES_CHECKSUM}")
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -273,8 +303,11 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--data", default="data/generated")
     parser.add_argument("--config", default=str(DEFAULT_PATH))
     parser.add_argument("--out", default=str(OUT_PATH))
+    parser.add_argument("--verify", action="store_true", help=f"check --out against {FEATURES_CHECKSUM} and exit")
     args = parser.parse_args(argv)
     data = Path(args.data)
+    if args.verify:
+        return _verify(data, Path(args.out))
     cfg = load_config(args.config)
     accounts = read_accounts(data / "accounts.csv")
     txns = read_transactions(data / "transactions.csv")
@@ -283,8 +316,10 @@ def main(argv: list[str] | None = None) -> None:
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     table.to_parquet(out, index=False, engine="pyarrow")
-    if (data / "CHECKSUMS.txt").exists():
-        _update_checksum(data / "CHECKSUMS.txt", out)
+    checksum = _checksum_path(data, out)
+    if checksum is not None:
+        checksum.write_text(f"{content_checksum(table)}  {OUT_PATH.name} (table contents)\n",
+                            encoding="utf-8", newline="\n")
     print(table.groupby("split").label.agg(accounts="size", positives="sum").to_string())
     print(f"wrote {out} ({len(table):,} accounts x {len(FEATURE_COLUMNS)} features)")
 
