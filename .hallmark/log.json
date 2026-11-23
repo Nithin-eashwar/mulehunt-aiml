@@ -1,0 +1,29 @@
+[
+ {
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "app",
+  "shape": "app screen",
+  "theme": "dusk",
+  "axes": "dark/grotesk-sans/cool",
+  "nav": "top bar, wordmark and four ruled links",
+  "footer": "ruled honest-framing line",
+  "imagery": "none (app)",
+  "photos": [],
+  "entry": "none",
+  "fingerprint": "ledger-first app screens",
+  "sections": [
+   "transaction check",
+   "mule trail ledger",
+   "evasion game",
+   "scam message well"
+  ],
+  "signature": "the trail ledger, one row per hop, cash-out hop in apricot",
+  "waived": [
+   "72",
+   "39b"
+  ],
+  "prompt": "analyst workbench for tracing stolen UPI money through mule accounts",
+  "date": "2026-11-23"
+ }
+]

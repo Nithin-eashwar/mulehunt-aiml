@@ -8,7 +8,6 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 os.chdir(ROOT)
 
-import pandas as pd  # noqa: E402
 import streamlit as st  # noqa: E402
 
 from app import data, style  # noqa: E402
@@ -36,28 +35,25 @@ else:
 with st.spinner("Solving the game"):
     rounds, acc, counts = game_run(X, R, lam, policy, fa)
 
-m = st.columns(4)
-m[0].metric("Moved past the bank", f"Rs {acc['uncaught'] / 1000:,.1f}k")
-m[1].metric("Frozen", f"Rs {acc['caught'] / 1000:,.1f}k")
-m[2].metric("Spent on mules", f"Rs {acc['fees'] / 1000:,.1f}k")
-m[3].metric("Fraudster's payoff", f"Rs {acc['payoff'] / 1000:,.1f}k")
+st.markdown(style.tally([
+    ("Moved past the bank", f"Rs {acc['uncaught']:,.0f}"), ("Frozen", f"Rs {acc['caught']:,.0f}"),
+    ("Spent on mules", f"Rs {acc['fees']:,.0f}"), ("Fraudster's payoff", f"Rs {acc['payoff']:,.0f}")]),
+    unsafe_allow_html=True)
 
 st.markdown("### The fraudster's best reply, day by day")
-days = rounds[rounds["round"] != "frozen"].copy()
-view = pd.DataFrame({
-    "Day": days["round"].astype(int),
-    "Bank's rule": [f"Rs {t:,.0f}{' + velocity' if v else ''}" for t, v in zip(days.threshold, days.velocity)],
-    "Moves": [f"{f:.0%} of Rs {r:,.0f}" for f, r in zip(days.fraction, days.remaining_before)],
-    "Parts": days.parts.astype(int),
-    "Part size": [f"Rs {x:,.0f}" for x in days.moved / days.parts],
-    "Frozen": [f"Rs {x:,.0f}" for x in days.caught], "Got through": [f"Rs {x:,.0f}" for x in days.uncaught],
-})
-st.dataframe(view, hide_index=True, use_container_width=True)
+days = rounds[rounds["round"] != "frozen"]
+table = [[int(d.round), f"Rs {d.threshold:,.0f}{' + velocity' if d.velocity else ''}",
+          f"{d.fraction:.0%} of Rs {d.remaining_before:,.0f}", int(d.parts), f"Rs {d.moved / d.parts:,.0f}",
+          f"Rs {d.caught:,.0f}", f"Rs {d.uncaught:,.0f}"] for d in days.itertuples()]
+caught_days = {i for i, d in enumerate(days.itertuples()) if d.caught > 0}
+st.markdown(style.ledger(["Day", "Bank's rule", "Moves", "Parts", "Part size", "Frozen", "Got through"], table,
+                         num={3, 4, 5, 6}, open_rows=caught_days), unsafe_allow_html=True)
+st.caption("Highlighted days are the ones where the bank froze money.")
 
 if counts:
     st.markdown("### Game-tree nodes visited for the same answer")
-    nodes = pd.DataFrame({"method": ["plain minimax", "alpha-beta", "alpha-beta, ordered"], "nodes": list(counts.values())})
-    st.altair_chart(style.bars(nodes, "method", "nodes", height=200), use_container_width=True)
+    st.markdown(style.bars([("Plain minimax", counts["minimax"]), ("Alpha-beta", counts["alpha-beta"]),
+                            ("Alpha-beta, ordered", counts["alpha-beta + ordering"])]), unsafe_allow_html=True)
     saving = 1 - counts["alpha-beta + ordering"] / counts["minimax"]
     st.caption(f"Alpha-beta with move ordering skips {saving:.0%} of the tree and returns the same rule and value.")
 data.footer()

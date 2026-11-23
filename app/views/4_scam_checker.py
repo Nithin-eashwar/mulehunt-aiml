@@ -40,21 +40,23 @@ if text.strip():
     p = out["scam_prob"]
     flagged = p >= 0.5
     marked = html.escape(clean)
-    for tok, w in out["top_tokens"]:
+    for tok, w in out["top_tokens"] if flagged else []:  # highlights explain a scam verdict only
         if w > 0 and len(tok) > 1:
             pattern = rf"(?i)(?<![\w;]){re.escape(html.escape(tok))}(?!\w)"
             marked = re.sub(pattern, lambda m: f"<mark>{m.group(0)}</mark>", marked)
-    st.markdown(
-        f"<div class='mh-panel' style='margin:.6rem 0 1rem'><div class='mh-verdict'>"
-        f"<span class='v' style='color:{style.SIGNAL if flagged else style.CALM}'>"
-        f"{'Likely scam' if flagged else 'Looks genuine'}</span>"
-        f"<span class='n'>P(scam) {p:.1%}</span>"
-        + (style.tag(out['scam_type'].replace('_', ' '), True) if flagged else "")
-        + "</div></div>", unsafe_allow_html=True)
+    st.markdown("<div class='mh-panel'>"
+                + style.verdict("Likely scam" if flagged else "Looks genuine", flagged,
+                                f"P(scam) {p:.1%}" + (f", likely {out['scam_type'].replace('_', ' ')}" if flagged else ""))
+                + "</div>", unsafe_allow_html=True)
     st.markdown("### What the model reacted to")
-    st.markdown(f"<div class='mh-msg'>{marked}</div>", unsafe_allow_html=True)
-    st.caption("Highlighted: the tokens that pushed hardest towards 'scam'. "
-               + ", ".join(f"{t} ({w:+.2f})" for t, w in out["top_tokens"]))
+    cap = ("highlighted words pushed it towards scam." if flagged else "nothing in it reads as a scam.")
+    st.markdown(f"<div class='mh-well'><div class='mh-card'>{marked}</div>"
+                f"<p class='mh-cap'>The message as the model read it, after scrubbing; {cap}</p></div>",
+                unsafe_allow_html=True)
+    st.caption("Top tokens: " + ", ".join(f"{t} ({w:+.2f})" for t, w in out["top_tokens"]))
+else:
+    st.markdown(style.empty("Nothing to score yet", "Paste a message above, or pick an example."),
+                unsafe_allow_html=True)
 st.caption(f"Model trained on {art['trained_on']:,} messages: real UCI SMS (CC BY 4.0), Indian scam messages written "
            "from cited news and bank advisories, and synthetic Indian messages. On cited scams it never saw in "
            "training it catches 54 of 56. No message was collected from a person.")
