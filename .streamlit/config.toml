@@ -1,10 +1,10 @@
-# hex mirrors of app/assets/tokens.css (Dusk); Streamlit's theme cannot read CSS variables
+# hex mirrors of app/assets/tokens.css (Piste); Streamlit's theme cannot read CSS variables
 [theme]
-base = "dark"
-primaryColor = "#a0b0f4"
-backgroundColor = "#0e1017"
-secondaryBackgroundColor = "#151820"
-textColor = "#f4f1ed"
+base = "light"
+primaryColor = "#1f50f5"
+backgroundColor = "#f8fafe"
+secondaryBackgroundColor = "#edf0f6"
+textColor = "#0a0d12"
 font = "sans serif"
 
 [client]

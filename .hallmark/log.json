@@ -1,6 +1,33 @@
 [
  {
   "mode": "redesign",
+  "depth": "restyle",
+  "scope": "app",
+  "shape": "app screen",
+  "theme": "piste",
+  "axes": "light/display-condensed/cool",
+  "nav": "top bar, wordmark and four ruled links",
+  "footer": "ruled honest-framing line",
+  "imagery": "none (app)",
+  "photos": [],
+  "entry": "none",
+  "fingerprint": "ledger-first app screens",
+  "sections": [
+   "transaction check",
+   "mule trail ledger",
+   "evasion game",
+   "scam message well"
+  ],
+  "signature": "the trail ledger, cash-out hop in cobalt",
+  "waived": [
+   "72",
+   "39b"
+  ],
+  "prompt": "analyst workbench for tracing stolen UPI money through mule accounts",
+  "date": "2026-11-23"
+ },
+ {
+  "mode": "redesign",
   "depth": "full",
   "scope": "app",
   "shape": "app screen",

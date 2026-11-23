@@ -1,4 +1,4 @@
-"""Shared look for the dashboard (Hallmark redesign, theme Dusk).
+"""Shared look for the dashboard (Hallmark redesign, theme Piste).
 
 Every colour and face lives in app/assets/tokens.css; app/assets/app.css holds the
 components. Python only emits HTML and SVG with classes; no colour is set from Python.
@@ -11,8 +11,7 @@ from pathlib import Path
 import streamlit as st
 
 ASSETS = Path(__file__).parent / "assets"
-FONTS = ("https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@500;600"
-         "&family=Wix+Madefor+Text:wght@400;500;600&display=swap")
+FONTS = "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Barlow:wght@400;500&display=swap"
 
 TIER_LABEL = {"victim": "victim", "fraudster": "fraudster", "mule_t1": "tier-1 mule", "mule_t2": "tier-2 mule",
               "mule_t3": "tier-3 mule", "cashout": "cash-out", None: "genuine"}
