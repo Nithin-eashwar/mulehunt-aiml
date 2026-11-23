@@ -14,7 +14,7 @@ The default demo payment shows why search is needed: the receiving tier-1 mule s
 
 ## 8.2 Mule trail explorer
 
-Pick a flagged victim payment, an algorithm (BFS, IDDFS, A\*) and a window (12 / 24 / 48 h); the search runs live with the 200,000-expansion budget. The trail is drawn with pyvis, with one-hop context in grey and nodes coloured by risk. **Reveal ground truth** recolours nodes by their true tier and marks mules the classifier missed.
+Pick a flagged victim payment, an algorithm (BFS, IDDFS, A\*) and a window (12 / 24 / 48 h); the search runs live with the 200,000-expansion budget. The trail is set out as a ledger, one row per hop with the amount, the time and how long the money waited, with the cash-out hop marked; below it, a drawing of the trail left to right with each account's other payees, nodes coloured by risk. **Reveal ground truth** recolours nodes by their true tier and marks mules the classifier missed.
 
 ![Mule trail](../b_figures/app_2_mule_trail.png)
 

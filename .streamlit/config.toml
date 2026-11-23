@@ -1,10 +1,12 @@
+# hex mirrors of app/assets/tokens.css (Piste); Streamlit's theme cannot read CSS variables
 [theme]
 base = "light"
-primaryColor = "#C2410C"
-backgroundColor = "#F7F5F0"
-secondaryBackgroundColor = "#EEEAE1"
-textColor = "#1B2333"
+primaryColor = "#1f50f5"
+backgroundColor = "#f8fafe"
+secondaryBackgroundColor = "#edf0f6"
+textColor = "#0a0d12"
 font = "sans serif"
 
 [client]
 toolbarMode = "minimal"
+showSidebarNavigation = false

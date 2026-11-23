@@ -1,16 +1,12 @@
 """Plain, testable logic behind the dashboard pages (no Streamlit here)."""
 
-import math
-from pathlib import Path
 
-import numpy as np
 import pandas as pd
 
 from mulehunt import b_params as P
 from mulehunt.search import astar, bfs, iddfs, layered_heuristic, make_cost_fn
 from mulehunt.trace import ring_members, ring_starts
 
-FEATURES = Path("data/processed/features.parquet")
 MULE_TIERS = ("mule_t1", "mule_t2", "mule_t3")
 
 
@@ -95,77 +91,105 @@ def ring_of(account, rings):
     return None, None
 
 
-def risk_colour(p):
-    """Calm green-grey at 0 to signal vermilion at 1."""
+def trail_rows(graph, txn_id, path) -> list[dict]:
+    """The trail as ledger rows: the victim payment, then one row per hop, with how long
+    the money sat in the sending account before moving on."""
+    from mulehunt.graph import to_timestamp
+    edges = [graph.edge_by_txn(txn_id)] + list(path)
+    rows = []
+    for i, e in enumerate(edges):
+        wait = (e.time_ns - edges[i - 1].time_ns) / 3.6e12 if i else None
+        rows.append({"hop": "victim payment" if i == 0 else f"hop {i}", "from": e.sender, "to": e.receiver,
+                     "amount": e.amount, "time": to_timestamp(e.time_ns), "waited_h": wait})
+    return rows
+
+
+from app.style import TIER_LABEL  # noqa: E402
+
+
+def risk_band(p) -> str:
+    """The legend's three bands, as CSS classes defined from tokens."""
     if p is None:
-        return "#D6D2C8"
-    p = min(1.0, max(0.0, p))
-    stops = [(0x7F, 0x9A, 0x8A), (0xE0, 0xA8, 0x5E), (0xC2, 0x41, 0x0C)]  # muted green, amber, vermilion
-    lo, hi, t = (stops[0], stops[1], p / 0.5) if p < 0.5 else (stops[1], stops[2], (p - 0.5) / 0.5)
-    return "#" + "".join(f"{round(a + (b - a) * t):02x}" for a, b in zip(lo, hi))
+        return "tier-genuine"
+    return "risk-high" if p >= 0.67 else ("risk-mid" if p >= 0.33 else "risk-low")
 
 
-from app.style import TIER as TIER_COLOURS  # noqa: E402
-
-
-def trail_html(graph, txn_id, path, risk, rings=None, reveal=False, threshold=0.5, height="480px") -> str:
-    from pyvis.network import Network
+def trail_svg(graph, txn_id, path, risk, rings=None, reveal=False, threshold=0.5, width=1000) -> str:
+    """The trail as inline SVG: trail accounts left to right, each one's one-hop context
+    fanned around it. Colours are token classes; hovering a node shows its id and risk."""
+    import html as _html
+    import math as _math
     edges, context = trail_context(graph, txn_id, path)
-    net = Network(height=height, width="100%", directed=True, cdn_resources="in_line", bgcolor="#FFFFFF",
-                  font_color="#1B2333")
-    trail_nodes = {edges[0].sender} | {e.receiver for e in edges}
-    for e in edges + context:
-        for a in (e.sender, e.receiver):
-            if a in net.get_nodes():
-                continue
-            p = None if risk is None else risk.get(a)
-            title = f"{a}\nrisk {p:.3f}" if p is not None else a
-            colour = risk_colour(p)
-            label = a[-6:]
-            if reveal and rings is not None:
-                _, tier = ring_of(a, rings)
-                colour = TIER_COLOURS.get(tier, "#EEEEEE")
-                label += f"\n{tier or 'genuine'}"
-                if tier in MULE_TIERS and (p is None or p < threshold):
-                    label += "\n(classifier missed)"
-            net.add_node(a, label=label, title=title, color=colour, size=20 if a in trail_nodes else 8,
-                         font={"face": "IBM Plex Mono", "size": 12 if a in trail_nodes else 10,
-                               "color": "#1B2333" if a in trail_nodes else "#8A8F98"},
-                         borderWidth=0)
-    for e in edges:
-        net.add_edge(e.sender, e.receiver, title=f"Rs {e.amount:,.0f}", label=f"Rs {e.amount:,.0f}", width=2.5,
-                     color="#1B2333", font={"face": "IBM Plex Mono", "size": 11, "strokeWidth": 4,
-                                            "strokeColor": "#FFFFFF"})
+    chain = [edges[0].sender] + [e.receiver for e in edges]
+    step = (width - 160) / max(len(chain) - 1, 1)
+    height = 360
+    pos = {a: (80 + i * step, height / 2) for i, a in enumerate(chain)}
+    by_parent = {}
     for e in context:
-        net.add_edge(e.sender, e.receiver, color="#E2DED5", width=1)
-    net.set_options('{"physics": {"barnesHut": {"springLength": 130}, "stabilization": {"iterations": 200}},'
-                    ' "edges": {"arrows": {"to": {"scaleFactor": 0.6}}, "smooth": false},'
-                    ' "interaction": {"hover": true}}')
-    page = net.generate_html()
-    fonts = ("<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500"
-             "&family=IBM+Plex+Sans:wght@400;600&display=swap'><style>body{margin:0}#mynetwork{border:0!important;"
-             "border-radius:12px}div.vis-tooltip{font-family:'IBM Plex Mono',monospace;font-size:12px;"
-             "background:#1B2333;color:#F7F5F0;border:0;border-radius:6px;padding:6px 8px}</style>")
-    return page.replace("</head>", fonts + "</head>", 1)
+        by_parent.setdefault(e.sender, []).append(e.receiver)
+    for j, (parent, kids) in enumerate(by_parent.items()):
+        px, py = pos[parent]
+        side = -1 if j % 2 == 0 else 1  # alternate above and below the chain
+        for k, kid in enumerate(kids):
+            if kid in pos:
+                continue
+            ang = _math.radians(-150 + 120 * (k + 0.5) / len(kids)) * side
+            pos[kid] = (px + 95 * _math.cos(ang), py + 110 * _math.sin(ang))
 
+    def cls(a):
+        p = None if risk is None else risk.get(a)
+        if reveal and rings is not None:
+            tier = ring_of(a, rings)[1]
+            return f"tier-{tier or 'genuine'}", tier, p
+        return risk_band(p), None, p
 
-def trail_metrics(result, cost_fn=None) -> pd.DataFrame:
-    return pd.DataFrame([{"found": result.found, "goal": result.goal, "hops": result.hops,
-                          "nodes expanded": result.nodes_expanded, "peak stored": result.peak_stored,
-                          "time (ms)": round(1000 * result.elapsed_s, 1),
-                          "cost": None if not result.found or math.isinf(result.cost) else round(result.cost, 4),
-                          "truncated": result.truncated}])
+    parts = [f"<svg class='mh-graph' viewBox='0 0 {width} {height}' role='img' "
+             f"aria-label='Trail of {len(edges)} payments from {chain[0]} to {chain[-1]}'>",
+             "<defs><marker id='mh-arrow' viewBox='0 0 8 8' refX='7' refY='4' markerWidth='7' markerHeight='7' "
+             "orient='auto'><path d='M0,0 L8,4 L0,8 z' class='arrow'/></marker></defs>"]
+    for e in context:
+        (x1, y1), (x2, y2) = pos[e.sender], pos[e.receiver]
+        parts.append(f"<line class='ctx' x1='{x1:.1f}' y1='{y1:.1f}' x2='{x2:.1f}' y2='{y2:.1f}'/>")
+    for e in edges:
+        (x1, y1), (x2, y2) = pos[e.sender], pos[e.receiver]
+        parts.append(f"<line class='hop' x1='{x1 + 16:.1f}' y1='{y1:.1f}' x2='{x2 - 18:.1f}' y2='{y2:.1f}' "
+                     "marker-end='url(#mh-arrow)'/>")
+        parts.append(f"<text class='amt' x='{(x1 + x2) / 2:.1f}' y='{y1 - 12:.1f}'>Rs {e.amount:,.0f}</text>")
+    on_chain = set(chain)
+    for a, (x, y) in pos.items():
+        c, tier, p = cls(a)
+        big = a in on_chain
+        tip = f"{a}, risk {p:.3f}" if p is not None else f"{a}, no score"
+        label = a[-6:]
+        sub = ""
+        if reveal and rings is not None and big:
+            sub = TIER_LABEL.get(tier, "genuine")
+            if tier in MULE_TIERS and (p is None or p < threshold):
+                sub += ", classifier missed"
+        parts.append(f"<g class='node{' on' if big else ''}'><title>{_html.escape(tip)}</title>"
+                     f"<circle class='{c}' cx='{x:.1f}' cy='{y:.1f}' r='{14 if big else 6}'/>")
+        if big:
+            parts.append(f"<text class='id' x='{x:.1f}' y='{y + 32:.1f}'>{label}</text>")
+            if sub:
+                parts.append(f"<text class='sub' x='{x:.1f}' y='{y + 48:.1f}'>{_html.escape(sub)}</text>")
+        parts.append("</g>")
+    parts.append("</svg>")
+    return "".join(parts)
 
 
 # ---------------------------------------------------------------- page 3: game
 
 def game_run(X, R, lam, policy, fa):
-    from dataclasses import replace
-    from mulehunt.adversarial import (GameParams, Stats, accounting, fixed_detector, full_depth, initial_state,
-                                      minimax, minimax_detector, minimax_fraudster, play_out)
+    from mulehunt.adversarial import (GameParams, Stats, accounting, best_response, fixed_detector, full_depth,
+                                      initial_state, minimax, minimax_detector, minimax_fraudster, play_out)
     p = GameParams(X=float(X), R=int(R), alert_cost=float(lam), fa=fa)
-    pol = minimax_detector(p) if policy == "minimax" else fixed_detector(policy)
-    rows = play_out(pol, minimax_fraudster(p), p)
+    if policy == "minimax":
+        rows = play_out(minimax_detector(p), minimax_fraudster(p), p)
+    else:
+        # against a rule that never changes, the fraudster's best reply is the exact best response
+        # (minimax_fraudster would assume the bank switches to minimax on later days)
+        _, plan = best_response(policy, p)
+        rows = play_out(fixed_detector(policy), lambda state, d: plan[state[0]], p)
     counts = {}
     if R <= 4:
         for label, ab, order in (("minimax", False, False), ("alpha-beta", True, False),
