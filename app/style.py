@@ -1,4 +1,4 @@
-"""Shared look for the dashboard (Hallmark redesign, theme Piste).
+"""Shared look for the dashboard (Hallmark redesign, custom direction: ask on the left, answer on the right).
 
 Every colour and face lives in app/assets/tokens.css; app/assets/app.css holds the
 components. Python only emits HTML and SVG with classes; no colour is set from Python.
@@ -11,7 +11,7 @@ from pathlib import Path
 import streamlit as st
 
 ASSETS = Path(__file__).parent / "assets"
-FONTS = "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Barlow:wght@400;500&display=swap"
+FONTS = "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700&display=swap"
 
 TIER_LABEL = {"victim": "victim", "fraudster": "fraudster", "mule_t1": "tier-1 mule", "mule_t2": "tier-2 mule",
               "mule_t3": "tier-3 mule", "cashout": "cash-out", None: "genuine"}
@@ -35,6 +35,12 @@ def setup(pages: list, current) -> None:
         with col.container(key="nav_current" if page.url_path == current.url_path else f"nav_{i}"):
             st.page_link(page, label=page.title)
     st.markdown("<div class='mh-rule'></div>", unsafe_allow_html=True)
+
+
+def workbench():
+    """Ask on the left, answer on the right: a narrow rail for the controls, a wide main for results."""
+    rail, main = st.columns([1.3, 2.7], gap="large")
+    return rail.container(key="rail"), main.container(key="main")
 
 
 def header(title: str, lede: str) -> None:

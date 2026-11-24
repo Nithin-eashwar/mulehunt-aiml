@@ -1,5 +1,4 @@
 :root {
-  color-scheme: light;
   --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
   --text-xs: 0.75rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.2rem; --text-xl: 1.44rem; --text-2xl: 1.728rem; --text-3xl: 2.074rem;
   --text-display-s: 1.44rem; --text-display: 1.728rem; --text-section: 1.2rem; --text-title: 1rem; --text-lead: 1rem;
@@ -8,13 +7,11 @@
   --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
   --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
   --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
-  --color-paper: oklch(98.5% 0.005 260); --color-paper-2: oklch(95.5% 0.008 260); --color-paper-3: oklch(91% 0.01 260);
-  --color-ink: oklch(16% 0.012 260); --color-ink-2: oklch(30% 0.014 260); --color-muted: oklch(48% 0.016 260);
-  --color-rule: oklch(88% 0.01 260);
-  --color-accent: oklch(52% 0.25 265); --color-accent-deep: oklch(40% 0.2 266); --color-accent-ink: oklch(98.5% 0.004 260); --color-focus: oklch(58% 0.22 28);
-  --color-field: var(--color-accent);
-  --font-display: "Barlow Condensed", ui-sans-serif, sans-serif; --font-body: "Barlow", ui-sans-serif, sans-serif; --font-outlier: var(--font-display);
-  --radius-card: 0; --radius-pill: 0; --rule-hair: 1px; --rule-bar: 2px;
-  --shadow-card: none;
-  --tracking-display: -0.005em; --display-weight: 800;
+  --color-paper: oklch(94.5% 0.007 85); --color-paper-2: oklch(99.4% 0.002 85); --color-paper-3: oklch(91% 0.008 85);
+  --color-ink: oklch(21% 0.02 320); --color-ink-2: oklch(36% 0.018 320); --color-muted: oklch(49% 0.014 320);
+  --color-rule: oklch(88% 0.008 85);
+  --color-accent: oklch(52% 0.2 350); --color-accent-ink: oklch(99% 0.004 350); --color-focus: oklch(52% 0.2 350);
+  --font-display: "Rethink Sans", ui-sans-serif, sans-serif; --font-body: "Rethink Sans", ui-sans-serif, sans-serif; --font-outlier: var(--font-body);
+  --radius-card: 16px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: none;
+  --tracking-display: -0.025em;
 }
