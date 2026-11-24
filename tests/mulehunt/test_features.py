@@ -1,17 +1,22 @@
+import shutil
+
 import numpy as np
 import pandas as pd
 import pytest
 
 from mulehunt.features import (
     FEATURE_COLUMNS,
+    FEATURES_CHECKSUM,
     FEATURE_GROUPS,
     TXN_ONLY,
     account_scenarios,
     build_feature_table,
     compute_account_features,
+    content_checksum,
     fifo_match,
     split_windows,
 )
+from mulehunt.features import main as features_main
 from simulator.config import load_config
 from simulator.schema import read_accounts, read_transactions
 
@@ -246,3 +251,63 @@ def test_account_scenarios(toy):
     assert set(s.unique()) == {"fake_kyc", "job_task", "digital_arrest"}
     fraud = tx[tx.is_fraud == 1]
     assert set(s.index) == set(fraud.sender_id) | set(fraud.receiver_id)
+
+
+def small_table():
+    return pd.DataFrame({"account_id": ["A", "B"], "total_inflow": [1.5, np.nan],
+                         "pass_through_ratio": [0.0, 0.25], "label": [0, 1], "split": ["train", "test"]})
+
+
+def test_content_checksum_ignores_file_bytes(tmp_path):
+    # Two writes of the same table can differ byte for byte (the writer records its version);
+    # the content checksum must not.
+    df = small_table()
+    df.to_parquet(tmp_path / "a.parquet", index=False, compression="snappy")
+    df.to_parquet(tmp_path / "b.parquet", index=False, compression="gzip")
+    assert (tmp_path / "a.parquet").read_bytes() != (tmp_path / "b.parquet").read_bytes()
+    assert content_checksum(pd.read_parquet(tmp_path / "a.parquet")) == \
+        content_checksum(pd.read_parquet(tmp_path / "b.parquet"))
+
+
+def test_content_checksum_sees_values_and_names():
+    base = content_checksum(small_table())
+    assert base == content_checksum(small_table().assign(pass_through_ratio=[-0.0, 0.25]))  # -0.0 == 0.0
+    assert base != content_checksum(small_table().assign(pass_through_ratio=[0.0, 0.25 + 1e-15]))
+    assert base != content_checksum(small_table().rename(columns={"label": "y"}))
+    assert base != content_checksum(small_table().iloc[::-1])
+
+
+def run_features_main(tmp_path, out):
+    data = tmp_path / "data/generated"
+    shutil.copytree(TOY, data)
+    pd.DataFrame({"account_id": read_accounts(f"{TOY}/accounts.csv").account_id, "split": "train"}).to_csv(
+        data.parent / "split.csv", index=False)
+    (data / "_meta").mkdir()
+    shutil.copy(data.parent / "split.csv", data / "_meta/account_split.csv")
+    (data / "CHECKSUMS.txt").write_text("abc  accounts.csv\n", encoding="utf-8")
+    features_main(["--data", str(data), "--out", str(out)])
+    return data
+
+
+def test_main_records_content_checksum_for_the_default_output(tmp_path, capsys):
+    out = tmp_path / "data/processed/features.parquet"
+    data = run_features_main(tmp_path, out)
+    assert (data / "CHECKSUMS.txt").read_text(encoding="utf-8") == "abc  accounts.csv\n"  # left alone
+    expected = content_checksum(pd.read_parquet(out))
+    assert (data / FEATURES_CHECKSUM).read_text(encoding="utf-8").split()[0] == expected
+    features_main(["--data", str(data), "--out", str(out), "--verify"])
+    assert "OK" in capsys.readouterr().out
+
+
+def test_main_elsewhere_writes_no_checksum(tmp_path):
+    data = run_features_main(tmp_path, tmp_path / "scratch/features.parquet")
+    assert not (data / FEATURES_CHECKSUM).exists()
+
+
+def test_verify_fails_on_changed_table(tmp_path):
+    out = tmp_path / "data/processed/features.parquet"
+    data = run_features_main(tmp_path, out)
+    pd.read_parquet(out).assign(label=0).to_parquet(out, index=False)
+    with pytest.raises(SystemExit) as exc:
+        features_main(["--data", str(data), "--out", str(out), "--verify"])
+    assert exc.value.code == 1

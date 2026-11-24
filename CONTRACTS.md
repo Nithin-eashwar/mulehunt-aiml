@@ -94,7 +94,7 @@ Run every command from the repo root: paths such as `simulator/config.yaml`,
 `models/` and `data/` are relative to it.
 
 Git holds only: the toy CSVs in `data/generated/toy/`,
-`data/generated/CHECKSUMS.txt`, `models/risk_scores.csv` and
+`data/generated/CHECKSUMS.txt`, `data/generated/FEATURES_CHECKSUM.txt`, `models/risk_scores.csv` and
 `models/*.joblib`. Rebuild the real data yourself (the output is identical for
 the same seed and the pinned `requirements.txt`):
 
@@ -103,7 +103,13 @@ python -m simulator.generate --config simulator/config.yaml --out data/generated
 python -m mulehunt.features
 ```
 
-Then compare the SHA-256 of your files with `data/generated/CHECKSUMS.txt`.
+Then check them:
+- `accounts.csv` and `transactions.csv`: SHA-256 against `data/generated/CHECKSUMS.txt`
+  (`cd data/generated && sha256sum -c CHECKSUMS.txt`).
+- `features.parquet`: `python -m mulehunt.features --verify`, which compares the table's
+  contents with `data/generated/FEATURES_CHECKSUM.txt`. A parquet file records the pyarrow
+  version that wrote it, so its bytes can differ between machines even when every value is
+  the same; the CSVs have no such problem.
 `python -m mulehunt.pipeline` rebuilds everything (about 6 minutes). For a quick
 development run use `python -m mulehunt.pipeline --small`: it writes only under
 `build/small/` and never touches the committed files.

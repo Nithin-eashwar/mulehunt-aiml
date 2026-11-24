@@ -36,7 +36,14 @@ python -m simulator.generate --config simulator/config.yaml --out data/generated
 python -m mulehunt.features
 ```
 
-Compare SHA-256 with `data/generated/CHECKSUMS.txt`. Without the real files, everything falls back to the toy data in `data/generated/toy/`.
+Then check both:
+
+```bash
+cd data/generated && sha256sum -c CHECKSUMS.txt && cd ../..   # accounts.csv, transactions.csv (byte-identical)
+python -m mulehunt.features --verify                          # features.parquet (same table contents)
+```
+
+The parquet file is checked by its contents, not its bytes: it records the pyarrow version that wrote it, so its bytes differ between machines even when every value is the same. Without the real files, everything falls back to the toy data in `data/generated/toy/`.
 
 ## One command per part
 
