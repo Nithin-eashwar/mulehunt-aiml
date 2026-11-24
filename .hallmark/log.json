@@ -1,6 +1,33 @@
 [
  {
   "mode": "redesign",
+  "depth": "full",
+  "scope": "app",
+  "shape": "app screen",
+  "theme": "custom",
+  "axes": "light/grotesk-sans/chromatic-magenta",
+  "nav": "top bar, wordmark and four links, current underlined",
+  "footer": "quiet honest-framing line",
+  "imagery": "none (app)",
+  "photos": [],
+  "entry": "none",
+  "fingerprint": "rail of controls, answer column",
+  "sections": [
+   "transaction check",
+   "mule trail ledger",
+   "evasion game",
+   "scam message well"
+  ],
+  "signature": "the verdict set large at the top of every answer; the trail ledger",
+  "waived": [
+   "72",
+   "39b"
+  ],
+  "prompt": "analyst workbench for tracing stolen UPI money through mule accounts",
+  "date": "2026-11-24"
+ },
+ {
+  "mode": "redesign",
   "depth": "restyle",
   "scope": "app",
   "shape": "app screen",

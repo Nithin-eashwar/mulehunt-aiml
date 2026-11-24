@@ -1,10 +1,11 @@
-# hex mirrors of app/assets/tokens.css (Piste); Streamlit's theme cannot read CSS variables
+# hex mirrors of app/assets/tokens.css (custom: stone paper, aubergine ink); Streamlit's theme cannot read CSS variables
+# primaryColor is the ink, so selections stay neutral; magenta is kept for flagged items only
 [theme]
 base = "light"
-primaryColor = "#1f50f5"
-backgroundColor = "#f8fafe"
-secondaryBackgroundColor = "#edf0f6"
-textColor = "#0a0d12"
+primaryColor = "#1c151e"
+backgroundColor = "#efece8"
+secondaryBackgroundColor = "#fefdfc"
+textColor = "#1c151e"
 font = "sans serif"
 
 [client]
